@@ -3,52 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Groups.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\Groups.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\styles\\Groups.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\styles\\Groups.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\Login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\services\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\services\\api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\mocks\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\mocks\\auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\mocks\\groups.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\mocks\\groups.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\public\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\public\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\GroupDetails.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\GroupDetails.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Groups.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\Groups.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\backend\\src\\models\\User.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\src\\models\\User.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\backend\\src\\models\\Auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\src\\models\\Auth.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\componnents\\Auth\\Login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\componnents\\Auth\\Login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,8 +38,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Groups.css",
+              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\styles\\Groups.css",
+              "RelativeDocumentMoniker": "frontend-web\\src\\styles\\Groups.css",
+              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\styles\\Groups.css",
+              "RelativeToolTip": "frontend-web\\src\\styles\\Groups.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-02T14:06:27.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Groups.jsx",
+              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Groups.jsx",
+              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\Groups.jsx",
+              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Groups.jsx",
+              "RelativeToolTip": "frontend-web\\src\\pages\\Groups.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-04-02T13:51:45.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GroupDetails.js",
+              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\GroupDetails.js",
+              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\GroupDetails.js",
+              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\GroupDetails.js",
+              "RelativeToolTip": "frontend-web\\src\\pages\\GroupDetails.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-02T13:51:41.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.js",
+              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Login.js",
+              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\Login.js",
+              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Login.js",
+              "RelativeToolTip": "frontend-web\\src\\pages\\Login.js",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAswCMAAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-02T13:45:35.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.js",
+              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\App.js",
+              "RelativeDocumentMoniker": "frontend-web\\src\\App.js",
+              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\App.js",
+              "RelativeToolTip": "frontend-web\\src\\App.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-02T13:37:42.748Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 5,
@@ -70,150 +115,20 @@
               "RelativeToolTip": "frontend-web\\src\\index.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T23:42:49.252Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\public\\index.html",
-              "RelativeDocumentMoniker": "frontend-web\\public\\index.html",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\public\\index.html",
-              "RelativeToolTip": "frontend-web\\public\\index.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-04-01T23:40:45.465Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\package.json",
-              "RelativeDocumentMoniker": "frontend-web\\package.json",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\package.json",
-              "RelativeToolTip": "frontend-web\\package.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-01T23:33:22.568Z",
+              "WhenOpened": "2025-04-02T13:37:17.919Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "App.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\App.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\App.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\App.js",
-              "RelativeToolTip": "frontend-web\\src\\App.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T23:07:20.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Groups.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Groups.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\Groups.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Groups.js",
-              "RelativeToolTip": "frontend-web\\src\\pages\\Groups.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T23:07:02.199Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Login.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\Login.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\pages\\Login.js",
-              "RelativeToolTip": "frontend-web\\src\\pages\\Login.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T23:06:36.974Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "groups.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\mocks\\groups.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\mocks\\groups.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\mocks\\groups.js",
-              "RelativeToolTip": "frontend-web\\src\\mocks\\groups.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T23:04:49.639Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "auth.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\mocks\\auth.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\mocks\\auth.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\mocks\\auth.js",
-              "RelativeToolTip": "frontend-web\\src\\mocks\\auth.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T23:04:38.683Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Login.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\componnents\\Auth\\Login.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\componnents\\Auth\\Login.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\componnents\\Auth\\Login.js",
-              "RelativeToolTip": "frontend-web\\src\\componnents\\Auth\\Login.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T17:44:27.696Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "api.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\services\\api.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\services\\api.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\src\\services\\api.js",
-              "RelativeToolTip": "frontend-web\\src\\services\\api.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T17:44:05.496Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Auth.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\backend\\src\\models\\Auth.js",
-              "RelativeDocumentMoniker": "backend\\src\\models\\Auth.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\backend\\src\\models\\Auth.js",
-              "RelativeToolTip": "backend\\src\\models\\Auth.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T17:43:07.175Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "User.js",
-              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\backend\\src\\models\\User.js",
-              "RelativeDocumentMoniker": "backend\\src\\models\\User.js",
-              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\backend\\src\\models\\User.js",
-              "RelativeToolTip": "backend\\src\\models\\User.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T17:42:50.939Z",
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\package.json",
+              "RelativeDocumentMoniker": "frontend-web\\package.json",
+              "ToolTip": "C:\\Users\\Atoine\\Desktop\\CFA\\BlougeCorp\\frontend-web\\package.json",
+              "RelativeToolTip": "frontend-web\\package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-02T13:33:00.265Z",
               "EditorCaption": ""
             }
           ]
