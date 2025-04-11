@@ -5,8 +5,8 @@ export default function GroupDetails() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold">Détails du groupe #{groupId}</h1>
-            {/* À compléter avec les données réelles */}
+            <h1 className="text-2xl font-bold">Dï¿½tails du groupe #{groupId}</h1>
+            {/* ï¿½ complï¿½ter avec les donnï¿½es rï¿½elles */}
         </div>
     );
 }

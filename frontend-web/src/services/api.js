@@ -1,15 +1,15 @@
 import { mockLogin } from '../mocks/auth';
-import { mockFetchGroups } from '../mocks/groups';
+import { fetchGroups } from '../mocks/groups';
 
 export const login = mockLogin;
-export const fetchGroups = mockFetchGroups;
+export { fetchGroups };
 
 const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const user = await login(email, password); // Utilise ton service mocké
-        console.log("Connecté :", user);
-        // Redirige vers /groups après connexion
+        const user = await login(email, password); // Utilise ton service mockï¿½
+        console.log("Connectï¿½ :", user);
+        // Redirige vers /groups aprï¿½s connexion
     } catch (error) {
         setError("Identifiants incorrects");
     }

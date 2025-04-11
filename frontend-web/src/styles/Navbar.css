@@ -1,0 +1,73 @@
+/* Conteneur navbar */
+nav.navbar {
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Partie gauche : les boutons */
+.nav-left {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Partie droite : logo + titre */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.nav-logo {
+    height: 32px;
+}
+
+
+/* Boutons */
+nav button {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: #f9f9f9;
+    color: #333;
+    min-width: 110px;
+    text-align: center;
+}
+
+nav button:hover {
+    background-color: #e6e6e6;
+    transform: translateY(-1px);
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+body.dark-mode nav.navbar {
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .nav-title {
+    color: #f0f0f0;
+}
+
+body.dark-mode nav button {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #444;
+}
+
+body.dark-mode nav button:hover {
+    background-color: #444;
+    transform: translateY(-1px);
+}

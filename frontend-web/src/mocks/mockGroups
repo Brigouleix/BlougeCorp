@@ -1,0 +1,34 @@
+// src/mocks/mockGroups.js
+
+export const mockGroups = [
+    {
+        id: 1,
+        name: "Développeurs React",
+        members: ["Alice", "Bob", "Charlie", "David", "Eva", "Frank"]
+    },
+    {
+        id: 2,
+        name: "Team Java Mobile",
+        members: ["Jean", "Marie", "Luc", "Claire", "Paul", "Julie"]
+    },
+    {
+        id: 3,
+        name: "Design UI/UX",
+        members: ["Max", "Léa", "Sophie", "Tom", "Emma", "Nina"]
+    },
+    {
+        id: 4,
+        name: "Startups & Idées",
+        members: ["Zack", "Nora", "Sam", "Ali", "Ivy", "Noah"]
+    },
+    {
+        id: 5,
+        name: "Langues & Culture",
+        members: ["Yasmine", "Hugo", "Clara", "Leo", "Lina", "Alex"]
+    },
+    {
+        id: 6,
+        name: "Fullstack Lovers",
+        members: ["Milo", "Sarah", "Theo", "Ines", "Louis", "Chloe"]
+    },
+];
