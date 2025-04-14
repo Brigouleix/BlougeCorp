@@ -108,3 +108,133 @@ body.dark-mode nav button {
 body.dark-mode nav button:hover {
     background-color: #444;
 }
+
+
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    
+}
+
+/* Modal content */
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.dark-mode .modal-content {
+    background: #1f2937;
+    color: white;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+}
+
+
+
+.create-group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+.create-group-form input,
+.create-group-form textarea,
+.create-group-form button {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    
+}
+
+.create-group-form button {
+    background-color: #4f46e5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+.create-group-form button:hover {
+    background-color: #4338ca;
+}
+
+.dark-mode .create-group-form input,
+.dark-mode .create-group-form textarea {
+    background-color: #374151;
+    color: white;
+    border: 1px solid #555;
+}
+
+.dark-mode .create-group-form button {
+    background-color: #6366f1;
+}
+
+.create-group-button {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-group-button:hover {
+    background-color: #4338ca;
+}
+
+body.dark-mode .create-group-button {
+    background-color: #6366f1;
+    color: white;
+}
+
+body.dark-mode .create-group-button:hover {
+    background-color: #4f46e5;
+}
+
+.groups-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1.5rem;
+}
+
+.group-rating {
+    font-size: 0.95rem;
+    color: #f59e0b;
+    margin: 0.3rem 0;
+}
+
+.group-member-names {
+    margin-top: 0.5rem;
+    list-style: none;
+    padding: 0;
+}
