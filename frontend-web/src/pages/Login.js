@@ -1,63 +1,84 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Card from '../components/Card';
-import GradientButton from '../components/GradientButton';
 import logo from '../assets/blouge.svg';
 import { login } from '../services/api';
+import '../styles/Login.css';
 
 export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError('');
+
         try {
             const user = await login(email, password);
             if (user) {
-                navigate('/groups'); // Corrig� ici
+                navigate('/groups');
+            } else {
+                setError('Email ou mot de passe incorrect.');
             }
-        } catch (error) {
-            console.error("Erreur de connexion", error);
+        } catch (err) {
+            setError('Une erreur est survenue.');
+        } finally {
+            setLoading(false);
         }
     };
 
+    const handleForgotPassword = () => {
+        alert("Fonctionnalité à venir : récupération du mot de passe !");
+        // Tu pourras plus tard rediriger vers /forgot-password par exemple
+    };
+
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="w-full max-w-md">
-                <img src={logo} alt="Logo" className="mx-auto h-16 mb-8" />
+        <div className="login-container">
+            <div className="login-card">
+                <img src={logo} alt="Logo Blouge" className="login-logo" />
 
-                <Card>
-                    <h1 className="text-2xl font-bold text-center mb-6">Connexion</h1>
+                <h1 className="login-title">Connexion</h1>
 
-                    {/* Ajout de onSubmit au formulaire */}
-                    <form className="space-y-4" onSubmit={handleSubmit}>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Email</label>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-                            />
-                        </div>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label className="login-label">Email</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="login-input"
+                            required
+                        />
+                    </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Mot de passe</label>
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-                            />
-                        </div>
+                    <div>
+                        <label className="login-label">Mot de passe</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="login-input"
+                            required
+                        />
+                    </div>
 
-                        {/* Correction : type="submit" pour d�clencher handleSubmit */}
-                        <GradientButton type="submit">
-                            Se connecter
-                        </GradientButton>
-                    </form>
-                </Card>
+                    {error && <p className="login-error">{error}</p>}
+
+                    <button type="submit" className="login-button" disabled={loading}>
+                        {loading ? 'Connexion en cours...' : 'Se connecter'}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleForgotPassword}
+                        className="login-link"
+                    >
+                        Mot de passe oublié ?
+                    </button>
+                </form>
             </div>
         </div>
     );

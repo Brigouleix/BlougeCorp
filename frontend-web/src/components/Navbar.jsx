@@ -2,29 +2,47 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../assets/blouge.svg';
 import '../styles/Navbar.css';
 
-
 export default function Navbar({ darkMode, setDarkMode }) {
     const navigate = useNavigate();
 
-    return (
-        <nav className="flex justify-between items-center p-4 bg-white dark:bg-gray-900 shadow-md">
-             <img src={logo} alt="Blouge Logo" className="nav-logo" />
-             
-            {/* Bouton Home */}
-            <button
-                onClick={() => navigate('/Groups')}
-                className="text-lg font-semibold text-gray-900 dark:text-white"
-            >
-                Home
-            </button>
+    const handleLogout = () => {
+        // Ici tu peux aussi nettoyer le localStorage ou un contexte utilisateur
+        navigate('/');
+    };
 
-            {/* Switch Dark Mode */}
-            <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="text-lg font-semibold text-gray-900 dark:text-white"
-            >
-                {darkMode ? '☀️ Mode Clair' : '🌙 Mode Sombre'}
-            </button>
+    return (
+        <nav className="navbar-container">
+            {/* Logo à gauche */}
+            <div className="navbar-left" onClick={() => navigate('/groups')}>
+                <img src={logo} alt="Blouge Logo" className="nav-logo" />
+            </div>
+
+            {/* Boutons centraux */}
+            <div className="navbar-center">
+                <button
+                    onClick={() => navigate('/groups')}
+                    className="nav-button"
+                >
+                    Home
+                </button>
+
+                <button
+                    onClick={() => setDarkMode(!darkMode)}
+                    className="nav-button"
+                >
+                    {darkMode ? '☀️ Mode Clair' : '🌙 Mode Sombre'}
+                </button>
+            </div>
+
+            {/* Logout à droite */}
+            <div className="navbar-right">
+                <button
+                    onClick={handleLogout}
+                    className="logout-button"
+                >
+                    Déconnexion
+                </button>
+            </div>
         </nav>
     );
 }

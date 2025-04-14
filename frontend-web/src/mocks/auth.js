@@ -1,4 +1,4 @@
-// Simule une connexion réussie ou échouée
+// Simule une connexion rÃ©ussie ou Ã©chouÃ©e
 export const mockLogin = (email, password) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -7,6 +7,6 @@ export const mockLogin = (email, password) => {
             } else {
                 reject(new Error("Identifiants incorrects"));
             }
-        }, 1000); // Délai réseau simulé
+        }, 1000); // DÃ©lais rÃ©seaux
     });
 };

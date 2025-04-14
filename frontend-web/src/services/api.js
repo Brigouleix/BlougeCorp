@@ -1,8 +1,8 @@
 import { mockLogin } from '../mocks/auth';
-import { fetchGroups } from '../mocks/groups';
+import { fetchGroups, fetchGroupById } from '../mocks/groups';
 
 export const login = mockLogin;
-export { fetchGroups };
+export { fetchGroups, fetchGroupById };
 
 const handleSubmit = async (e) => {
     e.preventDefault();
