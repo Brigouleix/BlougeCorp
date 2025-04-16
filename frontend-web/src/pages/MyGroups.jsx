@@ -1,7 +1,8 @@
+// src/pages/Groups.jsx
 import { useEffect, useState } from 'react';
-import { fetchGroups } from '../services/api';
-import GroupCard from '../components/GroupCard';
-import CreateGroup from './GroupCreate';
+import { fetchGroups } from '../services/api';  // Fonction pour récupérer les groupes
+import GroupCard from '../components/GroupCards'; // Attention ici : pas "GroupCards" avec un "s"
+import CreateGroup from '../components/GroupCreate';
 import '../styles/Groups.css';
 
 export default function Groups() {
@@ -9,32 +10,34 @@ export default function Groups() {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        fetchGroups().then(setGroups);
+        fetchGroups().then(setGroups);  // Récupère les groupes (les destinations)
     }, []);
 
     return (
         <div className="groups-container">
             <div className="groups-header">
-                <h1 className="groups-title">Mes Groupes</h1>
+                <h1 className="groups-title">Nos Groupes</h1>
+
                 <button
                     className="create-group-button"
                     onClick={() => setShowModal(true)}
                 >
-                    Créer une destination
+                    Créer un Groupe
                 </button>
             </div>
 
             <div className="groups-grid">
-                {groups.map(group => (
-                    <GroupCard
-                        key={group.id}
-                        id={group.id}
-                        name={group.name}
-                        image={group.image}
-                        members={group.members}
-                    />
-                ))}
-            </div>
+    {groups.map(group => (
+        <GroupCard
+            key={group.id}
+            id={group.id}
+            name={group.name}
+            creator={group.creator}
+            members={group.members}
+        />
+    ))}
+</div>
+
 
             {showModal && (
                 <div className="modal-overlay">

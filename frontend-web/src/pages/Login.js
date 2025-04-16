@@ -19,7 +19,7 @@ export default function Login() {
         try {
             const user = await login(email, password);
             if (user) {
-                navigate('/groups');
+                navigate('/my-groups');
             } else {
                 setError('Email ou mot de passe incorrect.');
             }
@@ -32,7 +32,10 @@ export default function Login() {
 
     const handleForgotPassword = () => {
         alert("Fonctionnalité à venir : récupération du mot de passe !");
-        // Tu pourras plus tard rediriger vers /forgot-password par exemple
+    };
+
+    const handleSignUpRedirect = () => {
+        navigate('/register');
     };
 
     return (
@@ -77,6 +80,14 @@ export default function Login() {
                         className="login-link"
                     >
                         Mot de passe oublié ?
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleSignUpRedirect}
+                        className="login-link"
+                    >
+                        Pas encore de compte ? Rejoins-nous !!
                     </button>
                 </form>
             </div>

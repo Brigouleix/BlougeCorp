@@ -6,21 +6,32 @@ export default function Navbar({ darkMode, setDarkMode }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        // Ici tu peux aussi nettoyer le localStorage ou un contexte utilisateur
+        localStorage.clear(); // Vide toutes les infos de session
         navigate('/');
+    };
+
+    // Vérifie si l'utilisateur est connecté (exemple : presence d'un "user" ou d'un "token")
+    const isLoggedIn = localStorage.getItem('user') !== null;
+
+    const handleHomeClick = () => {
+        if (isLoggedIn) {
+            navigate('/my-groups');
+        } else {
+            navigate('/');
+        }
     };
 
     return (
         <nav className="navbar-container">
             {/* Logo à gauche */}
-            <div className="navbar-left" onClick={() => navigate('/groups')}>
+            <div className="navbar-left" onClick={handleHomeClick}>
                 <img src={logo} alt="Blouge Logo" className="nav-logo" />
             </div>
 
             {/* Boutons centraux */}
             <div className="navbar-center">
                 <button
-                    onClick={() => navigate('/groups')}
+                    onClick={handleHomeClick}
                     className="nav-button"
                 >
                     Home
