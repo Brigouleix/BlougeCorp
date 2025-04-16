@@ -20,7 +20,7 @@ export default function CreateGroup({ onClose }) {
         <form onSubmit={handleSubmit} className="create-group-form">
             <h2>Créer un nouveau groupe</h2>
 
-            <label>Nom de la destination</label>
+            <label>Nom du groupe</label>
             <input
                 type="text"
                 value={name}

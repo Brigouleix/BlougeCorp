@@ -110,30 +110,37 @@ body.dark-mode nav button:hover {
 }
 
 
-/* Modal overlay */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    
+    z-index: 999;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
-/* Modal content */
 .modal-content {
-    background: white;
+    background-color: white;
+    max-height: 90vh;
+    width: 100%;
+    max-width: 600px;
+    overflow-y: auto;
+    border-radius: 12px;
     padding: 2rem;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
     position: relative;
 }
+
+body.dark .modal-content {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
 
 .dark-mode .modal-content {
     background: #1f2937;
@@ -237,4 +244,12 @@ body.dark-mode .create-group-button:hover {
     margin-top: 0.5rem;
     list-style: none;
     padding: 0;
+}
+
+.member-list {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: #444;
+    list-style-type: disc;
 }

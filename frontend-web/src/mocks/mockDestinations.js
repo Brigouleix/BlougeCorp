@@ -6,14 +6,14 @@ import sainttropez from '../assets/sainttropez.jpg';
 import crete from '../assets/crete.jpg';
 
 
-export const fetchGroupById = (id) => {
+export const fetchDestinationsById = (id) => {
     return new Promise((resolve) => {
-        const group = mockGroups.find((g) => g.id === parseInt(id));
+        const group = mockDestinations.find((g) => g.id === parseInt(id));
         resolve(group);
     });
 };
 
-const mockGroups = [
+const mockDestinations = [
     {
         id: 1,
         name: "Bretagne",
@@ -52,10 +52,10 @@ const mockGroups = [
     },
 ];
 
-export const fetchGroups = () => {
+export const fetchDestinations = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(mockGroups);
+            resolve(mockDestinations);
         }, 500);
     });
 };

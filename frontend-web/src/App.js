@@ -1,11 +1,18 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Groups from './pages/Groups';
-import GroupDetails from './pages/GroupDetails';
-import Navbar from './components/Navbar'; // Importer la navbar
+// src/App.js
 
-export default function App() {
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+import Navbar from './components/Navbar';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Destinations from './pages/Destinations';
+import MyGroups from './pages/MyGroups';
+import GroupDetails from './pages/GroupDetails';
+import CreateGroup from './components/CreateGroup';
+import ProtectedRoute from './components/ProtectedRoute'; 
+
+function App() {
     const [darkMode, setDarkMode] = useState(false);
 
     // Applique le mode sombre à tout le body
@@ -17,23 +24,43 @@ export default function App() {
         }
     }, [darkMode]);
 
+
+    
+    
+
     return (
         <Router>
-            <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            <div className={`app-container ${darkMode ? 'dark' : ''}`}>
+                <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-            <Routes>
-                {/* Route racine */}
-                <Route path="/" element={<Login />} />
-
-                {/* Route groupes avec sous-route */}
-                <Route path="/groups">
-                    <Route index element={<Groups />} />
-                    <Route path=":groupId" element={<GroupDetails />} />
-                </Route>
-
-                {/* Redirection pour les routes inconnues */}
-                <Route path="*" element={<Login />} />
-            </Routes>
+                    <Routes>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/destinations" element={<ProtectedRoute><Destinations /></ProtectedRoute>} />
+                        <Route path="/my-groups" element={<ProtectedRoute><MyGroups /></ProtectedRoute>}
+                    />
+                            
+                    <Route
+                        path="/groups/:groupId"
+                        element={
+                            <ProtectedRoute>
+                                <GroupDetails />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/create-group"
+                        element={
+                            <ProtectedRoute>
+                                <CreateGroup />
+                            </ProtectedRoute>
+                        }
+                    />
+                    </Routes>
+            </div>
         </Router>
     );
 }
+
+export default App;
+

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchGroupById } from '../services/api';
+
 import '../styles/GroupDetails.css';
 
 export default function GroupDetails() {
