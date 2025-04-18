@@ -2,6 +2,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { LoadScript, Autocomplete } from '@react-google-maps/api';
 
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -11,6 +12,7 @@ import MyGroups from './pages/MyGroups';
 import GroupDetails from './pages/GroupDetails';
 import CreateGroup from './components/CreateGroup';
 import ProtectedRoute from './components/ProtectedRoute'; 
+import NotFound from './pages/NotFound';
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
@@ -24,11 +26,38 @@ function App() {
         }
     }, [darkMode]);
 
-
+    useEffect(() => {
+        const scriptId = 'google-api-script';
+      
+        if (!document.getElementById(scriptId)) {
+          const script = document.createElement('script');
+          script.src = 'https://accounts.google.com/gsi/client';
+          script.id = scriptId;
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+      }, []);
+      useEffect(() => {
+        if (window.google && window.google.accounts) {
+          window.google.accounts.id.initialize({
+            client_id: "AIzaSyCYi43JdVAzPYWGqsNP724LNeA2MQK7z8w",
+            callback: handleCallbackResponse,
+          });
+      
+          window.google.accounts.id.renderButton(
+            document.getElementById("google-signin-button"),
+            { theme: "outline", size: "large" }
+          );
+        }
+      }, []);
+      
+      
     
     
 
     return (
+        <LoadScript googleMapsApiKey="AIzaSyCYi43JdVAzPYWGqsNP724LNeA2MQK7z8w" libraries={['places']}>
         <Router>
             <div className={`app-container ${darkMode ? 'dark' : ''}`}>
                 <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -56,9 +85,11 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route path="*" element={<NotFound />} />
                     </Routes>
             </div>
         </Router>
+        </LoadScript>
     );
 }
 

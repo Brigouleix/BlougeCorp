@@ -90,6 +90,12 @@ let mockGroups = [
         name: "Groupe B",
         members: ["bob", "david", "eve"],
         creator: "bob"
+    },
+    {
+        id: 3,
+        name: "Groupe C",
+        members: ["carlos", "ahmed", "pierrine"],
+        creator: "pierrine"
     }
 ];
 
