@@ -7,16 +7,8 @@ const GroupCard = ({ id, name, members, creator }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/destinations', {
-            state: {
-                groupId: id,
-                groupName: name,
-                members,
-                creator,
-            },
-        });
+        navigate('/destinations'); // 👈 Redirection vers la page Destinations
     };
-    
 
     return (
         <div className="group-card" onClick={handleClick}>

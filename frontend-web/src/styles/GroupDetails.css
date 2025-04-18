@@ -33,95 +33,6 @@
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 0.75rem;
-}
-
-.comment-rating {
-    font-weight: bold;
-    color: #555;
-}
-
-.add-comment textarea {
-    width: 100%;
-    height: 80px;
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-bottom: 0.5rem;
-    resize: vertical;
-}
-
-.add-comment select {
-    margin-right: 1rem;
-    padding: 0.5rem;
-    border-radius: 6px;
-}
-
-.add-comment button {
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.add-comment button:hover {
-    background-color: #4338ca;
-}
-
-.members-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.members-list li {
-    margin-bottom: 0.5rem;
-}
-
-.loading-text {
-    padding: 2rem;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #777;
-}
-
-
-.group-details-container {
-    padding: 2rem;
-    background-color: var(--bg);
-    color: var(--text);
-}
-
-.group-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.group-banner .banner-img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-}
-
-.comments-section,
-.members-section {
-    margin-top: 2rem;
-}
-
-.comments-list {
-    margin-bottom: 1rem;
-}
-
-.comment-card {
-    background: #f4f4f4;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 0.75rem;
     position: relative;
 }
 
@@ -200,4 +111,3 @@
     font-size: 1.2rem;
     color: #777;
 }
-

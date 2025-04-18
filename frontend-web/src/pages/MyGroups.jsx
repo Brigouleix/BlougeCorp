@@ -1,8 +1,9 @@
 // src/pages/Groups.jsx
 import { useEffect, useState } from 'react';
 import { fetchGroups } from '../services/api';  // Fonction pour récupérer les groupes
-import GroupCard from '../components/GroupCards'; // Attention ici : pas "GroupCards" avec un "s"
+import GroupCard from '../components/GroupCards'; 
 import CreateGroup from '../components/GroupCreate';
+
 import '../styles/Groups.css';
 
 export default function Groups() {
@@ -25,9 +26,11 @@ export default function Groups() {
                     Créer un Groupe
                 </button>
             </div>
+            
+
 
             <div className="groups-grid">
-    {groups.map(group => (
+            {groups.map(group => (
         <GroupCard
             key={group.id}
             id={group.id}

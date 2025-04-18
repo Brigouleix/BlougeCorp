@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/Groups.css'; 
 
-export default function DestinationCards({ id, name, image, members, comments = [], price, dates, proposedBy }) {
+export default function DestinationCards({ id, name, image, comments = [], price, dates, proposedBy }) {
 
     const navigate = useNavigate();
 
