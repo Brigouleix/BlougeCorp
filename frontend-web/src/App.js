@@ -13,6 +13,7 @@ import GroupDetails from './pages/GroupDetails';
 import CreateGroup from './components/CreateGroup';
 import ProtectedRoute from './components/ProtectedRoute'; 
 import NotFound from './pages/NotFound';
+import Footer from './components/Footer'; 
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
@@ -85,8 +86,11 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    
                     <Route path="*" element={<NotFound />} />
                     </Routes>
+                    <Footer />
+
             </div>
         </Router>
         </LoadScript>
