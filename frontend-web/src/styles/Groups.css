@@ -100,7 +100,6 @@ body.dark-mode nav {
 
 /* Boutons de la navbar */
 body.dark-mode nav button {
-    background-color: #333;
     color: #f0f0f0;
     border: 1px solid #555;
 }

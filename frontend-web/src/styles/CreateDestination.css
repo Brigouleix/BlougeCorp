@@ -1,3 +1,4 @@
+/* Style général du formulaire */
 .destination-form-container {
     padding: 2rem;
     border-radius: 12px;
@@ -7,12 +8,14 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Mode sombre */
 body.dark .destination-form-container {
     background-color: #1e1e1e;
     color: #f0f0f0;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
+/* Titre */
 .destination-form-container h2 {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -20,28 +23,34 @@ body.dark .destination-form-container {
     color: #111827;
 }
 
+/* Titre en mode sombre */
 body.dark .destination-form-container h2 {
     color: #ffffff;
 }
 
+/* Formulaire */
 .destination-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
+/* Labels */
 .destination-form label {
     font-weight: 500;
     font-size: 0.9rem;
     color: #374151;
 }
 
+/* Labels en mode sombre */
 body.dark .destination-form label {
     color: #ccc;
 }
 
+/* Inputs et Textareas */
 .destination-form input,
-.destination-form textarea {
+.destination-form textarea,
+.destination-form select {
     padding: 0.75rem;
     border-radius: 0.5rem;
     border: 1px solid #d1d5db;
@@ -51,23 +60,29 @@ body.dark .destination-form label {
     transition: border 0.2s ease-in-out;
 }
 
-.destination-form input[type="file"] {
-    padding: 0.3rem;
-}
-
+/* Effet au focus pour input et textarea */
 .destination-form input:focus,
-.destination-form textarea:focus {
+.destination-form textarea:focus,
+.destination-form select:focus {
     border-color: #3b82f6;
     outline: none;
 }
 
+/* Mode sombre pour les inputs, textareas et select */
 body.dark .destination-form input,
-body.dark .destination-form textarea {
+body.dark .destination-form textarea,
+body.dark .destination-form select {
     background-color: #2c2c2c;
     color: #fff;
     border: 1px solid #444;
 }
 
+/* Input de type file */
+.destination-form input[type="file"] {
+    padding: 0.3rem;
+}
+
+/* Bouton de soumission */
 .destination-form button {
     padding: 0.75rem;
     font-size: 1rem;
@@ -80,7 +95,23 @@ body.dark .destination-form textarea {
     transition: background 0.3s ease-in-out;
 }
 
+/* Effet au survol du bouton */
 .destination-form button:hover {
     background-color: #2563eb;
 }
 
+/* Liste déroulante (select) */
+.destination-form select {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #000;
+    transition: border 0.2s ease-in-out;
+}
+
+/* Option de la liste déroulante */
+.destination-form select option {
+    padding: 10px;
+}

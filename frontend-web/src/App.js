@@ -3,17 +3,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { LoadScript, Autocomplete } from '@react-google-maps/api';
-
+import DestinationCreate from '../src/components/DestinationsCreate';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Destinations from './pages/Destinations';
 import MyGroups from './pages/MyGroups';
 import GroupDetails from './pages/GroupDetails';
-import CreateGroup from './components/CreateGroup';
+import GroupCreate from './components/GroupCreate';
 import ProtectedRoute from './components/ProtectedRoute'; 
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer'; 
+import Legal from './pages/Legal';
+import Contact from './pages/Contact';
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
@@ -66,8 +68,11 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/legal" element={<Legal />} />
+                        <Route path="/contact" element={<Contact />} />
                         <Route path="/destinations" element={<ProtectedRoute><Destinations /></ProtectedRoute>} />
                         <Route path="/my-groups" element={<ProtectedRoute><MyGroups /></ProtectedRoute>}
+                        
                     />
                             
                     <Route
@@ -82,10 +87,20 @@ function App() {
                         path="/create-group"
                         element={
                             <ProtectedRoute>
-                                <CreateGroup />
+                                <GroupCreate />
                             </ProtectedRoute>
                         }
                     />
+
+                    <Route
+                    path="/destinations-create"
+                    element={
+                        <ProtectedRoute>
+                        <DestinationCreate />
+                        </ProtectedRoute>
+                    }
+                    />
+
                     
                     <Route path="*" element={<NotFound />} />
                     </Routes>
