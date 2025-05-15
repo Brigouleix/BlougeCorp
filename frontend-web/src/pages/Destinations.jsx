@@ -13,13 +13,15 @@ export default function Destinations() {
     const [showModal, setShowModal] = useState(false);
 
     const groupMembers = state?.members || [];
-    const groupName = state?.groupName || "Nos destinations";
+    const groupName = state?.groups.name || "Nos destinations";
 
     useEffect(() => {
         fetchDestinations().then((data) => {
             setGroups(data);
         });
     }, []);
+
+    console.log(groups); // Affiche les données des groupes
 
     return (
         <div className="groups-container">
@@ -49,10 +51,12 @@ export default function Destinations() {
                     borderRadius: '8px'
                 }}
                 center={{ lat: 43.6, lng: 1.433 }} // Point intermédiaire par défaut
-                zoom={4}
+                zoom={2}
+                onLoad={() => console.log('Map loaded')} // Vérifie que la carte se charge bien
             >
-                {groups.map((group) =>
-                    group.location?.lat && group.location?.lng && (
+                {/* Afficher un marqueur pour chaque destination */}
+                {groups.map((group) => 
+                    group.location?.lat && group.location?.lng ? (
                         <Marker
                             key={group.id}
                             position={{
@@ -61,25 +65,30 @@ export default function Destinations() {
                             }}
                             title={group.name}
                         />
-                    )
+                    ) : null
                 )}
             </GoogleMap>
 
             {/* Cartes de destinations */}
             <div className="groups-grid">
-                {groups.map(group => (
-                    <DestinationCard
-                        key={group.id}
-                        id={group.id}
-                        name={group.name}
-                        image={group.image}
-                        price={group.price}
-                        startDate={group.startDate}
-                        endDate={group.endDate}
-                        creator={group.creator}
-                        comments={group.comments}
-                    />
-                ))}
+            {
+            groups.map((d) => (
+                <DestinationCard
+                key={d.id}
+                id={d.id}
+                name={d.name}
+                image={d.image}
+                comments={d.comments}
+                priceHouse={parseFloat(d.priceHouse)}
+                priceTravel={parseFloat(d.priceTravel)}
+                proposedBy={d.proposedBy}
+                members={d.members}
+                dates={d.dates}
+            />
+            
+            ))
+        }
+
             </div>
 
             {/* Modal de création */}
@@ -98,4 +107,5 @@ export default function Destinations() {
             )}
         </div>
     );
+
 }

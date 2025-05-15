@@ -7,10 +7,19 @@ import sainttropez from '../assets/sainttropez.jpg';
 import crete from '../assets/crete.jpg';
 
 
-export const fetchDestinationsById = (id) => {
+
+
+export const fetchDestinations = () => {
     return new Promise((resolve) => {
-        const group = mockDestinations.find((g) => g.id === parseInt(id));
-        resolve(group);
+        const stored = localStorage.getItem('destinations');
+
+        if (stored) {
+            resolve(JSON.parse(stored));
+        } else {
+            // Initialisation avec mockData si rien dans le localStorage
+            localStorage.setItem('destinations', JSON.stringify(mockData));
+            resolve(mockData);
+        }
     });
 };
 
@@ -24,7 +33,7 @@ export async function createDestination(formData) {
     return await response.json(); // doit retourner la nouvelle destination
 }
 
-const mockDestinations = [
+const mockData = [
     {
         id: 1,
         name: "Bretagne",
@@ -63,13 +72,7 @@ const mockDestinations = [
     },
 ];
 
-export const fetchDestinations = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockDestinations);
-        }, 500);
-    });
-};
+
 
 // 🔧 Simule des utilisateurs en base
 const mockUsers = [
@@ -96,6 +99,12 @@ let mockGroups = [
         name: "Groupe C",
         members: ["carlos", "ahmed", "pierrine"],
         creator: "pierrine"
+    },
+    {
+        id: '4',
+        name: "Vacances USA",
+        members: ['Antoine', 'Mikerlange'],
+        creator: 'Antoine'
     }
 ];
 

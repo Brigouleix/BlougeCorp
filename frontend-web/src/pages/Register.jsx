@@ -12,12 +12,39 @@ export default function Register() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const validatePassword = (password) => {
+        // Vérifie la longueur minimale
+        if (password.length < 12) {
+            return "Le mot de passe doit contenir au moins 12 caractères.";
+        }
+
+        // Vérifie les différents types de caractères
+        const hasLowercase = /[a-z]/.test(password);
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasNumbers = /[0-12]/.test(password);
+        const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        const typesCount = [hasLowercase, hasUppercase, hasNumbers, hasSpecialChars].filter(Boolean).length;
+
+        if (typesCount < 4) {
+            return "Le mot de passe doit contenir au moins 4 types différents : minuscules, majuscules, chiffres et caractères spéciaux.";
+        }
+
+        return null;
+    };
+
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
 
         if (password !== confirmPassword) {
             setError("Les mots de passe ne correspondent pas.");
+            return;
+        }
+
+        const passwordError = validatePassword(password);
+        if (passwordError) {
+            setError(passwordError);
             return;
         }
 
@@ -73,6 +100,8 @@ export default function Register() {
 
                     <div>
                         <label className="login-label">Mot de passe</label>
+                        <br/>
+                        <small className="password-hint">⚠️Le mot de passe doit contenir au moins 12 caractères avec 4 types différents : minuscules, majuscules, chiffres et caractères spéciaux.⚠️</small>
                         <input
                             type="password"
                             value={password}
@@ -80,6 +109,7 @@ export default function Register() {
                             className="login-input"
                             required
                         />
+                       
                     </div>
 
                     <div>

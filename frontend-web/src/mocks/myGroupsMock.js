@@ -13,7 +13,7 @@ const myGroupsMock = [
     },
     {
         id: '3',
-        title: 'Groupe Teta',
+        title: 'Groupe Gamma',
         members: ['Dave', 'Eve']
     }
 ];
