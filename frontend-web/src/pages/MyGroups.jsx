@@ -17,7 +17,7 @@ export default function Groups() {
     return (
         <div className="groups-container">
             <div className="groups-header">
-                <h1 className="groups-title">Nos Groupes</h1>
+                <h1 className="groups-title">Mes Groupes</h1>
 
                 <button
                     className="create-group-button"

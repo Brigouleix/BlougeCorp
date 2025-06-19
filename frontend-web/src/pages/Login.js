@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/blouge.svg';
-import { login } from '../services/api';
 import '../styles/Login.css';
 
 export default function Login() {
@@ -17,14 +16,36 @@ export default function Login() {
         setError('');
 
         try {
-            const user = await login(email, password);
-            if (user) {
+            const response = await fetch('http://localhost/BlougeCorp/backend/app/Api/Login.php', {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    setError('Email ou mot de passe incorrect.');
+                } else {
+                    setError('Une erreur est survenue lors de la connexion.');
+                }
+                setLoading(false);
+                return;
+            }
+
+            const data = await response.json();
+
+            if (data.user) {
+                // Stocke l'utilisateur dans localStorage
+                localStorage.setItem('user', JSON.stringify(data.user));
+                // Redirige vers la page des groupes
                 navigate('/my-groups');
             } else {
                 setError('Email ou mot de passe incorrect.');
             }
         } catch (err) {
-            setError('Une erreur est survenue.');
+            setError('Erreur réseau ou serveur indisponible.');
         } finally {
             setLoading(false);
         }

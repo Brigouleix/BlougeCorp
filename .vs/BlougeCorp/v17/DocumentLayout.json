@@ -3,32 +3,120 @@
   "WorkspaceRootPath": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\Groups.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\Groups.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\register.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\public\\api\\register.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\styles\\Groups.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\styles\\Groups.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Core\\Router.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Core\\Router.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\Login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\Login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\utils\\Mailer.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\utils\\Mailer.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Views\\api.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Views\\api.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\GroupDetails.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\pages\\GroupDetails.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\src\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\db.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:db.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend-web\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\index.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\public\\index.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\confirm.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\public\\confirm.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\public\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\confirm.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\public\\api\\confirm.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\login.php||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\public\\api\\login.php||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\User.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Models\\User.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\config\\database.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\config\\database.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Core\\Controller.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Core\\Controller.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\routes\\web.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\migrations.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\migrations.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\AuthController.php||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Controllers\\AuthController.php||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Destination.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Models\\Destination.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\DestinationController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Controllers\\DestinationController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\GroupController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Controllers\\GroupController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Group.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Models\\Group.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Invitation.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Models\\Invitation.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Task.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Models\\Task.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\vendor\\phpmailer\\phpmailer\\composer.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:vendor\\phpmailer\\phpmailer\\composer.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\test_mail.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_mail.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\UtilisateurController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Controllers\\UtilisateurController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\InvitationController.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app\\Controllers\\InvitationController.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\test_db.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\test_db.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\migrations.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\migrations.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,96 +126,366 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\.env",
+              "RelativeDocumentMoniker": ".env",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\.env",
+              "RelativeToolTip": ".env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-13T14:13:00.485Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Groups.css",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\styles\\Groups.css",
-              "RelativeDocumentMoniker": "frontend-web\\src\\styles\\Groups.css",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\styles\\Groups.css",
-              "RelativeToolTip": "frontend-web\\src\\styles\\Groups.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-04-02T14:06:27.003Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Groups.jsx",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\Groups.jsx",
-              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\Groups.jsx",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\Groups.jsx",
-              "RelativeToolTip": "frontend-web\\src\\pages\\Groups.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-04-02T13:51:45.693Z",
+              "DocumentIndex": 7,
+              "Title": "confirm.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\confirm.php",
+              "RelativeDocumentMoniker": "backend\\public\\confirm.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\confirm.php",
+              "RelativeToolTip": "backend\\public\\confirm.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-19T13:25:02.459Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GroupDetails.js",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\GroupDetails.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\GroupDetails.js",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\GroupDetails.js",
-              "RelativeToolTip": "frontend-web\\src\\pages\\GroupDetails.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T13:51:41.538Z"
+              "DocumentIndex": 6,
+              "Title": "index.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\index.php",
+              "RelativeDocumentMoniker": "backend\\public\\index.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\index.php",
+              "RelativeToolTip": "backend\\public\\index.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-13T12:50:01.896Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Login.js",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\Login.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\pages\\Login.js",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\pages\\Login.js",
-              "RelativeToolTip": "frontend-web\\src\\pages\\Login.js",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAswCMAAABkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T13:45:35.005Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.js",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\App.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\App.js",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\App.js",
-              "RelativeToolTip": "frontend-web\\src\\App.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T13:37:42.748Z"
+              "DocumentIndex": 1,
+              "Title": "Router.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Core\\Router.php",
+              "RelativeDocumentMoniker": "backend\\app\\Core\\Router.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Core\\Router.php",
+              "RelativeToolTip": "backend\\app\\Core\\Router.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T12:21:59.649Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "index.js",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\index.js",
-              "RelativeDocumentMoniker": "frontend-web\\src\\index.js",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\src\\index.js",
-              "RelativeToolTip": "frontend-web\\src\\index.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T13:37:17.919Z"
+              "Title": "db.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\db.php",
+              "RelativeDocumentMoniker": "db.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\db.php",
+              "RelativeToolTip": "db.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T13:28:59.524Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\package.json",
-              "RelativeDocumentMoniker": "frontend-web\\package.json",
-              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\frontend-web\\package.json",
-              "RelativeToolTip": "frontend-web\\package.json",
+              "DocumentIndex": 3,
+              "Title": "api.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Views\\api.php",
+              "RelativeDocumentMoniker": "backend\\app\\Views\\api.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Views\\api.php",
+              "RelativeToolTip": "backend\\app\\Views\\api.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-13T12:49:39.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Mailer.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\utils\\Mailer.php",
+              "RelativeDocumentMoniker": "backend\\app\\utils\\Mailer.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\utils\\Mailer.php",
+              "RelativeToolTip": "backend\\app\\utils\\Mailer.php",
+              "ViewState": "AgIAACQAAAAAAAAAAADwv0AAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T09:50:55.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "register.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\register.php",
+              "RelativeDocumentMoniker": "backend\\public\\api\\register.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\register.php",
+              "RelativeToolTip": "backend\\public\\api\\register.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-18T10:19:45.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "confirm.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\confirm.php",
+              "RelativeDocumentMoniker": "backend\\public\\api\\confirm.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\confirm.php",
+              "RelativeToolTip": "backend\\public\\api\\confirm.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T09:22:22.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "login.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\login.php",
+              "RelativeDocumentMoniker": "backend\\public\\api\\login.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\api\\login.php",
+              "RelativeToolTip": "backend\\public\\api\\login.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-13T12:48:37.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "User.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\User.php",
+              "RelativeDocumentMoniker": "backend\\app\\Models\\User.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\User.php",
+              "RelativeToolTip": "backend\\app\\Models\\User.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T14:26:04.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\.htaccess",
+              "RelativeDocumentMoniker": "backend\\public\\.htaccess",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\public\\.htaccess",
+              "RelativeToolTip": "backend\\public\\.htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-17T13:57:58.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Controller.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Core\\Controller.php",
+              "RelativeDocumentMoniker": "backend\\app\\Core\\Controller.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Core\\Controller.php",
+              "RelativeToolTip": "backend\\app\\Core\\Controller.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-18T10:25:58.355Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "web.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\routes\\web.php",
+              "RelativeDocumentMoniker": "backend\\routes\\web.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\routes\\web.php",
+              "RelativeToolTip": "backend\\routes\\web.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-13T12:50:19.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "migrations.sql ",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\migrations.sql",
+              "RelativeDocumentMoniker": "backend\\migrations.sql",
+              "ToolTip": "migrations.sql ",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-05-13T14:18:09.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AuthController.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\AuthController.php",
+              "RelativeDocumentMoniker": "backend\\app\\Controllers\\AuthController.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\AuthController.php",
+              "RelativeToolTip": "backend\\app\\Controllers\\AuthController.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T09:49:42.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "database.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\config\\database.php",
+              "RelativeDocumentMoniker": "backend\\config\\database.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\config\\database.php",
+              "RelativeToolTip": "backend\\config\\database.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T13:17:55.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Destination.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Destination.php",
+              "RelativeDocumentMoniker": "backend\\app\\Models\\Destination.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Destination.php",
+              "RelativeToolTip": "backend\\app\\Models\\Destination.php",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T12:22:01.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DestinationController.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\DestinationController.php",
+              "RelativeDocumentMoniker": "backend\\app\\Controllers\\DestinationController.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\DestinationController.php",
+              "RelativeToolTip": "backend\\app\\Controllers\\DestinationController.php",
+              "ViewState": "AgIAADAAAAAAAAAAAADwv0wAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T09:04:35.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GroupController.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\GroupController.php",
+              "RelativeDocumentMoniker": "backend\\app\\Controllers\\GroupController.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\GroupController.php",
+              "RelativeToolTip": "backend\\app\\Controllers\\GroupController.php",
+              "ViewState": "AgIAAAoAAAAAAAAAAADwvyYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T09:04:30.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Group.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Group.php",
+              "RelativeDocumentMoniker": "backend\\app\\Models\\Group.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Group.php",
+              "RelativeToolTip": "backend\\app\\Models\\Group.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T12:44:52.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Invitation.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Invitation.php",
+              "RelativeDocumentMoniker": "backend\\app\\Models\\Invitation.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Invitation.php",
+              "RelativeToolTip": "backend\\app\\Models\\Invitation.php",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T13:03:02.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Task.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Task.php",
+              "RelativeDocumentMoniker": "backend\\app\\Models\\Task.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Models\\Task.php",
+              "RelativeToolTip": "backend\\app\\Models\\Task.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T13:02:58.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "composer.json",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\vendor\\phpmailer\\phpmailer\\composer.json",
+              "RelativeDocumentMoniker": "vendor\\phpmailer\\phpmailer\\composer.json",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\vendor\\phpmailer\\phpmailer\\composer.json",
+              "RelativeToolTip": "vendor\\phpmailer\\phpmailer\\composer.json",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-02T13:33:00.265Z"
+              "WhenOpened": "2025-06-17T11:59:09.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "test_mail.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\test_mail.php",
+              "RelativeDocumentMoniker": "test_mail.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\test_mail.php",
+              "RelativeToolTip": "test_mail.php",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAmwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T10:13:47.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "InvitationController.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\InvitationController.php",
+              "RelativeDocumentMoniker": "backend\\app\\Controllers\\InvitationController.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\InvitationController.php",
+              "RelativeToolTip": "backend\\app\\Controllers\\InvitationController.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-17T09:04:32.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UtilisateurController.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\UtilisateurController.php",
+              "RelativeDocumentMoniker": "backend\\app\\Controllers\\UtilisateurController.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\app\\Controllers\\UtilisateurController.php",
+              "RelativeToolTip": "backend\\app\\Controllers\\UtilisateurController.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-06-16T09:49:30.24Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "test_db.php",
+              "DocumentMoniker": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\test_db.php",
+              "RelativeDocumentMoniker": "backend\\test_db.php",
+              "ToolTip": "C:\\Users\\antoi\\Desktop\\blouge projet\\BlougeCorp\\backend\\test_db.php",
+              "RelativeToolTip": "backend\\test_db.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-05-13T14:22:00.819Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

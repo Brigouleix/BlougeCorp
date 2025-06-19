@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LoadScript, Autocomplete } from '@react-google-maps/api';
-import myGroupsMock from '../mocks/myGroupsMock'; // ✅ Import des groupes mockés
+import myGroupsMock from '../mocks/myGroupsMock';
 import '../styles/CreateDestination.css';
-
-
-
-
 
 export default function CreateDestination({ onClose = () => {} }) {
     const [name, setName] = useState('');
@@ -20,11 +16,9 @@ export default function CreateDestination({ onClose = () => {} }) {
     const autocompleteRef = useRef(null);
 
     useEffect(() => {
-        // ✅ Extraire tous les membres uniques des groupes mockés
         const allMembers = myGroupsMock
             .flatMap(group => group.members)
-            .filter((value, index, self) => self.indexOf(value) === index); // Supprime les doublons
-
+            .filter((value, index, self) => self.indexOf(value) === index);
         setMembers(allMembers);
     }, []);
 
@@ -43,39 +37,48 @@ export default function CreateDestination({ onClose = () => {} }) {
     const handlePlaceChanged = () => {
         const place = autocompleteRef.current.getPlace();
         if (place && place.geometry) {
-            const loc = {
+            setLocation({
                 lat: place.geometry.location.lat(),
                 lng: place.geometry.location.lng(),
                 address: place.formatted_address
-            };
-            setLocation(loc);
+            });
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const newDestination = {
-            id: Date.now(),
             name,
             image,
-            priceHouse: Number(priceHouse),   // ✅ conversion explicite
-            priceTravel: Number(priceTravel), // ✅ conversion explicite
+            priceHouse,
+            priceTravel,
             dates,
             proposedBy,
-            members: [],
-            comments: [],
-            location,
+            members,
+            location
         };
-    
-        const stored = localStorage.getItem('destinations');
-        const destinations = stored ? JSON.parse(stored) : [];
-        const updated = [...destinations, newDestination];
-        localStorage.setItem('destinations', JSON.stringify(updated));
-        
-        onClose();
+
+        try {
+            const res = await fetch("http://localhost/BlougeCorp/backend/public/api/destinations/create", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newDestination),
+            });
+
+            if (!res.ok) {
+                throw new Error(`Erreur HTTP : ${res.status}`);
+            }
+
+            const result = await res.json();
+            console.log('Destination créée :', result);
+            onClose();
+        } catch (error) {
+            console.error('Erreur lors de la création de la destination :', error);
+        }
     };
-    
 
     return (
         <form onSubmit={handleSubmit} className="destination-form">
@@ -86,79 +89,31 @@ export default function CreateDestination({ onClose = () => {} }) {
 
             <label>Image</label>
             <input type="file" accept="image/*" onChange={handleImageChange} />
-            {imagePreview && (
-                <img
-                    src={imagePreview}
-                    alt="Preview"
-                    style={{ width: '50%', margin: 'auto', borderRadius: '8px' }}
-                />
-            )}
+            {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '50%', borderRadius: '8px' }} />}
 
             <label>Prix logement</label>
-            <input
-                type="number"
-                value={priceHouse}
-                onChange={(e) => setPriceHouse(Number(e.target.value))}
-                placeholder="Ex: 250 €"
-                required
-            />
+            <input type="number" value={priceHouse} onChange={(e) => setPriceHouse(Number(e.target.value))} required />
 
             <label>Prix transport</label>
-            <input
-                type="number"
-                value={priceTravel}
-                onChange={(e) => setPriceTravel(Number(e.target.value))}
-                placeholder="Ex: 250 €"
-                required
-            />
+            <input type="number" value={priceTravel} onChange={(e) => setPriceTravel(Number(e.target.value))} required />
 
             <label>Dates</label>
-            <input
-                type="text"
-                value={dates}
-                onChange={(e) => setDates(e.target.value)}
-                placeholder="Ex: du 12 au 20 mai"
-                required
-            />
-
+            <input type="text" value={dates} onChange={(e) => setDates(e.target.value)} required />
 
             <label>Proposé par</label>
-            <select
-                value={proposedBy}
-                onChange={(e) => setProposedBy(e.target.value)}
-                required
-            >
+            <select value={proposedBy} onChange={(e) => setProposedBy(e.target.value)} required>
                 <option value="">Sélectionner un membre</option>
                 {members.map((member, index) => (
-                    <option key={index} value={member}>
-                        {member}
-                    </option>
+                    <option key={index} value={member}>{member}</option>
                 ))}
             </select>
 
             <label>Lieu</label>
-            <Autocomplete
-                onLoad={(auto) => (autocompleteRef.current = auto)}
-                onPlaceChanged={handlePlaceChanged}
-            >
-                <input
-                    type="text"
-                    placeholder="Tapez une adresse ou ville..."
-                    style={{
-                        width: '100%',
-                        padding: '10px',
-                        fontSize: '16px',
-                        borderRadius: '8px',
-                        marginBottom: '10px',
-                        border: '1px solid #ccc',
-                    }}
-                    required
-                />
+            <Autocomplete onLoad={(auto) => (autocompleteRef.current = auto)} onPlaceChanged={handlePlaceChanged}>
+                <input type="text" placeholder="Tapez une adresse ou ville..." required />
             </Autocomplete>
 
-            <button type="submit" className="create-button">
-                Créer
-            </button>
+            <button type="submit" className="create-button">Créer</button>
         </form>
     );
 }

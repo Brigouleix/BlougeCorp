@@ -1,13 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\frontend-web",
-    "\\frontend-web\\src",
-    "\\frontend-web\\src\\assets",
-    "\\frontend-web\\src\\components",
-    "\\frontend-web\\src\\pages",
-    "\\frontend-web\\src\\styles"
+    "\\backend",
+    "\\backend\\app",
+    "\\backend\\app\\Core",
+    "\\backend\\app\\utils",
+    "\\backend\\app\\Views",
+    "\\backend\\routes",
+    "\\mobile-app\\src",
+    "\\mobile-app\\src\\components",
+    "\\mobile-app\\src\\components\\Auth"
   ],
-  "SelectedNode": "\\frontend-web\\src\\pages\\Groups.jsx",
-  "PreviewInSolutionExplorer": false
+  "SelectedNode": "\\backend\\public\\api\\register.php",
+  "PreviewInSolutionExplorer": true
 }

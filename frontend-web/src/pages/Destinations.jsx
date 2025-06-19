@@ -12,8 +12,11 @@ export default function Destinations() {
     const [groups, setGroups] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
+    
+    
+    const groupName = state?.name || "Nos destinations";
     const groupMembers = state?.members || [];
-    const groupName = state?.groups.name || "Nos destinations";
+
 
     useEffect(() => {
         fetchDestinations().then((data) => {
@@ -21,7 +24,7 @@ export default function Destinations() {
         });
     }, []);
 
-    console.log(groups); // Affiche les données des groupes
+    console.log(groups.n); // Affiche les données des groupes
 
     return (
         <div className="groups-container">

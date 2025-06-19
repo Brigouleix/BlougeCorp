@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from '../assets/blouge.svg';
 import '../styles/Login.css';
@@ -11,18 +11,29 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState('');
+
+    useEffect(() => {
+    if (success) {
+        const timer = setTimeout(() => {
+            navigate('/'); // redirection vers la page de connexion
+        }, 4000); // attend 4 secondes
+
+        return () => clearTimeout(timer);
+    }
+}, [success, navigate]);
+
+
 
     const validatePassword = (password) => {
-        // Vérifie la longueur minimale
         if (password.length < 12) {
             return "Le mot de passe doit contenir au moins 12 caractères.";
         }
 
-        // Vérifie les différents types de caractères
         const hasLowercase = /[a-z]/.test(password);
         const hasUppercase = /[A-Z]/.test(password);
-        const hasNumbers = /[0-12]/.test(password);
-        const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const hasNumbers = /[0-9]/.test(password);
+        const hasSpecialChars = /[!@#$%^&*(),.?\":{}|<>]/.test(password);
 
         const typesCount = [hasLowercase, hasUppercase, hasNumbers, hasSpecialChars].filter(Boolean).length;
 
@@ -50,20 +61,33 @@ export default function Register() {
 
         setLoading(true);
 
+
         try {
-            // Tu peux ensuite appeler une vraie API ici plus tard
-            const newUser = {
-                email,
-                username,
-                password
-            };
+            const response = await fetch('http://localhost/BlougeCorp/backend/public/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password, username }),
+            });
 
-            // Pour test : on sauvegarde dans localStorage
-            localStorage.setItem("user", JSON.stringify(newUser));
+            const data = await response.json();
 
-            navigate('/my-groups');
+            if (response.ok && data.user) {
+                setSuccess("✅ Inscription réussie ! Vous allez être redirigé vers la page de connexion...");
+                setEmail('');
+                setUsername('');
+                setPassword('');
+                setConfirmPassword('');
+            } else {
+                setError(data.error || "Erreur lors de l'inscription.");
+            }
+
+           
+
+
         } catch (err) {
-            setError("Erreur lors de l'inscription.");
+            setError("Erreur réseau ou serveur.");
         } finally {
             setLoading(false);
         }
@@ -100,8 +124,10 @@ export default function Register() {
 
                     <div>
                         <label className="login-label">Mot de passe</label>
-                        <br/>
-                        <small className="password-hint">⚠️Le mot de passe doit contenir au moins 12 caractères avec 4 types différents : minuscules, majuscules, chiffres et caractères spéciaux.⚠️</small>
+                        <br />
+                        <small className="password-hint">
+                            ⚠️ Le mot de passe doit contenir au moins 12 caractères avec 4 types différents : minuscules, majuscules, chiffres et caractères spéciaux. ⚠️
+                        </small>
                         <input
                             type="password"
                             value={password}
@@ -109,7 +135,6 @@ export default function Register() {
                             className="login-input"
                             required
                         />
-                       
                     </div>
 
                     <div>
@@ -123,7 +148,13 @@ export default function Register() {
                         />
                     </div>
 
+                    
+                    {success && <p className="login-success">{success}</p>}
                     {error && <p className="login-error">{error}</p>}
+
+
+
+                    
 
                     <button type="submit" className="login-button" disabled={loading}>
                         {loading ? 'Création en cours...' : "S'inscrire"}

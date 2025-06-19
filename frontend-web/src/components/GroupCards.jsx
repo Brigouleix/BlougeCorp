@@ -7,7 +7,8 @@ const GroupCard = ({ id, name, members, creator }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/destinations'); // 👈 Redirection vers la page Destinations
+        navigate('/destinations', { state: { name, members } });
+
     };
 
     return (
