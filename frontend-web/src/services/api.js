@@ -112,20 +112,33 @@ let mockGroups = [
 
 
 // ✅ Simule une API de connexion
-export const login = async (email, password) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const user = mockUsers.find(
-                (u) => u.email === email && u.password === password
-            );
-            if (user) {
-                // Tu peux aussi stocker l'utilisateur dans localStorage ici
-                localStorage.setItem("user", JSON.stringify(user));
-            }
-            resolve(user);
-        }, 500); // délai simulé
+// services/api.js
+
+export async function login(email, password) {
+  try {
+    const response = await fetch('http://localhost/api/Login.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
     });
-};
+
+    if (!response.ok) {
+      // Si code HTTP non 200, on récupère le message d'erreur
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Erreur lors de la connexion');
+    }
+
+    const data = await response.json();
+    // data.user contient l'utilisateur sans mot de passe
+    return data.user;
+  } catch (error) {
+    console.error('Erreur login API:', error);
+    throw error;
+  }
+}
+
 
 // ✅ Récupère l'utilisateur connecté (depuis localStorage)
 export const getCurrentUser = () => {
