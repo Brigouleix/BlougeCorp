@@ -6,11 +6,8 @@
     "\\backend\\app\\Core",
     "\\backend\\app\\utils",
     "\\backend\\app\\Views",
-    "\\backend\\routes",
-    "\\mobile-app\\src",
-    "\\mobile-app\\src\\components",
-    "\\mobile-app\\src\\components\\Auth"
+    "\\backend\\routes"
   ],
-  "SelectedNode": "\\backend\\public\\api\\register.php",
+  "SelectedNode": "\\backend\\migrations.sql",
   "PreviewInSolutionExplorer": true
 }
