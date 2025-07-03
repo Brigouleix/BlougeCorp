@@ -16,7 +16,7 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await fetch('http://localhost/BlougeCorp/backend/app/Api/Login.php', {  
+            const response = await fetch('http://localhost/BlougeCorp-backend/public/api/register', {  
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

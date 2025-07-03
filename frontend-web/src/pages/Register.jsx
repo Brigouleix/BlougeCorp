@@ -63,7 +63,10 @@ export default function Register() {
 
 
         try {
-            const response = await fetch('http://localhost/BlougeCorp/backend/public/api/register', {
+            const API_URL = process.env.REACT_APP_API_URL;
+            const response = await fetch('http://localhost:8000/api/register', {
+
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

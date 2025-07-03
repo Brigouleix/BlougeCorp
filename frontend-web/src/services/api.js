@@ -116,7 +116,7 @@ let mockGroups = [
 
 export async function login(email, password) {
   try {
-    const response = await fetch('http://localhost/api/Login.php', {
+    const response = await fetch('http://localhost/BlougeCorp-backend/public/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
