@@ -1,0 +1,26 @@
+# Node (frontend React)
+frontend-web/node_modules/
+node_modules/
+frontend-web/build/
+
+# PHP (backend Laravel / custom MVC)
+BlougeCorp-backend/vendor/
+*.log
+*.lock
+*.tmp
+*.bak
+*.swp
+.env
+
+# IDEs & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# XAMPP / fichiers inutiles
+*.zip
+*.tar
+*.gz
+*.rar
+*.exe
