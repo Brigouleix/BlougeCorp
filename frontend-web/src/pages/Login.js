@@ -12,11 +12,13 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(email, password);
+        console.log('handleSubmit appelé');  // Debug : vérifier que la fonction est bien déclenchée
         setLoading(true);
         setError('');
 
         try {
-            const response = await fetch('http://localhost/BlougeCorp-backend/public/api/register', {  
+            const response = await fetch('http://localhost/BlougeCorp-backend/public/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,9 +26,13 @@ export default function Login() {
                 body: JSON.stringify({ email, password }),
             });
 
+            console.log('Réponse reçue:', response.status);  // Debug : vérifier le statut HTTP
+
             if (!response.ok) {
                 if (response.status === 401) {
                     setError('Email ou mot de passe incorrect.');
+                } else if (response.status === 403) {
+                    setError('Compte non confirmé. Vérifiez vos e-mails.');
                 } else {
                     setError('Une erreur est survenue lors de la connexion.');
                 }
@@ -35,16 +41,20 @@ export default function Login() {
             }
 
             const data = await response.json();
+            console.log('Données reçues:', data);  // Debug : vérifier la réponse JSON
 
             if (data.user) {
-                // Stocke l'utilisateur dans localStorage
                 localStorage.setItem('user', JSON.stringify(data.user));
-                // Redirige vers la page des groupes
+                console.log("Connexion OK, redirection manuelle vers /my-groups");
+                window.location.href = "/my-groups";
+
+
                 navigate('/my-groups');
             } else {
                 setError('Email ou mot de passe incorrect.');
             }
         } catch (err) {
+            console.error('Erreur réseau ou serveur:', err);
             setError('Erreur réseau ou serveur indisponible.');
         } finally {
             setLoading(false);
@@ -64,7 +74,7 @@ export default function Login() {
             <div className="login-card">
                 <img src={logo} alt="Logo Blouge" className="login-logo" />
 
-                <h1 className="login-title">Connexion</h1>
+                <h1 className="login-title">On se connait ?</h1>
 
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -75,6 +85,7 @@ export default function Login() {
                             onChange={(e) => setEmail(e.target.value)}
                             className="login-input"
                             required
+                            autoComplete="username"
                         />
                     </div>
 
@@ -86,6 +97,7 @@ export default function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                             className="login-input"
                             required
+                            autoComplete="current-password"
                         />
                     </div>
 
