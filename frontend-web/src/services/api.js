@@ -85,6 +85,7 @@ export async function fetchGroups() {
     return res.json();
 }
 
+// services/api.js
 export async function deleteGroup(id) {
     const res = await fetch(`${API}/groups/${id}`, {
         method: 'DELETE',
@@ -93,12 +94,25 @@ export async function deleteGroup(id) {
             'Content-Type': 'application/json',
         },
     });
+
+    const raw = await res.text(); // on récupère toujours du texte
     if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || 'Erreur lors de la suppression');
+        try {
+            const errorData = JSON.parse(raw);
+            throw new Error(errorData.error || 'Erreur lors de la suppression');
+        } catch (e) {
+            throw new Error('Erreur inconnue : réponse non JSON');
+        }
     }
-    return res.json();
+
+    try {
+        return raw ? JSON.parse(raw) : { message: 'Suppression réussie (vide)' };
+    } catch (e) {
+        return { message: 'Suppression réussie (non JSON)' };
+    }
 }
+
+
 
 export async function createGroup(payload) {
     const res = await fetch(`${API}/groups/create`, {

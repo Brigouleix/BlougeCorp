@@ -74,9 +74,9 @@ class GroupController extends Controller
         }
 
         if ($groupModel->delete($id)) {
-            $this->json(['message' => 'Groupe supprimé avec succès']);
-        } else {
-            $this->json(['error' => 'Erreur lors de la suppression'], 500);
+            $this->json(['message' => 'Groupe supprimé avec succès']); // JSON explicite
+            return;
         }
+
     }
 }

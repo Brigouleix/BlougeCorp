@@ -16,13 +16,15 @@ export default function MyGroups() {
     const currentUser = getCurrentUser();
 
     const handleDelete = async (id) => {
-    try {
-        await deleteGroup(id);
-        setGroups(groups.filter(g => g.id !== id));
-    } catch (error) {
-        alert(error.message);
-    }
+        try {
+            const response = await deleteGroup(id);
+            console.log('Réponse suppression :', response);
+            setGroups(groups.filter(g => g.id !== id));
+        } catch (error) {
+            alert(error.message);
+        }
     };
+
 
 
     return (
