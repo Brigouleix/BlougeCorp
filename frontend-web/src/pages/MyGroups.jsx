@@ -14,7 +14,7 @@ export default function MyGroups() {
     }, []);
 
     const currentUser = getCurrentUser();
-
+    const handleCreated = g => setGroups(prev => [...prev, g]); 
     const handleDelete = async (id) => {
         try {
             const response = await deleteGroup(id);
@@ -57,7 +57,10 @@ export default function MyGroups() {
                 <div className="modal-overlay">
                     <div className="modal-content">
                         <button className="close-modal" onClick={() => setShowModal(false)}>✖</button>
-                        <CreateGroup onClose={() => setShowModal(false)} />
+                        <CreateGroup 
+                        onClose={() => setShowModal(false)}
+                        onCreated={handleCreated}
+                         />
                     </div>
                 </div>
             )}
