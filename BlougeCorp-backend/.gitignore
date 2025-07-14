@@ -1,0 +1,7 @@
+.vs/
+vendor/
+node_modules/
+*.log
+*.cache
+.env
+.DS_Store
