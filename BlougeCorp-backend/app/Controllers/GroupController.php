@@ -1,21 +1,37 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Core\Auth;
 use App\Models\Group;
 
-class GroupController
+/**
+ * CRUD (minimal) des groupes.
+ */
+class GroupController extends Controller
 {
-    
+    public function index(): void
+    {
+        $payload = Auth::checkToken();
+        if (!$payload) {
+            $this->json(['error' => 'Token manquant ou invalide'], 401);
+            return;
+        }
+
+        $groupModel = new Group();
+        $groups = $groupModel->findForUserEmail($payload['email']);
+
+        $this->json($groups);
+    }
+
+
     public function create(): void
     {
         $payload = Auth::checkToken();
         if (!$payload) {
-            http_response_code(401);
-            echo json_encode(['error' => 'Token manquant ou invalide']);
+            $this->json(['error' => 'Token manquant ou invalide'], 401);
             return;
         }
-        $creatorId = (int)$payload['sub'];
 
         $data = json_decode(file_get_contents('php://input'), true);
         $name        = $data['name']        ?? '';
@@ -24,67 +40,43 @@ class GroupController
         $description = $data['description'] ?? null;
 
         if (!$name) {
-            http_response_code(400);
-            echo json_encode(['error' => 'Nom requis.']);
+            $this->json(['error' => 'Nom requis.'], 400);
             return;
         }
 
         $groupModel = new Group();
-        $ok = $groupModel->create($name, $emails, $creatorId, $image, $description);
+        $ok = $groupModel->create($name, $emails, (int)$payload['sub'], $image, $description);
 
-        echo json_encode(['success' => $ok]);
+        $this->json(['success' => $ok]);
     }
 
-    
-    public function index(): void
-    {
+ 
+    public function delete(int $id): void
+    {   
+        error_log("GroupController::delete called with id = $id");
         $payload = Auth::checkToken();
         if (!$payload) {
-            http_response_code(401);
-            echo json_encode(['error' => 'Token manquant ou invalide']);
+            $this->json(['error' => 'Token manquant ou invalide'], 401);
             return;
         }
 
-        $userEmail = $payload['email'];     
-
         $groupModel = new Group();
-        $groups = $groupModel->findForUserEmail($userEmail);
+        $group = $groupModel->find($id);
 
-        echo json_encode($groups);
+        if (!$group) {
+            $this->json(['error' => 'Groupe non trouvé'], 404);
+            return;
+        }
+
+        if ((int)$group['creator_id'] !== (int)$payload['sub']) {
+            $this->json(['error' => 'Accès refusé'], 403);
+            return;
+        }
+
+        if ($groupModel->delete($id)) {
+            $this->json(['message' => 'Groupe supprimé avec succès']);
+        } else {
+            $this->json(['error' => 'Erreur lors de la suppression'], 500);
+        }
     }
-
-    public function delete($id)
-{
-    // Récupérer l'utilisateur connecté via JWT ou session
-    $user = Auth::checkToken();
-    if (!$user) {
-        http_response_code(401);
-        echo json_encode(['error' => 'Non autorisé']);
-        return;
-    }
-
-    $group = Group::find($id);
-    if (!$group) {
-        http_response_code(404);
-        echo json_encode(['error' => 'Groupe non trouvé']);
-        return;
-    }
-
-    // Vérifie si l'utilisateur est l'auteur/admin
-    if ($group->creator !== $user['sub']) {
-        http_response_code(403);
-        echo json_encode(['error' => 'Accès refusé']);
-        return;
-    }
-
-    // Suppression
-    if ($group->delete()) {
-        echo json_encode(['message' => 'Groupe supprimé avec succès']);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur lors de la suppression']);
-    }
-}
-
-
 }

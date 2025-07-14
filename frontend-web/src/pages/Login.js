@@ -12,28 +12,22 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, password);
-        console.log('handleSubmit appelé');  // Debug : vérifier que la fonction est bien déclenchée
         setLoading(true);
         setError('');
 
         try {
-            const response = await fetch('http://localhost/BlougeCorp-backend/public/api/login', {
+            const response = await fetch('http://blougecorp.local/api/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email, password })
             });
 
-            console.log('Réponse reçue:', response.status);  // Debug : vérifier le statut HTTP
-            
-
             if (!response.ok) {
-                if (response.status === 401) {
-                    setError('Email ou mot de passe incorrect.');
-                } else if (response.status === 403) {
-                    setError('Compte non confirmé. Vérifiez vos e-mails.');
+                const { error } = await response.json();
+                if (response.status === 401 || response.status === 403) {
+                    setError(error || 'Email ou mot de passe incorrect.');
                 } else {
                     setError('Une erreur est survenue lors de la connexion.');
                 }
@@ -41,21 +35,13 @@ export default function Login() {
                 return;
             }
 
-            const data = await response.json();
-            console.log('Données reçues:', data);  // Debug : vérifier la réponse JSON
+            const { user, token } = await response.json();
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', token);
 
-            if (data.user) {
-                localStorage.setItem('user', JSON.stringify(data.user));
-                localStorage.setItem('token', data.token);
-                window.location.href = "/my-groups";
-
-
-                navigate('/my-groups');
-            } else {
-                setError('Email ou mot de passe incorrect.');
-            }
+            navigate('/my-groups');
         } catch (err) {
-            console.error('Erreur réseau ou serveur:', err);
+            console.error('Erreur réseau ou serveur :', err);
             setError('Erreur réseau ou serveur indisponible.');
         } finally {
             setLoading(false);

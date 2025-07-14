@@ -34,7 +34,7 @@ public function dispatch($method, $uri) {
     }
     $path = trim($path, '/');
 
-    // Gestion CORS preflight (OPTIONS)
+    // Préflight OPTIONS
     if ($method === 'OPTIONS') {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -43,37 +43,49 @@ public function dispatch($method, $uri) {
         exit();
     }
 
-    // Route match
+    // Route exacte
     if (isset($this->routes[$method][$path])) {
         $action = $this->routes[$method][$path];
+        return $this->executeAction($action);
+    }
 
-        if (is_callable($action)) {
-            call_user_func($action);
-        } else if (is_string($action)) {
-            [$controllerName, $methodName] = explode('@', $action);
-
-            $controllerClass = "\\App\\Controllers\\$controllerName";
-            if (!class_exists($controllerClass)) {
-                http_response_code(500);
-                echo json_encode(['error' => "Contrôleur $controllerClass introuvable."]);
-                return;
-            }
-
-            $controller = new $controllerClass();
-            if (!method_exists($controller, $methodName)) {
-                http_response_code(500);
-                echo json_encode(['error' => "Méthode $methodName introuvable dans $controllerClass."]);
-                return;
-            }
-
-            call_user_func([$controller, $methodName]);
-        } else {
-            http_response_code(500);
-            echo json_encode(['error' => 'Action de route invalide']);
+    // Parcourir les routes avec paramètres (regex)
+    foreach ($this->routes[$method] as $pattern => $action) {
+        $regex = '#^' . $pattern . '$#';
+        if (preg_match($regex, $path, $matches)) {
+            array_shift($matches); // Supprime le match complet
+            return $this->executeAction($action, $matches);
         }
+    }
+
+    http_response_code(404);
+    echo json_encode(['message' => 'Route non trouvée']);
+}
+
+private function executeAction($action, $params = []) {
+    if (is_callable($action)) {
+        call_user_func_array($action, $params);
+    } elseif (is_string($action)) {
+        [$controllerName, $methodName] = explode('@', $action);
+
+        $controllerClass = "\\App\\Controllers\\$controllerName";
+        if (!class_exists($controllerClass)) {
+            http_response_code(500);
+            echo json_encode(['error' => "Contrôleur $controllerClass introuvable."]);
+            return;
+        }
+
+        $controller = new $controllerClass();
+        if (!method_exists($controller, $methodName)) {
+            http_response_code(500);
+            echo json_encode(['error' => "Méthode $methodName introuvable dans $controllerClass."]);
+            return;
+        }
+
+        call_user_func_array([$controller, $methodName], $params);
     } else {
-        http_response_code(404);
-        echo json_encode(['message' => 'Route non trouvée']);
+        http_response_code(500);
+        echo json_encode(['error' => 'Action de route invalide']);
     }
 }
 

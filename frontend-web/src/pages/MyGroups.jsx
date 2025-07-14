@@ -15,14 +15,15 @@ export default function MyGroups() {
 
     const currentUser = getCurrentUser();
 
-    const handleDelete = async (groupId) => {
-        try {
-            await deleteGroup(groupId);
-            setGroups(prev => prev.filter(group => group.id !== groupId));
-        } catch (error) {
-            alert(error.message);
-        }
+    const handleDelete = async (id) => {
+    try {
+        await deleteGroup(id);
+        setGroups(groups.filter(g => g.id !== id));
+    } catch (error) {
+        alert(error.message);
+    }
     };
+
 
     return (
         <div className="groups-container">

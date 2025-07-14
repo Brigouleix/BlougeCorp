@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     echo json_encode(['message' => 'Preflight OK']);
     exit();
 }
+file_put_contents(__DIR__ . '/../debug.log', $_SERVER['REQUEST_METHOD'] . ' - ' . $_SERVER['REQUEST_URI'] . "\n", FILE_APPEND);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

@@ -1,12 +1,13 @@
 <?php
 namespace App\Controllers;
 
-
-use App\Core\Auth;
 use App\Core\Controller;
+use App\Core\Auth;
 use App\Models\User;
-use Firebase\JWT\JWT;
 
+/**
+ * Gère l’inscription, la connexion et la confirmation d’un compte.
+ */
 class AuthController extends Controller
 {
     private User $userModel;
@@ -16,8 +17,9 @@ class AuthController extends Controller
         $this->userModel = new User();
     }
 
-    /* -----------  REGISTER  ----------- */
-    public function register()
+    /* ─────────────────────────── REGISTER ─────────────────────────── */
+
+    public function register(): void
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $email    = $data['email']    ?? '';
@@ -25,52 +27,62 @@ class AuthController extends Controller
         $username = $data['username'] ?? '';
 
         if (!$email || !$password || !$username) {
-            return $this->json(['error' => 'Champs manquants.'], 400);
+            $this->json(['error' => 'Champs manquants.'], 400);
+            return;
         }
 
         if ($this->userModel->findByEmail($email)) {
-            return $this->json(['error' => 'Email déjà utilisé.'], 409);
+            $this->json(['error' => 'Email déjà utilisé.'], 409);
+            return;
         }
 
         $hashed = password_hash($password, PASSWORD_DEFAULT);
         $token  = bin2hex(random_bytes(32));
 
         $this->userModel->create($email, $hashed, $username, $token);
-
-        // TODO : envoyer email de confirmation
-        return $this->json(['message' => 'Compte créé. Vérifiez vos e‑mails pour confirmer votre compte.']);
+        // TODO : envoyer le mail de confirmation
+        $this->json(['message' => 'Compte créé. Vérifiez vos e‑mails.']);
     }
 
-    /* -----------  LOGIN  ----------- */
-    public function login()
+    /* ───────────────────────────── LOGIN ──────────────────────────── */
+
+    public function login(): void
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $email    = $data['email']    ?? '';
         $password = $data['password'] ?? '';
 
         if (!$email || !$password) {
-            return $this->json(['error' => 'Email et mot de passe requis.'], 400);
+            $this->json(['error' => 'Email et mot de passe requis.'], 400);
+            return;
         }
 
         $user = $this->userModel->checkCredentials($email, $password);
         if (!$user) {
-            return $this->json(['error' => 'Identifiants incorrects.'], 401);
+            $this->json(['error' => 'Identifiants incorrects.'], 401);
+            return;
         }
         if (!$user['est_confirme']) {
-            return $this->json(['error' => 'Compte non confirmé.'], 403);
+            $this->json(['error' => 'Compte non confirmé.'], 403);
+            return;
         }
 
         $jwt = Auth::generateToken($user['id'], $user['email']);
-        return $this->json(['token' => $jwt, 'user' => $user]);
+        // On enlève le hash du mot de passe avant de renvoyer l’objet
+        unset($user['mot_de_passe']);
+
+        $this->json(['user' => $user, 'token' => $jwt]);
     }
 
-    /* -----------  CONFIRM  ----------- */
-    public function confirm(string $token)
+    /* ────────────────────────── CONFIRMATION ───────────────────────── */
+
+    public function confirm(string $token): void
     {
         $user = $this->userModel->confirmAccount($token);
         if ($user) {
-            return $this->json(['message' => 'Compte confirmé avec succès.']);
+            $this->json(['message' => 'Compte confirmé avec succès.']);
+        } else {
+            $this->json(['error' => 'Lien invalide ou expiré.'], 400);
         }
-        return $this->json(['error' => 'Lien invalide ou expiré.'], 400);
     }
 }

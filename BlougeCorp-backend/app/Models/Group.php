@@ -10,6 +10,7 @@ class Group {
         $this->conn = (new \Database())->getConnection();
     }
 
+    // Création d'un groupe
     public function create(string $name, array $members, int $creatorId, ?string $image = null, ?string $description = null): bool {
         $query = "INSERT INTO groups (name, members, creator_id, image, description) VALUES (:name, :members, :creator_id, :image, :description)";
         $stmt = $this->conn->prepare($query);
@@ -21,6 +22,29 @@ class Group {
         return $stmt->execute();
     }
 
+    public function findById(int $id): ?array
+{
+    $stmt = $this->conn->prepare("SELECT * FROM groups WHERE id = :id");
+    $stmt->execute(['id' => $id]);
+    $group = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $group ?: null;
+}
+public function find(int $id): ?array {
+    $stmt = $this->conn->prepare("SELECT * FROM groups WHERE id = :id");
+    $stmt->execute(['id' => $id]);
+    $group = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $group ?: null;
+}
+
+public function delete(int $id): bool {
+    $stmt = $this->conn->prepare("DELETE FROM groups WHERE id = :id");
+    return $stmt->execute(['id' => $id]);
+}
+
+
+
+
+    // Vérifier si un utilisateur existe (utile ailleurs)
     public function userExists(string $email): ?int {
         $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);
@@ -28,17 +52,13 @@ class Group {
         return $user ? (int)$user['id'] : null;
     }
 
-
-    public function findForUserEmail(string $email): array
-{
-    $sql = "SELECT * FROM groups
-            WHERE creator_id = (SELECT id FROM users WHERE email = :email)
-               OR JSON_CONTAINS(members, JSON_QUOTE(:email))";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute(['email' => $email]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
-
+    // Trouver tous les groupes pour un utilisateur donné (par email)
+    public function findForUserEmail(string $email): array {
+        $sql = "SELECT * FROM groups
+                WHERE creator_id = (SELECT id FROM users WHERE email = :email)
+                   OR JSON_CONTAINS(members, JSON_QUOTE(:email))";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
