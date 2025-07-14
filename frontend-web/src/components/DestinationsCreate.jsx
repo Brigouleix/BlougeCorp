@@ -60,7 +60,7 @@ export default function CreateDestination({ onClose = () => {} }) {
         };
 
         try {
-            const res = await fetch("http://localhost/BlougeCorp/backend/public/api/destinations/create", {
+            const res = await fetch("http://localhost/BlougeCorp-backend/public/api/DestinationController", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

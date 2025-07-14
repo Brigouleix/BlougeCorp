@@ -27,6 +27,7 @@ export default function Login() {
             });
 
             console.log('Réponse reçue:', response.status);  // Debug : vérifier le statut HTTP
+            
 
             if (!response.ok) {
                 if (response.status === 401) {
@@ -45,7 +46,7 @@ export default function Login() {
 
             if (data.user) {
                 localStorage.setItem('user', JSON.stringify(data.user));
-                console.log("Connexion OK, redirection manuelle vers /my-groups");
+                localStorage.setItem('token', data.token);
                 window.location.href = "/my-groups";
 
 

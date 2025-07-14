@@ -187,11 +187,46 @@ export const fetchGroupById = async (groupId) => {
 
 
 // Récupère tous les groupes
+// services/api.js
 export const fetchGroups = async () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockGroups);
-        }, 500); // délai simulé
-    });
+  const token = localStorage.getItem('token');
+  const response = await fetch('http://blougecorp.local/api/groups', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+
+  if (!response.ok) {
+    const txt = await response.text();
+    throw new Error(`${response.status} ${txt}`);
+  }
+
+  const groups = await response.json();
+
+  // 🔽  Assure‑toi que members est bien un tableau
+  return groups.map(g => ({
+    ...g,
+    members: Array.isArray(g.members)
+      ? g.members
+      : JSON.parse(g.members ?? '[]')
+  }));
 };
+
+
+export async function deleteGroup(id) {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`http://blougecorp.local/api/groups/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Erreur lors de la suppression');
+    }
+
+    return await response.json();
+}
+
 

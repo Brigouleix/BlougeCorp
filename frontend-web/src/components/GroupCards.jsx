@@ -1,14 +1,17 @@
-// src/components/GroupCard.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Groups.css';
 
-const GroupCard = ({ id, name, members, creator }) => {
+const GroupCard = ({ id, name, members, creator, currentUser, showDelete, onDelete }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
         navigate('/destinations', { state: { name, members } });
+    };
 
+    const handleDelete = (e) => {
+        e.stopPropagation(); // pour ne pas déclencher le navigate
+        onDelete(id);
     };
 
     return (
@@ -18,10 +21,16 @@ const GroupCard = ({ id, name, members, creator }) => {
                 <p><strong>Admin:</strong> {creator}</p>
                 <p><strong>Membres:</strong></p>
                 <ul>
-                    {members.map((member, index) => (
+                    {Array.isArray(members) ? members.map((member, index) => (
                         <li key={index}>{member}</li>
-                    ))}
+                    )) : <li>Aucun membre</li>}
                 </ul>
+
+                {showDelete && currentUser === creator && (
+                    <button className="delete-group-button" onClick={handleDelete}>
+                        🗑 Supprimer
+                    </button>
+                )}
             </div>
         </div>
     );

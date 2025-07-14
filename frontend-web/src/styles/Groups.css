@@ -252,3 +252,41 @@ body.dark-mode .create-group-button:hover {
     color: #444;
     list-style-type: disc;
 }
+
+
+
+
+.groups-header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.delete-group-button {
+    margin-top: 10px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-group-button:hover {
+    background-color: #ff1a1a;
+}
+
+.groups-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.delete-mode-button {
+    background-color: #ccc;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
