@@ -5,24 +5,23 @@ use App\Core\Controller;
 use App\Core\Auth;
 use App\Models\Group;
 
-/**
- * CRUD (minimal) des groupes.
- */
 class GroupController extends Controller
 {
     public function index(): void
     {
+        
         $payload = Auth::checkToken();
         if (!$payload) {
             $this->json(['error' => 'Token manquant ou invalide'], 401);
             return;
         }
 
-        $groupModel = new Group();
-        $groups = $groupModel->findForUserEmail($payload['email']);
+        $model  = new Group();
+        $groups = $model->findForUserEmail($payload['email']);
 
-        $this->json($groups);
+        $this->json($groups);          
     }
+
 
 
     public function create(): void

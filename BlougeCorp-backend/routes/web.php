@@ -30,3 +30,8 @@ $router->get('api/groups', 'GroupController@index');
 $router->post('api/groups/create', 'GroupController@create');
 
 
+// Destinations
+$router->get   ('api/destinations',                 'DestinationController@index');
+$router->get   ('api/destinations/(\d+)',           'DestinationController@index');   // liste d’un groupe
+$router->post  ('api/destinations/create',          'DestinationController@create');
+$router->delete('api/destinations/(\d+)',           'DestinationController@delete');

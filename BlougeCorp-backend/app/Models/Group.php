@@ -53,12 +53,20 @@ public function delete(int $id): bool {
     }
 
     // Trouver tous les groupes pour un utilisateur donné (par email)
-    public function findForUserEmail(string $email): array {
+    public function findForUserEmail(string $email): array
+    {
         $sql = "SELECT * FROM groups
                 WHERE creator_id = (SELECT id FROM users WHERE email = :email)
                    OR JSON_CONTAINS(members, JSON_QUOTE(:email))";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['email' => $email]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // décodage ici, une seule fois
+        foreach ($rows as &$r) {
+            $r['members'] = json_decode($r['members'], true) ?: [];
+        }
+        return $rows;
     }
+
 }
