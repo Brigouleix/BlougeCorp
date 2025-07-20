@@ -9,7 +9,6 @@ class GroupController extends Controller
 {
     public function index(): void
     {
-        
         $payload = Auth::checkToken();
         if (!$payload) {
             $this->json(['error' => 'Token manquant ou invalide'], 401);
@@ -21,8 +20,6 @@ class GroupController extends Controller
 
         $this->json($groups);          
     }
-
-
 
     public function create(): void
     {
@@ -37,6 +34,7 @@ class GroupController extends Controller
         $emails      = $data['emails']      ?? [];
         $image       = $data['image']       ?? null;
         $description = $data['description'] ?? null;
+        $creator     = $payload['email']; 
 
         if (!$name) {
             $this->json(['error' => 'Nom requis.'], 400);
@@ -44,43 +42,41 @@ class GroupController extends Controller
         }
 
         $groupModel = new Group();
-        $ok = $groupModel->create($name, $emails, (int)$payload['sub'], $image, $description);
+        $ok = $groupModel->create($name, $emails, (int)$payload['sub'], $image, $description, $creator); 
 
         $this->json(['success' => $ok]);
     }
 
     public function members(int $id): void
-{
-    $payload = Auth::checkToken();
-    if (!$payload) {
-        $this->json(['error' => 'Token manquant ou invalide'], 401);
-        return;
+    {
+        $payload = Auth::checkToken();
+        if (!$payload) {
+            $this->json(['error' => 'Token manquant ou invalide'], 401);
+            return;
+        }
+
+        $groupModel = new Group();
+        $group = $groupModel->find($id);
+
+        if (!$group) {
+            $this->json(['error' => 'Groupe non trouvé'], 404);
+            return;
+        }
+
+        // Vérifie que le user a bien accès
+        $userEmail = $payload['email'];
+        $isCreator = (int)$group['creator_id'] === (int)$payload['sub'];
+        $isMember  = in_array($userEmail, json_decode($group['members'], true) ?? []);
+
+        if (!$isCreator && !$isMember) {
+            $this->json(['error' => 'Accès refusé'], 403);
+            return;
+        }
+
+        $members = $groupModel->getMembers($id);
+        $this->json(['members' => $members]);
     }
 
-    $groupModel = new Group();
-    $group = $groupModel->find($id);
-
-    if (!$group) {
-        $this->json(['error' => 'Groupe non trouvé'], 404);
-        return;
-    }
-
-    // Vérifie que le user a bien accès
-    $userEmail = $payload['email'];
-    $isCreator = (int)$group['creator_id'] === (int)$payload['sub'];
-    $isMember  = in_array($userEmail, json_decode($group['members'], true) ?? []);
-
-    if (!$isCreator && !$isMember) {
-        $this->json(['error' => 'Accès refusé'], 403);
-        return;
-    }
-
-    $members = $groupModel->getMembers($id);
-    $this->json(['members' => $members]);
-}
-
-
- 
     public function delete(int $id): void
     {   
         error_log("GroupController::delete called with id = $id");
@@ -104,9 +100,8 @@ class GroupController extends Controller
         }
 
         if ($groupModel->delete($id)) {
-            $this->json(['message' => 'Groupe supprimé avec succès']); // JSON explicite
+            $this->json(['message' => 'Groupe supprimé avec succès']);
             return;
         }
-
     }
 }

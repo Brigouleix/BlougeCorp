@@ -22,27 +22,42 @@ class Group {
         return $stmt->execute();
     }
 
-    public function findById(int $id): ?array
-{
-    $stmt = $this->conn->prepare("SELECT * FROM groups WHERE id = :id");
-    $stmt->execute(['id' => $id]);
-    $group = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $group ?: null;
-}
-public function find(int $id): ?array {
-    $stmt = $this->conn->prepare("SELECT * FROM groups WHERE id = :id");
-    $stmt->execute(['id' => $id]);
-    $group = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $group ?: null;
-}
+    // Trouver un groupe avec données du créateur (email et nom)
+    public function find(int $id): ?array {
+        $sql = "SELECT g.*, u.email AS creator_email, u.nom AS creator_name
+                FROM groups g
+                JOIN users u ON g.creator_id = u.id
+                WHERE g.id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $group = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($group) {
+            $group['members'] = json_decode($group['members'], true) ?: [];
+        }
+        return $group ?: null;
+    }
 
-public function delete(int $id): bool {
-    $stmt = $this->conn->prepare("DELETE FROM groups WHERE id = :id");
-    return $stmt->execute(['id' => $id]);
-}
+    // Trouver tous les groupes pour un utilisateur donné (avec jointure créateur)
+    public function findForUserEmail(string $email): array {
+        $sql = "SELECT g.*, u.email AS creator_email, u.nom AS creator_name
+                FROM groups g
+                JOIN users u ON g.creator_id = u.id
+                WHERE g.creator_id = (SELECT id FROM users WHERE email = :email)
+                   OR JSON_CONTAINS(g.members, JSON_QUOTE(:email))";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        foreach ($rows as &$r) {
+            $r['members'] = json_decode($r['members'], true) ?: [];
+        }
+        return $rows;
+    }
 
-
+    public function delete(int $id): bool {
+        $stmt = $this->conn->prepare("DELETE FROM groups WHERE id = :id");
+        return $stmt->execute(['id' => $id]);
+    }
 
     // Vérifier si un utilisateur existe (utile ailleurs)
     public function userExists(string $email): ?int {
@@ -52,35 +67,12 @@ public function delete(int $id): bool {
         return $user ? (int)$user['id'] : null;
     }
 
-    // Trouver tous les groupes pour un utilisateur donné (par email)
-    public function findForUserEmail(string $email): array
-    {
-        $sql = "SELECT * FROM groups
-                WHERE creator_id = (SELECT id FROM users WHERE email = :email)
-                   OR JSON_CONTAINS(members, JSON_QUOTE(:email))";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute(['email' => $email]);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // décodage ici, une seule fois
-        foreach ($rows as &$r) {
-            $r['members'] = json_decode($r['members'], true) ?: [];
-        }
-        return $rows;
+    // Récupérer les membres d'un groupe (suppose table group_members)
+    public function getMembers(int $groupId): array {
+        $sql = "SELECT u.id, u.nom, u.email
+                FROM group_members gm
+                JOIN users u ON gm.user_id = u.id
+                WHERE gm.group_id = ?";
+        return $this->db->prepare($sql, [$groupId], true);
     }
-
-    public function getMembers(int $groupId): array
-{
-    $stmt = $this->conn->prepare("SELECT members FROM groups WHERE id = :id");
-    $stmt->execute(['id' => $groupId]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$result) {
-        return [];
-    }
-
-    return json_decode($result['members'], true) ?? [];
-}
-
-
 }

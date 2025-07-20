@@ -135,3 +135,13 @@ export const getCurrentUser = () => {
   const user = localStorage.getItem('user');
   return user ? JSON.parse(user) : null;
 };
+export async function fetchUsersByEmails(emails) {
+  const response = await fetch('http://localhost/blougecorp/api/users-by-emails', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ emails }),
+  });
+
+  if (!response.ok) throw new Error('Échec récupération des noms');
+  return await response.json(); // attendu : tableau [{ email, nom }]
+}

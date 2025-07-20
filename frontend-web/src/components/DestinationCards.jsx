@@ -21,7 +21,7 @@ export default function DestinationCards({ id, name, image, priceHouse, priceTra
 
     // Récupération de la moyenne des commentaires depuis l’API
     useEffect(() => {
-        fetch(`http://localhost/blougecorp/api/groups/${id}/average-rating`)
+        fetch(`http://blougecorp.local/api/destinations/${id}/average_rating`)
             .then(res => res.json())
             .then(data => {
                 if (data && data.average !== undefined) {

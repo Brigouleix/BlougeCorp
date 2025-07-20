@@ -7,29 +7,28 @@ export default function GroupCard({
   id,
   name,
   members,
-  creator,
+  creator_email,
+  creator_name,
   currentUser,
   showDelete,
   onDelete,
 }) {
   const navigate = useNavigate();
 
-  /* --------- handlers --------- */
   const handleClick = () => {
     navigate('/destinations', {
       state: {
         groupId: id,
         name,
-        members: Array.isArray(members) ? members : [], // sécurisé
+        members: Array.isArray(members) ? members : [],
       },
     });
   };
 
   const handleDelete = (e) => {
-    e.stopPropagation();          // n’active pas la navigation
+    e.stopPropagation();
     if (onDelete) onDelete(id);
   };
-
 
   return (
     <div className="group-card" onClick={handleClick}>
@@ -37,7 +36,7 @@ export default function GroupCard({
         <h2 className="group-title">{name}</h2>
 
         <p>
-          <strong>Admin&nbsp;:</strong> {creator}
+          <strong>Admin&nbsp;:</strong> {creator_name || creator_email || 'Inconnu'}
         </p>
 
         <p>
@@ -51,7 +50,7 @@ export default function GroupCard({
           )}
         </ul>
 
-        {showDelete && currentUser === creator && (
+        {showDelete && (currentUser === creator_email || currentUser === creator_name) && (
           <button className="delete-group-button" onClick={handleDelete}>
             🗑 Supprimer
           </button>

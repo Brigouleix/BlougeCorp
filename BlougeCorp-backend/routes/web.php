@@ -23,6 +23,8 @@ $router->post('api/register', 'AuthController@register');
 $router->post('api/login', 'AuthController@login');
 $router->get('api/confirm/([a-f0-9]{64})', 'AuthController@confirm');
 $router->get('api/users', 'UserController@index');
+$router->post('/users-by-emails', 'UserController@getUsersByEmails');
+
 
 //  Groupes
 $router->delete('api/groups/(\d+)', 'GroupController@delete');

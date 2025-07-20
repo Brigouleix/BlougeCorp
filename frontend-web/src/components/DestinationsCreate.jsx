@@ -51,14 +51,15 @@ export default function CreateDestination({
     const payload = {
       groupId,
       name,
-      image, // Peut être null
+      image,
       priceHouse: Number(priceHouse),
       priceTravel: Number(priceTravel),
       dates,
       proposedBy,
-      members, // Tableau d’emails/noms
-      location, // Peut être null
+      emails: members.map(m => m.email ? m.email : m), // Assure-toi que c'est bien un tableau d'emails
+      location,
     };
+
 
     try {
       const res = await fetch('http://blougecorp.local/api/destinations/create', {
@@ -137,9 +138,11 @@ export default function CreateDestination({
       >
         <option value="">— Sélectionner —</option>
         {members.map((m) => (
-          <option key={m} value={m}>
-            {m}
-          </option>
+        <option key={m.id} value={m.name}>
+          {m.name}
+        </option>
+
+
         ))}
       </select>
 

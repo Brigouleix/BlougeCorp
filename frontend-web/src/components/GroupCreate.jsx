@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { createGroup } from '../services/api';
+import '../styles/MyGroup.css'
+import { getCurrentUser } from '../services/api'; 
+
 
 export default function CreateGroup({ onClose, onCreated }) {
   const [name, setName]             = useState('');
@@ -24,17 +27,22 @@ export default function CreateGroup({ onClose, onCreated }) {
 
     try {
       const base64 = image ? await fileToBase64(image) : null;
+      const currentUser = getCurrentUser();
+      if (!currentUser?.email) throw new Error("Utilisateur non connecté");
+
+      const membersList = emails.split(',').map(s => s.trim()).filter(Boolean);
+      // On n'ajoute pas l'email du créateur ici, il sera ajouté côté backend
 
       const newGroup = await createGroup({
         name,
-        emails: emails.split(',').map(s => s.trim()).filter(Boolean),
+        emails: [...new Set(membersList)],
         description,
         image: base64,
+        // Pas besoin d'envoyer creator, backend l'ajoute via token
       });
 
-      // ➜ informe MyGroups.jsx
       onCreated(newGroup);
-      onClose();                // ➜ ferme la modal
+      onClose();
     } catch (err) {
       setError(err.message);
     } finally {

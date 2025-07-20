@@ -70,6 +70,7 @@ h1.dark {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin-top: 20px;
     text-align: center;
     transition: box-shadow 0.2s ease-in-out;
 }

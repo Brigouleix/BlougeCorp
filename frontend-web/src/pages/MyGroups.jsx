@@ -7,23 +7,20 @@ import '../styles/MyGroup.css';
 export default function MyGroups() {
     const [groups, setGroups] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [showInviteModal, setShowInviteModal] = useState(false);
     const [deleteMode, setDeleteMode] = useState(false);
-    const [notification, setNotification] = useState(null);
+    const [showAddMemberForm, setShowAddMemberForm] = useState(false);
 
-    const [inviteData, setInviteData] = useState({
-        groupId: '',
-        email: '',
-        message: ''
-    });
+    const [inviteEmail, setInviteEmail] = useState('');
+    const [inviteMessage, setInviteMessage] = useState('');
+    const [selectedGroup, setSelectedGroup] = useState('');
+
+    const currentUser = getCurrentUser();
 
     useEffect(() => {
         fetchGroups().then(setGroups);
     }, []);
 
-    const currentUser = getCurrentUser();
-
-    const handleCreated = g => setGroups(prev => [...prev, g]);
+    const handleCreated = (g) => setGroups(prev => [...prev, g]);
 
     const handleDelete = async (id) => {
         try {
@@ -35,15 +32,42 @@ export default function MyGroups() {
         }
     };
 
-    const handleInviteSubmit = (e) => {
+    const handleInviteSubmit = async (e) => {
         e.preventDefault();
-        console.log('Formulaire d\'invitation envoyé :', inviteData);
 
-        // Simulation de l'envoi
-        setNotification('Invitation envoyée avec succès !');
-        setTimeout(() => setNotification(null), 3000);
-        setShowInviteModal(false);
-        setInviteData({ groupId: '', email: '', message: '' });
+        if (!selectedGroup || !inviteEmail) {
+            alert("Veuillez remplir tous les champs obligatoires.");
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost/blougecorp/api/invitations`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify({
+                    groupe_id: selectedGroup,
+                    email: inviteEmail,
+                    message: inviteMessage,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                alert("Invitation envoyée avec succès !");
+                setInviteEmail('');
+                setInviteMessage('');
+                setSelectedGroup('');
+                setShowAddMemberForm(false);
+            } else {
+                alert(data.message || "Erreur lors de l'envoi de l'invitation.");
+            }
+        } catch (error) {
+            alert("Erreur réseau ou serveur : " + error.message);
+        }
     };
 
     return (
@@ -57,11 +81,53 @@ export default function MyGroups() {
                     <button className="delete-mode-button" onClick={() => setDeleteMode(!deleteMode)}>
                         🗑
                     </button>
-                    <button className="invite-member-button" onClick={() => setShowInviteModal(true)}>
-                        Ajouter un membre
+                    <button className="add-member-button" onClick={() => setShowAddMemberForm(prev => !prev)}>
+                        Ajouter un Membre
                     </button>
                 </div>
             </div>
+
+            {showAddMemberForm && (
+                <div className="add-member-form">
+                    <h3>Inviter un membre dans un groupe</h3>
+                    <form onSubmit={handleInviteSubmit}>
+                        <label>
+                            Groupe :
+                            <select
+                                value={selectedGroup}
+                                onChange={e => setSelectedGroup(e.target.value)}
+                                required
+                            >
+                                <option value="">-- Choisir un groupe --</option>
+                                {groups.map(group => (
+                                    <option key={group.id} value={group.id}>{group.nom}</option>
+                                ))}
+                            </select>
+                        </label>
+
+                        <label>
+                            Email du membre :
+                            <input
+                                type="email"
+                                value={inviteEmail}
+                                onChange={e => setInviteEmail(e.target.value)}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            Message :
+                            <textarea
+                                value={inviteMessage}
+                                onChange={e => setInviteMessage(e.target.value)}
+                                placeholder="Entrez un message personnalisé"
+                            />
+                        </label>
+
+                        <button type="submit">Envoyer l'invitation</button>
+                    </form>
+                </div>
+            )}
 
             <div className="groups-grid">
                 {groups.map(group => (
@@ -86,47 +152,6 @@ export default function MyGroups() {
                     </div>
                 </div>
             )}
-
-            {showInviteModal && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <button className="close-modal" onClick={() => setShowInviteModal(false)}>✖</button>
-                        <h2>Ajouter un membre</h2>
-                        <form onSubmit={handleInviteSubmit} className="invite-form">
-                            <label>Choisir un groupe :</label>
-                            <select
-                                required
-                                value={inviteData.groupId}
-                                onChange={e => setInviteData({ ...inviteData, groupId: e.target.value })}
-                            >
-                                <option value="">-- Sélectionnez --</option>
-                                {groups.map(group => (
-                                    <option key={group.id} value={group.id}>{group.titre}</option>
-                                ))}
-                            </select>
-
-                            <label>Adresse email :</label>
-                            <input
-                                type="email"
-                                required
-                                value={inviteData.email}
-                                onChange={e => setInviteData({ ...inviteData, email: e.target.value })}
-                            />
-
-                            <label>Message :</label>
-                            <textarea
-                                rows="4"
-                                value={inviteData.message}
-                                onChange={e => setInviteData({ ...inviteData, message: e.target.value })}
-                            />
-
-                            <button type="submit" className="submit-invite-button">Envoyer l'invitation</button>
-                        </form>
-                    </div>
-                </div>
-            )}
-
-            {notification && <div className="notification success">{notification}</div>}
         </div>
     );
 }
