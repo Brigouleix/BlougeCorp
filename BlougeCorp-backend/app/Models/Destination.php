@@ -112,7 +112,7 @@ class Destination
     private function getMembers(int $destinationId): array
     {
         $sql = "
-            SELECT u.id, u.name, u.email
+            SELECT u.id, u.nom, u.email
             FROM destination_members dm
             JOIN users u ON u.id = dm.user_id
             WHERE dm.destination_id = :id

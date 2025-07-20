@@ -1,4 +1,3 @@
-// src/components/CreateDestination.jsx
 import { useState, useRef } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 import '../styles/CreateDestination.css';
@@ -14,7 +13,7 @@ export default function CreateDestination({
   const [priceHouse, setPriceHouse] = useState('');
   const [priceTravel, setPriceTravel] = useState('');
   const [dates, setDates] = useState('');
-  const [proposedBy, setProposedBy] = useState('');
+  // const [proposedBy, setProposedBy] = useState('');  <-- supprimé
   const [members] = useState(defaultMembers);
   const [location, setLocation] = useState(null);
   const autocompleteRef = useRef(null);
@@ -43,10 +42,7 @@ export default function CreateDestination({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!proposedBy) {
-      alert("Veuillez sélectionner la personne qui propose la destination.");
-      return;
-    }
+    // Suppression de la validation proposedBy
 
     const payload = {
       groupId,
@@ -55,11 +51,10 @@ export default function CreateDestination({
       priceHouse: Number(priceHouse),
       priceTravel: Number(priceTravel),
       dates,
-      proposedBy,
-      emails: members.map(m => m.email ? m.email : m), // Assure-toi que c'est bien un tableau d'emails
+      // proposedBy,  <-- supprimé
+      emails: members.map(m => m.email ? m.email : m),
       location,
     };
-
 
     try {
       const res = await fetch('http://blougecorp.local/api/destinations/create', {
@@ -130,21 +125,7 @@ export default function CreateDestination({
         placeholder="Ex: 27/08 - 29/08"
       />
 
-      <label>Proposé par</label>
-      <select
-        value={proposedBy}
-        onChange={(e) => setProposedBy(e.target.value)}
-        required
-      >
-        <option value="">— Sélectionner —</option>
-        {members.map((m) => (
-        <option key={m.id} value={m.name}>
-          {m.name}
-        </option>
-
-
-        ))}
-      </select>
+      {/* Champ "Proposé par" supprimé */}
 
       <label>Lieu</label>
       <Autocomplete

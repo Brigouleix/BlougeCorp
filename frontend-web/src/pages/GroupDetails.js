@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchDestinationsById } from '../mocks/mockDestinations';
-import { GoogleMap, Marker, Autocomplete } from '@react-google-maps/api';
+import { GoogleMap, Autocomplete, Marker } from '@react-google-maps/api';
 
 import '../styles/GroupDetails.css';
 
 export default function GroupDetails() {
     const { groupId } = useParams();
+
     const [group, setGroup] = useState(null);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
@@ -16,91 +16,82 @@ export default function GroupDetails() {
     const [mapCenter, setMapCenter] = useState({ lat: 48.8566, lng: 2.3522 }); // Paris par défaut
     const [markerPosition, setMarkerPosition] = useState(null);
     const autocompleteRef = useRef(null);
-    const token = localStorage.getItem('token');
 
+    // useEffect : fetch des données du groupe depuis API
     useEffect(() => {
-        fetchDestinationsById(groupId).then(data => {
-            setGroup(data);
-            if (data?.location?.lat && data?.location?.lng) {
-                const loc = { lat: data.location.lat, lng: data.location.lng };
-                setMapCenter(loc);
-                setMarkerPosition(loc);
-            }
-        });
+        async function fetchGroup() {
+            try {
+                const res = await fetch(`http://blougecorp.local/api/destinations/${groupId}`);
+                if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
 
-        fetchComments();
+                const data = await res.json();
+
+                setGroup(data);
+
+                // Récupérer les commentaires en localStorage liés au groupe
+                const savedComments = JSON.parse(localStorage.getItem(`comments-${groupId}`)) || [];
+                setComments(savedComments);
+
+                // Si données de localisation valides, centrer la carte
+                if (data?.location?.lat && data?.location?.lng) {
+                    const loc = { lat: data.location.lat, lng: data.location.lng };
+                    setMapCenter(loc);
+                    setMarkerPosition(loc);
+                } else {
+                    setMarkerPosition(null);
+                }
+            } catch (error) {
+                console.error('Erreur lors du fetch du groupe :', error);
+                // Ici tu peux gérer l'affichage d'une erreur ou une redirection
+            }
+        }
+
+        fetchGroup();
     }, [groupId]);
 
+    // Gestion ajout de commentaire
     const handleAddComment = () => {
         if (!newComment.trim()) return;
 
-        fetch('http://blougecorp.local/api/commentaire/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify({
-                contenu: newComment,
-                rating: rating,
-                destination_id: groupId,
-            }),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    fetchComments(); // Recharge les commentaires
-                    setNewComment('');
-                    setRating(5);
-                } else {
-                    alert("Erreur lors de l'ajout du commentaire");
-                }
-            });
+        const comment = {
+            id: Date.now(),
+            text: newComment.trim(),
+            rating: Number(rating),
+            date: new Date().toISOString()
+        };
+
+        const updated = [...comments, comment];
+        setComments(updated);
+        localStorage.setItem(`comments-${groupId}`, JSON.stringify(updated));
+        setNewComment('');
+        setRating(5);
     };
 
+    // Suppression commentaire
     const handleDeleteComment = (id) => {
-        fetch(`http://blougecorp.local/api/commentaire/${id}`, {
-            method: 'DELETE',
-            headers: { 'Authorization': 'Bearer ' + token },
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    fetchComments(); // Recharge les commentaires
-                } else {
-                    alert('Erreur lors de la suppression');
-                }
-            });
+        const updated = comments.filter(c => c.id !== id);
+        setComments(updated);
+        localStorage.setItem(`comments-${groupId}`, JSON.stringify(updated));
     };
 
-    const fetchComments = () => {
-        fetch(`http://blougecorp.local/api/commentaire?destination_id=${groupId}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.success && Array.isArray(data.commentaires)) {
-                    setComments(data.commentaires);
-                } else {
-                    console.error("Format de réponse invalide :", data);
-                }
-            })
-            .catch(err => console.error("Erreur fetch commentaires :", err));
-    };
-
+    // Tri des commentaires
     const getSortedComments = () => {
         const sorted = [...comments];
         return sortType === 'rating'
             ? sorted.sort((a, b) => b.rating - a.rating)
-            : sorted.sort((a, b) => new Date(b.date_creation) - new Date(a.date_creation));
+            : sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
     };
 
+    // Calcul moyenne des notes
     const calculateAverageRating = () => {
         if (comments.length === 0) return 0;
         const total = comments.reduce((sum, c) => sum + c.rating, 0);
         return (total / comments.length).toFixed(1);
     };
 
+    // Gestion changement adresse autocomplete Google Maps
     const handlePlaceChanged = () => {
-        const place = autocompleteRef.current.getPlace();
+        const place = autocompleteRef.current?.getPlace();
         if (place && place.geometry) {
             const location = place.geometry.location;
             const latLng = {
@@ -125,7 +116,7 @@ export default function GroupDetails() {
 
             <div className="group-banner">
                 <Autocomplete
-                    onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                    onLoad={autocomplete => (autocompleteRef.current = autocomplete)}
                     onPlaceChanged={handlePlaceChanged}
                 >
                     <input
@@ -157,7 +148,7 @@ export default function GroupDetails() {
 
                 <div className="sort-options">
                     <label>Tri :</label>
-                    <select value={sortType} onChange={(e) => setSortType(e.target.value)}>
+                    <select value={sortType} onChange={e => setSortType(e.target.value)}>
                         <option value="date">Par date</option>
                         <option value="rating">Par note</option>
                     </select>
@@ -166,11 +157,9 @@ export default function GroupDetails() {
                 <div className="comments-list">
                     {getSortedComments().map(comment => (
                         <div key={comment.id} className="comment-card">
-                            <p className="comment-text">{comment.contenu}</p>
+                            <p className="comment-text">{comment.text}</p>
                             <p className="comment-rating">Note : {comment.rating}/5</p>
-                            <p className="comment-date">
-                                {new Date(comment.date_creation).toLocaleString()}
-                            </p>
+                            <p className="comment-date">{new Date(comment.date).toLocaleString()}</p>
                             <button onClick={() => handleDeleteComment(comment.id)}>🗑️ Supprimer</button>
                         </div>
                     ))}
@@ -180,15 +169,28 @@ export default function GroupDetails() {
                     <textarea
                         placeholder="Votre commentaire..."
                         value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
+                        onChange={e => setNewComment(e.target.value)}
                     />
-                    <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+                    <select value={rating} onChange={e => setRating(Number(e.target.value))}>
                         {[1, 2, 3, 4, 5].map(n => (
                             <option key={n} value={n}>{n}</option>
                         ))}
                     </select>
                     <button onClick={handleAddComment}>Envoyer</button>
                 </div>
+            </section>
+
+            <section className="members-section">
+                <h2>Membres du groupe</h2>
+                {group.members && group.members.length > 0 ? (
+                    <ul className="members-list">
+                        {group.members.map((m, index) => (
+                            <li key={index}>{m}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Aucun membre pour ce groupe.</p>
+                )}
             </section>
         </div>
     );

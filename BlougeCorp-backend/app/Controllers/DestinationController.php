@@ -25,56 +25,57 @@ class DestinationController extends Controller
     }
 
     /** POST /api/destinations/create */
-    public function create(): void
-    {
-        $payload = Auth::checkToken();
-        if (!$payload) {
-            $this->json(['error' => 'Token manquant'], 401);
-            return;
-        }
-
-        $data = json_decode(file_get_contents('php://input'), true) ?? [];
-
-        // Champs requis
-        $required = ['groupId','name','priceHouse','priceTravel','dates','proposedBy'];
-        foreach ($required as $f) {
-            if (!isset($data[$f]) || $data[$f] === '') {
-                $this->json(['error' => "Champ $f manquant"], 400);
-                return;
-            }
-        }
-
-        // On vérifie que 'emails' est bien un tableau (optionnel mais recommandé)
-        if (isset($data['emails']) && !is_array($data['emails'])) {
-            $this->json(['error' => "Le champ 'emails' doit être un tableau d'adresses e-mail"], 400);
-            return;
-        }
-
-        // Traduire les emails en IDs utilisateurs (via table users)
-        $members = [];
-        if (!empty($data['emails'])) {
-            $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = :email");
-
-            foreach ($data['emails'] as $email) {
-                $stmt->execute(['email' => $email]);
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                if ($user) {
-                    $members[] = $user['id'];
-                }
-            }
-        }
-
-        // Injecter les membres (IDs) dans le payload pour le modèle
-        $data['members'] = $members;
-
-        // Création dans le modèle
-        $dest = $this->model->create($data);
-        if (!$dest) {
-            $this->json(['error' => 'Erreur insertion destination'], 500);
-            return;
-        }
-        $this->json($dest, 201);
+   public function create(): void
+{
+    $payload = Auth::checkToken();
+    if (!$payload) {
+        $this->json(['error' => 'Token manquant'], 401);
+        return;
     }
+
+    $data = json_decode(file_get_contents('php://input'), true) ?? [];
+
+    // Validation des champs obligatoires sauf proposedBy
+    $required = ['groupId', 'name', 'priceHouse', 'priceTravel', 'dates'];
+    foreach ($required as $f) {
+        if (!isset($data[$f]) || $data[$f] === '') {
+            $this->json(['error' => "Champ $f manquant"], 400);
+            return;
+        }
+    }
+
+    // Forcer proposedBy à l'email de l'utilisateur connecté
+    $data['proposedBy'] = $payload['email'];
+
+    // Vérification emails
+    if (isset($data['emails']) && !is_array($data['emails'])) {
+        $this->json(['error' => "Le champ 'emails' doit être un tableau d'adresses e-mail"], 400);
+        return;
+    }
+
+    // Traduction emails en IDs utilisateurs
+    $members = [];
+    if (!empty($data['emails'])) {
+        $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = :email");
+        foreach ($data['emails'] as $email) {
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                $members[] = $user['id'];
+            }
+        }
+    }
+
+    $data['members'] = $members;
+
+    $dest = $this->model->create($data);
+    if (!$dest) {
+        $this->json(['error' => 'Erreur insertion destination'], 500);
+        return;
+    }
+    $this->json($dest, 201);
+}
+
 
     /** DELETE /api/destinations/{id} */
     public function delete(int $id): void

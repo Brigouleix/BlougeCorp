@@ -68,11 +68,14 @@ class Group {
     }
 
     // Récupérer les membres d'un groupe (suppose table group_members)
-    public function getMembers(int $groupId): array {
+   public function getMembers(int $groupId): array {
         $sql = "SELECT u.id, u.nom, u.email
                 FROM group_members gm
                 JOIN users u ON gm.user_id = u.id
                 WHERE gm.group_id = ?";
-        return $this->db->prepare($sql, [$groupId], true);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$groupId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
