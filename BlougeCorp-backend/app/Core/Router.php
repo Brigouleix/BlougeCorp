@@ -28,11 +28,14 @@ class Router
 public function dispatch($method, $uri) {
     $path = parse_url($uri, PHP_URL_PATH);
 
-    $basePath = '/BlougeCorp-backend/public';
-    if ($basePath !== '' && strpos($path, $basePath) === 0) {
-        $path = substr($path, strlen($basePath));
-    }
+
+//    $basePath = '/BlougeCorp-backend/public';
+  //  if ($basePath !== '' && strpos($path, $basePath) === 0) {
+    //    $path = substr($path, strlen($basePath));
+    //}
     $path = trim($path, '/');
+    error_log("ROUTER‑MATCH: [$method] $path");
+
 
     // Préflight OPTIONS
     if ($method === 'OPTIONS') {
@@ -48,15 +51,31 @@ public function dispatch($method, $uri) {
         $action = $this->routes[$method][$path];
         return $this->executeAction($action);
     }
+    error_log(">>> Dispatching méthode: $method, path: $path");
 
     // Parcourir les routes avec paramètres (regex)
-    foreach ($this->routes[$method] as $pattern => $action) {
-        $regex = '#^' . $pattern . '$#';
-        if (preg_match($regex, $path, $matches)) {
-            array_shift($matches); // Supprime le match complet
-            return $this->executeAction($action, $matches);
+    foreach ($this->routes[$method] ?? [] as $pattern => $handler) {
+        error_log("Route testée: $pattern");
+        if (preg_match("#^$pattern$#", $path, $matches)) {
+            error_log("✓ Correspondance trouvée avec : $pattern");
+        
+            // On enlève la première correspondance complète
+            array_shift($matches);
+            return $this->executeAction($handler, $matches);
         }
     }
+
+
+    error_log("Dispatch: méthode = $method, path = $path");
+
+if (!isset($this->routes[$method])) {
+    error_log("Aucune route définie pour la méthode $method");
+} else {
+    foreach ($this->routes[$method] as $pattern => $action) {
+        error_log("Route définie pour $method : $pattern");
+    }
+}
+
 
     http_response_code(404);
     echo json_encode(['message' => 'Route non trouvée']);

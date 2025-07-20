@@ -28,10 +28,22 @@ $router->get('api/users', 'UserController@index');
 $router->delete('api/groups/(\d+)', 'GroupController@delete');
 $router->get('api/groups', 'GroupController@index');
 $router->post('api/groups/create', 'GroupController@create');
+$router->get('api/groups/(\d+)/members', 'GroupController@members');
+
 
 
 // Destinations
-$router->get   ('api/destinations',                 'DestinationController@index');
-$router->get   ('api/destinations/(\d+)',           'DestinationController@index');   // liste d’un groupe
-$router->post  ('api/destinations/create',          'DestinationController@create');
-$router->delete('api/destinations/(\d+)',           'DestinationController@delete');
+$router->get   ('api/destinations', 'DestinationController@index');
+$router->get   ('api/destinations/(\d+)', 'DestinationController@index');   
+$router->post  ('api/destinations/create', 'DestinationController@create');
+$router->delete('api/destinations/(\d+)', 'DestinationController@delete');
+
+// commentaires
+$router->post('api/commentaire/create', 'CommentaireController@create');
+$router->delete('api/commentaire/(\d+)', 'CommentaireController@delete');
+$router->get('api/commentaire/destination/(\d+)', 'CommentaireController@getByDestination');
+$router->get('api/commentaire', 'CommentaireController@index'); 
+
+
+
+

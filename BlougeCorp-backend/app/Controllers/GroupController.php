@@ -49,6 +49,37 @@ class GroupController extends Controller
         $this->json(['success' => $ok]);
     }
 
+    public function members(int $id): void
+{
+    $payload = Auth::checkToken();
+    if (!$payload) {
+        $this->json(['error' => 'Token manquant ou invalide'], 401);
+        return;
+    }
+
+    $groupModel = new Group();
+    $group = $groupModel->find($id);
+
+    if (!$group) {
+        $this->json(['error' => 'Groupe non trouvé'], 404);
+        return;
+    }
+
+    // Vérifie que le user a bien accès
+    $userEmail = $payload['email'];
+    $isCreator = (int)$group['creator_id'] === (int)$payload['sub'];
+    $isMember  = in_array($userEmail, json_decode($group['members'], true) ?? []);
+
+    if (!$isCreator && !$isMember) {
+        $this->json(['error' => 'Accès refusé'], 403);
+        return;
+    }
+
+    $members = $groupModel->getMembers($id);
+    $this->json(['members' => $members]);
+}
+
+
  
     public function delete(int $id): void
     {   

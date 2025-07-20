@@ -69,4 +69,18 @@ public function delete(int $id): bool {
         return $rows;
     }
 
+    public function getMembers(int $groupId): array
+{
+    $stmt = $this->conn->prepare("SELECT members FROM groups WHERE id = :id");
+    $stmt->execute(['id' => $groupId]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$result) {
+        return [];
+    }
+
+    return json_decode($result['members'], true) ?? [];
+}
+
+
 }

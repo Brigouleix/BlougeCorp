@@ -15,6 +15,7 @@ CREATE TABLE users (
 CREATE TABLE commentaire (
   id SERIAL PRIMARY KEY,
   contenu TEXT NOT NULL,
+  averageratings INT CHECK (averageratings BETWEEN 0 AND 5),
   date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   utilisateur_id INTEGER REFERENCES utilisateur(id) ON DELETE CASCADE,
   destination_id INTEGER REFERENCES destination(id) ON DELETE CASCADE
@@ -22,12 +23,20 @@ CREATE TABLE commentaire (
 
 
 
-CREATE TABLE IF NOT EXISTS destinations (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+
+CREATE TABLE destination (
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    image VARCHAR(255) NOT NULL,
-    members JSON NOT NULL
+    description TEXT,
+    image VARCHAR(255),
+    location JSON,
+    priceHouse DECIMAL(10, 2),
+    priceTravel DECIMAL(10, 2),
+    dates VARCHAR(255),
+    proposedBy VARCHAR(255),
+    average_rating DECIMAL(3, 2) DEFAULT 0
 );
+
 CREATE TABLE IF NOT EXISTS groups (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,

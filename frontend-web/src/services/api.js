@@ -1,8 +1,44 @@
-
-
 // src/services/api.js
 
-const API = 'http://blougecorp.local/api';
+export const API = 'http://blougecorp.local/api';
+
+// ———————————————————————————————————————————————
+// AUTHENTIFICATION
+// ———————————————————————————————————————————————
+
+export async function register({ email, username, password }) {
+  const res = await fetch(`${API}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, username, password }),
+  });
+
+  if (!res.ok) {
+    const { error } = await res.json();
+    throw new Error(error || 'Erreur lors de l\'inscription');
+  }
+
+  return res.json(); // attend { user, token } ou selon la réponse backend
+}
+
+export async function login(email, password) {
+  const res = await fetch(`${API}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!res.ok) {
+    const { error } = await res.json();
+    throw new Error(error || 'Erreur lors de la connexion');
+  }
+
+  return res.json(); // { user, token }
+}
 
 // ———————————————————————————————————————————————
 // DESTINATIONS
@@ -14,7 +50,7 @@ export const fetchDestinations = async (groupId) => {
     : `${API}/destinations`;
 
   const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
   if (!res.ok) throw new Error('Erreur lors de la récupération des destinations');
   return res.json();
@@ -22,19 +58,19 @@ export const fetchDestinations = async (groupId) => {
 
 export const createDestination = async (payload) => {
   const res = await fetch(`${API}/destinations/create`, {
-    method : 'POST',
+    method: 'POST',
     headers: {
-      'Content-Type' : 'application/json',
-      Authorization  : `Bearer ${localStorage.getItem('token')}`
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
     const { error = 'Erreur inconnue' } = await res.json();
     throw new Error(error);
   }
-  return res.json();          // ← renvoie la destination créée (JSON décodé)
+  return res.json();
 };
 
 // ———————————————————————————————————————————————
@@ -43,9 +79,7 @@ export const createDestination = async (payload) => {
 
 export async function fetchGroups() {
   const res = await fetch(`${API}/groups`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    }
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
   if (!res.ok) throw new Error('Erreur lors de la récupération des groupes');
   return res.json();
@@ -56,9 +90,9 @@ export async function createGroup(payload) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
   if (!res.ok) {
     const errorData = await res.json();
@@ -94,27 +128,10 @@ export async function deleteGroup(id) {
 }
 
 // ———————————————————————————————————————————————
-// AUTHENTIFICATION
+// UTILITAIRES
 // ———————————————————————————————————————————————
 
-export async function login(email, password) {
-  const res = await fetch(`${API}/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
-
-  if (!res.ok) {
-    const { error } = await res.json();
-    throw new Error(error || 'Erreur lors de la connexion');
-  }
-
-  return res.json(); // { user, token }
-}
-
 export const getCurrentUser = () => {
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem('user');
   return user ? JSON.parse(user) : null;
 };

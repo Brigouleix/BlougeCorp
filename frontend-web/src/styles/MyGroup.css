@@ -176,3 +176,123 @@ button.dark:hover {
 .transition-all {
     transition: all 0.3s ease;
 }
+
+/* Bouton Ajouter un membre */
+.invite-member-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+}
+
+.invite-member-button:hover {
+    background-color: #45a049;
+}
+
+/* Rétablir style du bouton suppression */
+.delete-mode-button {
+    background-color: #ccc;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+}
+
+.delete-mode-button:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+/* Close button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    background-color: #ec5959;
+    opacity: 0.25;
+    transform: scale(1.05);
+}
+
+/* Formulaire d'invitation */
+.invite-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.invite-form input,
+.invite-form select,
+.invite-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+.submit-invite-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-invite-button:hover {
+    background-color: #45a049;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 1100;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+    color: white;
+}
