@@ -134,10 +134,11 @@ export default function MyGroups() {
                     <GroupCard
                         key={group.id}
                         {...group}
-                        currentUser={currentUser?.username}
+                        currentUserId={currentUser?.id} // 👈 passe l'ID, pas le username
                         showDelete={deleteMode}
                         onDelete={handleDelete}
                     />
+
                 ))}
             </div>
 
