@@ -1,0 +1,14 @@
+node_modules/
+frontend-web/build/
+backend/vendor/
+backend/data/*.sqlite
+*.log
+*.tmp
+*.bak
+*.swp
+.env
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.claude/

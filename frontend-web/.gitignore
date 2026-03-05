@@ -1,0 +1,18 @@
+# === Dépendances ===
+node_modules/
+.cache/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# === Build ===
+build/
+dist/
+
+# === Environnement ===
+.env
+.env.*.local
+
+# === IDE et outils ===
+.vscode/
+.vs/

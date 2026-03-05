@@ -1,0 +1,292 @@
+﻿.groups-container {
+    padding: 2rem;
+    min-height: 100vh;
+    background: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.groups-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.group-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .group-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+.group-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.group-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.group-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.5rem;
+}
+
+.group-members {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+
+/* Fond sombre pour toute la page */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+/* Conteneur principal des groupes */
+body.dark-mode .groups-container {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .groups-title {
+    color:#f0f0f0;
+}
+
+/* Carte de groupe en mode sombre */
+body.dark-mode .group-card {
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+/* Titre de groupe */
+body.dark-mode .group-name {
+    color: #ffffff;
+}
+
+/* Membres */
+body.dark-mode .group-members {
+    color: #cccccc;
+}
+
+/* Navbar en mode sombre */
+body.dark-mode nav {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #333;
+}
+
+/* Boutons de la navbar */
+body.dark-mode nav button {
+    color: #f0f0f0;
+    border: 1px solid #555;
+}
+
+body.dark-mode nav button:hover {
+    background-color: #444;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: white;
+    max-height: 90vh;
+    width: 100%;
+    max-width: 600px;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+}
+
+body.dark .modal-content {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+
+.dark-mode .modal-content {
+    background: #1f2937;
+    color: white;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+}
+
+
+
+.create-group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+.create-group-form input,
+.create-group-form textarea,
+.create-group-form button {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    
+}
+
+.create-group-form button {
+    background-color: #4f46e5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+.create-group-form button:hover {
+    background-color: #4338ca;
+}
+
+.dark-mode .create-group-form input,
+.dark-mode .create-group-form textarea {
+    background-color: #374151;
+    color: white;
+    border: 1px solid #555;
+}
+
+.dark-mode .create-group-form button {
+    background-color: #6366f1;
+}
+
+.create-group-button {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-group-button:hover {
+    background-color: #4338ca;
+}
+
+body.dark-mode .create-group-button {
+    background-color: #6366f1;
+    color: white;
+}
+
+body.dark-mode .create-group-button:hover {
+    background-color: #4f46e5;
+}
+
+.groups-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1.5rem;
+}
+
+.group-rating {
+    font-size: 0.95rem;
+    color: #f59e0b;
+    margin: 0.3rem 0;
+}
+
+.group-member-names {
+    margin-top: 0.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.member-list {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: #444;
+    list-style-type: disc;
+}
+
+
+
+
+.groups-header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.delete-group-button {
+    margin-top: 10px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-group-button:hover {
+    background-color: #ff1a1a;
+}
+
+.groups-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.delete-mode-button {
+    background-color: #ccc;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
