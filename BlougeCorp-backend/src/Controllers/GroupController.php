@@ -22,7 +22,7 @@ class GroupController
 
         $stmt = $this->db->prepare('
             SELECT g.id, g.name, g.description, g.image, g.creator_id, g.created_at
-            FROM `groups` g
+            FROM groups_ g
             JOIN group_members gm ON gm.group_id = g.id
             WHERE gm.user_id = ?
             ORDER BY g.created_at DESC
@@ -72,7 +72,7 @@ class GroupController
         }
 
         // Create group
-        $stmt = $this->db->prepare('INSERT INTO `groups` (name, description, image, creator_id) VALUES (?, ?, ?, ?)');
+        $stmt = $this->db->prepare('INSERT INTO groups_ (name, description, image, creator_id) VALUES (?, ?, ?, ?)');
         $stmt->execute([$name, $description, $image, $user['user_id']]);
         $groupId = $this->db->lastInsertId();
 
@@ -92,7 +92,7 @@ class GroupController
 
             if ($existingUser) {
                 // Add to group
-                $addStmt = $this->db->prepare('INSERT IGNORE INTO group_members (group_id, user_id) VALUES (?, ?)');
+                $addStmt = $this->db->prepare('INSERT OR IGNORE INTO group_members (group_id, user_id) VALUES (?, ?)');
                 $addStmt->execute([$groupId, $existingUser['id']]);
                 $members[] = $existingUser['username'];
             } else {
@@ -122,7 +122,7 @@ class GroupController
         $groupId = (int) ($params['id'] ?? 0);
 
         // Check ownership
-        $stmt = $this->db->prepare('SELECT creator_id FROM `groups` WHERE id = ?');
+        $stmt = $this->db->prepare('SELECT creator_id FROM groups_ WHERE id = ?');
         $stmt->execute([$groupId]);
         $group = $stmt->fetch();
 
@@ -138,7 +138,7 @@ class GroupController
             return;
         }
 
-        $stmt = $this->db->prepare('DELETE FROM `groups` WHERE id = ?');
+        $stmt = $this->db->prepare('DELETE FROM groups_ WHERE id = ?');
         $stmt->execute([$groupId]);
 
         echo json_encode(['message' => 'Groupe supprimé avec succès.']);

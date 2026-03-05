@@ -1,49 +1,45 @@
--- BlougeCorp Database Schema
-CREATE DATABASE IF NOT EXISTS blougecorp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE blougecorp;
+-- BlougeCorp Database Schema (SQLite)
+-- Ce fichier est fourni à titre de référence.
+-- La base SQLite est créée automatiquement au premier lancement du backend.
 
--- Users
 CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
--- Groups
-CREATE TABLE IF NOT EXISTS `groups` (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS groups_ (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     description TEXT,
-    image LONGTEXT,
-    creator_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image TEXT,
+    creator_id INTEGER NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+);
 
--- Group members (many-to-many)
 CREATE TABLE IF NOT EXISTS group_members (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    group_id INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (group_id) REFERENCES `groups`(id) ON DELETE CASCADE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups_(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_membership (group_id, user_id)
-) ENGINE=InnoDB;
+    UNIQUE (group_id, user_id)
+);
 
--- Destinations
 CREATE TABLE IF NOT EXISTS destinations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    image LONGTEXT,
-    price_house DECIMAL(10,2),
-    price_travel DECIMAL(10,2),
-    dates VARCHAR(255),
-    proposed_by VARCHAR(255),
-    members JSON,
-    location_lat DOUBLE,
-    location_lng DOUBLE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    image TEXT,
+    price_house REAL,
+    price_travel REAL,
+    dates TEXT,
+    proposed_by TEXT,
+    members TEXT,
+    location_lat REAL,
+    location_lng REAL,
     location_address TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
