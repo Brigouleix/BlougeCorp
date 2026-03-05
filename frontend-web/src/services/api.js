@@ -24,7 +24,7 @@ export const fetchDestinations = () => {
 };
 
 export async function createDestination(formData) {
-    const response = await fetch('/api/destinations', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/destinations`, {
         method: 'POST',
         body: formData
     });
@@ -56,7 +56,7 @@ const mockData = [
         id: 4,
         name: "New-York",
         image: ny,
-        members:["Zack", "Nora", "Sam", "Ali", "Ivy", "Noah",, "Sophie", "Tom"]
+        members:["Zack", "Nora", "Sam", "Ali", "Ivy", "Noah", "Sophie", "Tom"]
     },
     {
         id: 5,
@@ -68,7 +68,7 @@ const mockData = [
         id: 6,
         name: "Crète",
         image: crete,
-        members:  ["Milo", "Sarah",  "Ines", ]
+        members:  ["Milo", "Sarah", "Ines"]
     },
 ];
 
@@ -116,7 +116,7 @@ let mockGroups = [
 
 export async function login(email, password) {
   try {
-    const response = await fetch('http://localhost/BlougeCorp-backend/public/api/register', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -190,7 +190,7 @@ export const fetchGroupById = async (groupId) => {
 // services/api.js
 export const fetchGroups = async () => {
   const token = localStorage.getItem('token');
-  const response = await fetch('http://blougecorp.local/api/groups', {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/groups`, {
     headers: { Authorization: 'Bearer ' + token }
   });
 
@@ -214,7 +214,7 @@ export const fetchGroups = async () => {
 export async function deleteGroup(id) {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`http://blougecorp.local/api/groups/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/groups/${id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`

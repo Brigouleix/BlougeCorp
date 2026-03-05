@@ -2,8 +2,8 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { LoadScript, Autocomplete } from '@react-google-maps/api';
-import DestinationCreate from '../src/components/DestinationsCreate';
+import { LoadScript } from '@react-google-maps/api';
+import DestinationCreate from './components/DestinationsCreate';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -23,15 +23,20 @@ function App() {
     // Applique le mode sombre à tout le body
     useEffect(() => {
         if (darkMode) {
-            document.body.classList.add('dark-mode'); // Ajoute la classe 'dark-mode' à body
+            document.body.classList.add('dark-mode');
         } else {
-            document.body.classList.remove('dark-mode'); // Enlève la classe 'dark-mode' de body
+            document.body.classList.remove('dark-mode');
         }
     }, [darkMode]);
 
+    const handleCallbackResponse = (response) => {
+        // TODO: Décoder le JWT Google et connecter l'utilisateur
+        console.log("Google Sign-In response:", response);
+    };
+
     useEffect(() => {
         const scriptId = 'google-api-script';
-      
+
         if (!document.getElementById(scriptId)) {
           const script = document.createElement('script');
           script.src = 'https://accounts.google.com/gsi/client';
@@ -40,27 +45,26 @@ function App() {
           script.defer = true;
           document.body.appendChild(script);
         }
-      }, []);
-      useEffect(() => {
+    }, []);
+
+    useEffect(() => {
         if (window.google && window.google.accounts) {
           window.google.accounts.id.initialize({
-            client_id: "AIzaSyCYi43JdVAzPYWGqsNP724LNeA2MQK7z8w",
+            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
             callback: handleCallbackResponse,
           });
-      
+
           window.google.accounts.id.renderButton(
             document.getElementById("google-signin-button"),
             { theme: "outline", size: "large" }
           );
         }
-      }, []);
-      
-      
-    
-    
+    });
+
+
 
     return (
-        <LoadScript googleMapsApiKey="AIzaSyCYi43JdVAzPYWGqsNP724LNeA2MQK7z8w" libraries={['places']}>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY} libraries={['places']}>
         <Router>
             <div className={`app-container ${darkMode ? 'dark' : ''}`}>
                 <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { LoadScript, Autocomplete } from '@react-google-maps/api';
+import { Autocomplete } from '@react-google-maps/api';
 import myGroupsMock from '../mocks/myGroupsMock';
 import '../styles/CreateDestination.css';
 
@@ -60,7 +60,7 @@ export default function CreateDestination({ onClose = () => {} }) {
         };
 
         try {
-            const res = await fetch("http://localhost/BlougeCorp-backend/public/api/DestinationController", {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/destinations`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -63,8 +63,7 @@ export default function Register() {
 
 
         try {
-            const API_URL = process.env.REACT_APP_API_URL;
-            const response = await fetch('http://localhost:8000/api/register', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/register`, {
 
 
                 method: 'POST',

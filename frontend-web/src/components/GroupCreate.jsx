@@ -27,7 +27,7 @@ export default function CreateGroup({ onClose, afterCreate }) {
       const emails      = emailList.split(",").map(e => e.trim()).filter(Boolean);
       const token       = localStorage.getItem("token");
 
-      const res = await fetch("http://blougecorp.local/api/groups/create", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/groups/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

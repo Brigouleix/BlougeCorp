@@ -18,7 +18,7 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await fetch('http://localhost/BlougeCorp-backend/public/api/login', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,9 +47,6 @@ export default function Login() {
             if (data.user) {
                 localStorage.setItem('user', JSON.stringify(data.user));
                 localStorage.setItem('token', data.token);
-                window.location.href = "/my-groups";
-
-
                 navigate('/my-groups');
             } else {
                 setError('Email ou mot de passe incorrect.');
