@@ -2,7 +2,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { LoadScript } from '@react-google-maps/api';
+import 'leaflet/dist/leaflet.css';
 import DestinationCreate from './components/DestinationsCreate';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -11,16 +11,16 @@ import Destinations from './pages/Destinations';
 import MyGroups from './pages/MyGroups';
 import GroupDetails from './pages/GroupDetails';
 import GroupCreate from './components/GroupCreate';
-import ProtectedRoute from './components/ProtectedRoute'; 
+import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
-import Footer from './components/Footer'; 
+import Footer from './components/Footer';
 import Legal from './pages/Legal';
 import Contact from './pages/Contact';
+import MyAccount from './pages/MyAccount';
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
 
-    // Applique le mode sombre à tout le body
     useEffect(() => {
         if (darkMode) {
             document.body.classList.add('dark-mode');
@@ -30,13 +30,11 @@ function App() {
     }, [darkMode]);
 
     const handleCallbackResponse = (response) => {
-        // TODO: Décoder le JWT Google et connecter l'utilisateur
         console.log("Google Sign-In response:", response);
     };
 
     useEffect(() => {
         const scriptId = 'google-api-script';
-
         if (!document.getElementById(scriptId)) {
           const script = document.createElement('script');
           script.src = 'https://accounts.google.com/gsi/client';
@@ -53,7 +51,6 @@ function App() {
             client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
             callback: handleCallbackResponse,
           });
-
           window.google.accounts.id.renderButton(
             document.getElementById("google-signin-button"),
             { theme: "outline", size: "large" }
@@ -61,60 +58,28 @@ function App() {
         }
     });
 
-
-
     return (
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY} libraries={['places']}>
         <Router>
             <div className={`app-container ${darkMode ? 'dark' : ''}`}>
                 <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-                    <Routes>
-                        <Route path="/" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/legal" element={<Legal />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="/destinations" element={<ProtectedRoute><Destinations /></ProtectedRoute>} />
-                        <Route path="/my-groups" element={<ProtectedRoute><MyGroups /></ProtectedRoute>}
-                        
-                    />
-                            
-                    <Route
-                        path="/groups/:groupId"
-                        element={
-                            <ProtectedRoute>
-                                <GroupDetails />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/create-group"
-                        element={
-                            <ProtectedRoute>
-                                <GroupCreate />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    <Route
-                    path="/destinations-create"
-                    element={
-                        <ProtectedRoute>
-                        <DestinationCreate />
-                        </ProtectedRoute>
-                    }
-                    />
-
-                    
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/legal" element={<Legal />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/destinations" element={<ProtectedRoute><Destinations /></ProtectedRoute>} />
+                    <Route path="/my-groups" element={<ProtectedRoute><MyGroups /></ProtectedRoute>} />
+                    <Route path="/groups/:groupId" element={<ProtectedRoute><GroupDetails /></ProtectedRoute>} />
+                    <Route path="/create-group" element={<ProtectedRoute><GroupCreate /></ProtectedRoute>} />
+                    <Route path="/destinations-create" element={<ProtectedRoute><DestinationCreate /></ProtectedRoute>} />
+                    <Route path="/my-account" element={<ProtectedRoute><MyAccount /></ProtectedRoute>} />
                     <Route path="*" element={<NotFound />} />
-                    </Routes>
-                    <Footer />
-
+                </Routes>
+                <Footer />
             </div>
         </Router>
-        </LoadScript>
     );
 }
 
 export default App;
-

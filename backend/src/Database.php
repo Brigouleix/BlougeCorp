@@ -70,6 +70,7 @@ class Database
         self::$pdo->exec("
             CREATE TABLE destinations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id INTEGER,
                 name TEXT NOT NULL,
                 image TEXT,
                 price_house REAL,
@@ -80,7 +81,79 @@ class Database
                 location_lat REAL,
                 location_lng REAL,
                 location_address TEXT,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (group_id) REFERENCES groups_(id) ON DELETE CASCADE
+            )
+        ");
+
+        self::$pdo->exec("
+            CREATE TABLE comments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                destination_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                username TEXT NOT NULL,
+                text TEXT NOT NULL,
+                rating INTEGER NOT NULL DEFAULT 5,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ");
+
+        self::$pdo->exec("
+            CREATE TABLE invitations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id INTEGER NOT NULL,
+                email TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'pending',
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (group_id) REFERENCES groups_(id) ON DELETE CASCADE
+            )
+        ");
+    }
+
+    public static function ensureGroupIdColumn(): void
+    {
+        $pdo = self::connect();
+        $cols = $pdo->query("PRAGMA table_info(destinations)")->fetchAll();
+        $hasGroupId = false;
+        foreach ($cols as $col) {
+            if ($col['name'] === 'group_id') { $hasGroupId = true; break; }
+        }
+        if (!$hasGroupId) {
+            $pdo->exec("ALTER TABLE destinations ADD COLUMN group_id INTEGER REFERENCES groups_(id) ON DELETE CASCADE");
+        }
+    }
+
+    public static function ensureCommentsTable(): void
+    {
+        $pdo = self::connect();
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS comments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                destination_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                username TEXT NOT NULL,
+                text TEXT NOT NULL,
+                rating INTEGER NOT NULL DEFAULT 5,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ");
+    }
+
+    public static function ensureInvitationsTable(): void
+    {
+        $pdo = self::connect();
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS invitations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id INTEGER NOT NULL,
+                email TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'pending',
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (group_id) REFERENCES groups_(id) ON DELETE CASCADE
             )
         ");
     }

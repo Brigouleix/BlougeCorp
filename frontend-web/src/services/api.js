@@ -1,224 +1,72 @@
 // src/services/api.js
-import bretagne from '../assets/bretagne.jpg';
-import toscane from '../assets/toscane.jpg';
-import miami from '../assets/miami.jpg';
-import ny from '../assets/ny.jpg';
-import sainttropez from '../assets/sainttropez.jpg';
-import crete from '../assets/crete.jpg';
 
+const API = process.env.REACT_APP_API_URL;
 
-
-
-export const fetchDestinations = () => {
-    return new Promise((resolve) => {
-        const stored = localStorage.getItem('destinations');
-
-        if (stored) {
-            resolve(JSON.parse(stored));
-        } else {
-            // Initialisation avec mockData si rien dans le localStorage
-            localStorage.setItem('destinations', JSON.stringify(mockData));
-            resolve(mockData);
-        }
-    });
-};
-
-export async function createDestination(formData) {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/destinations`, {
-        method: 'POST',
-        body: formData
-    });
-
-    if (!response.ok) throw new Error('Échec de la création');
-    return await response.json(); // doit retourner la nouvelle destination
+function authHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+    };
 }
 
-const mockData = [
-    {
-        id: 1,
-        name: "Bretagne",
-        image: bretagne,
-        members: ["Alice", "Bob", "Charlie", "David", "Eva", "Frank","Theo","Louis", "Chloe"]
-    },
-    {
-        id: 2,
-        name: "Toscane",
-        image: toscane,
-        members:  ["Jean", "Marie", "Claire", "Paul", "Julie"]
-    },
-    {
-        id: 3,
-        name: "Miami",
-        image: miami,
-        members: ["Max", "Léa", "Emma", "Nina"]
-    },
-    {
-        id: 4,
-        name: "New-York",
-        image: ny,
-        members:["Zack", "Nora", "Sam", "Ali", "Ivy", "Noah", "Sophie", "Tom"]
-    },
-    {
-        id: 5,
-        name: "Saint-Tropez",
-        image: sainttropez,
-        members: ["Yasmine", "Hugo"]
-    },
-    {
-        id: 6,
-        name: "Crète",
-        image: crete,
-        members:  ["Milo", "Sarah", "Ines"]
-    },
-];
-
-
-
-// 🔧 Simule des utilisateurs en base
-const mockUsers = [
-    { id: 1, email: 'alice@blouge.com', password: '1234', username: 'alice' },
-    { id: 2, email: 'bob@blouge.com', password: '5678', username: 'bob' },
-];
-
-// 🔧 Simule des groupes
-let mockGroups = [
-    {
-        id: 1,
-        name: "Groupe A",
-        members: ["alice", "bob", "charlie"],
-        creator: "alice"
-    },
-    {
-        id: 2,
-        name: "Groupe B",
-        members: ["bob", "david", "eve"],
-        creator: "bob"
-    },
-    {
-        id: 3,
-        name: "Groupe C",
-        members: ["carlos", "ahmed", "pierrine"],
-        creator: "pierrine"
-    },
-    {
-        id: '4',
-        name: "Vacances USA",
-        members: ['Antoine', 'Mikerlange'],
-        creator: 'Antoine'
-    }
-];
-
-
-
-
-// ✅ Simule une API de connexion
-// services/api.js
+// ===== AUTH =====
 
 export async function login(email, password) {
-  try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+        const response = await fetch(`${API}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
 
-    if (!response.ok) {
-      // Si code HTTP non 200, on récupère le message d'erreur
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Erreur lors de la connexion');
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Erreur lors de la connexion');
+        }
+
+        const data = await response.json();
+        return data.user;
+    } catch (error) {
+        console.error('Erreur login API:', error);
+        throw error;
     }
-
-    const data = await response.json();
-    // data.user contient l'utilisateur sans mot de passe
-    return data.user;
-  } catch (error) {
-    console.error('Erreur login API:', error);
-    throw error;
-  }
 }
 
-
-// ✅ Récupère l'utilisateur connecté (depuis localStorage)
 export const getCurrentUser = () => {
     const user = localStorage.getItem("user");
     return user ? JSON.parse(user) : null;
 };
 
-// ✅ Récupère les groupes d’un utilisateur
-export const getUserGroups = async (username) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const userGroups = mockGroups.filter(group =>
-                group.members.includes(username)
-            );
-            resolve(userGroups);
-        }, 500);
-    });
-};
+// ===== GROUPS =====
 
-// ✅ Crée un nouveau groupe
-export const createGroup = async (groupName, creatorUsername) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const newGroup = {
-                id: mockGroups.length + 1,
-                name: groupName,
-                members: [creatorUsername],
-                creator: creatorUsername,
-            };
-            mockGroups.push(newGroup);
-            resolve(newGroup);
-        }, 500);
-    });
-};
-
-
-
-export const fetchGroupById = async (groupId) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const group = mockGroups.find(g => g.id === parseInt(groupId));
-            resolve(group);
-        }, 500);
-    });
-};
-
-
-// Récupère tous les groupes
-// services/api.js
 export const fetchGroups = async () => {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/groups`, {
-    headers: { Authorization: 'Bearer ' + token }
-  });
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API}/api/groups`, {
+        headers: { Authorization: 'Bearer ' + token }
+    });
 
-  if (!response.ok) {
-    const txt = await response.text();
-    throw new Error(`${response.status} ${txt}`);
-  }
+    if (!response.ok) {
+        const txt = await response.text();
+        throw new Error(`${response.status} ${txt}`);
+    }
 
-  const groups = await response.json();
+    const groups = await response.json();
 
-  // 🔽  Assure‑toi que members est bien un tableau
-  return groups.map(g => ({
-    ...g,
-    members: Array.isArray(g.members)
-      ? g.members
-      : JSON.parse(g.members ?? '[]')
-  }));
+    return groups.map(g => ({
+        ...g,
+        members: Array.isArray(g.members)
+            ? g.members
+            : JSON.parse(g.members ?? '[]')
+    }));
 };
-
 
 export async function deleteGroup(id) {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/groups/${id}`, {
+    const response = await fetch(`${API}/api/groups/${id}`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
+        headers: { 'Authorization': `Bearer ${token}` }
     });
 
     if (!response.ok) {
@@ -229,4 +77,135 @@ export async function deleteGroup(id) {
     return await response.json();
 }
 
+// ===== DESTINATIONS =====
 
+export const fetchDestinations = async (groupId) => {
+    const url = groupId ? `${API}/api/destinations?group_id=${groupId}` : `${API}/api/destinations`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Erreur lors du chargement des destinations');
+    }
+    return await response.json();
+};
+
+export const fetchDestinationById = async (id) => {
+    const response = await fetch(`${API}/api/destinations/${id}`);
+    if (!response.ok) {
+        throw new Error('Destination introuvable');
+    }
+    return await response.json();
+};
+
+export async function deleteDestination(id) {
+    const response = await fetch(`${API}/api/destinations/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders()
+    });
+    if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Erreur lors de la suppression');
+    }
+    return await response.json();
+}
+
+export async function createDestination(formData) {
+    const response = await fetch(`${API}/api/destinations`, {
+        method: 'POST',
+        body: formData
+    });
+
+    if (!response.ok) throw new Error('Échec de la création');
+    return await response.json();
+}
+
+// ===== COMMENTS =====
+
+export async function fetchComments(destId) {
+    const response = await fetch(`${API}/api/destinations/${destId}/comments`);
+    if (!response.ok) throw new Error('Erreur lors du chargement des commentaires');
+    return await response.json();
+}
+
+export async function createComment(destId, text, rating) {
+    const response = await fetch(`${API}/api/destinations/${destId}/comments`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ text, rating })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Erreur');
+    return data;
+}
+
+export async function deleteComment(commentId) {
+    const response = await fetch(`${API}/api/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: authHeaders()
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Erreur');
+    return data;
+}
+
+// ===== INVITATIONS =====
+
+export async function fetchInvitations() {
+    const response = await fetch(`${API}/api/invitations`, {
+        headers: authHeaders()
+    });
+    if (!response.ok) throw new Error('Erreur lors du chargement des invitations');
+    return await response.json();
+}
+
+export async function acceptInvitation(id) {
+    const response = await fetch(`${API}/api/invitations/${id}/accept`, {
+        method: 'POST',
+        headers: authHeaders()
+    });
+    if (!response.ok) throw new Error("Erreur lors de l'acceptation");
+    return await response.json();
+}
+
+export async function declineInvitation(id) {
+    const response = await fetch(`${API}/api/invitations/${id}/decline`, {
+        method: 'POST',
+        headers: authHeaders()
+    });
+    if (!response.ok) throw new Error('Erreur lors du refus');
+    return await response.json();
+}
+
+export async function sendInvitations(groupId, emails) {
+    const response = await fetch(`${API}/api/invitations/send`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ groupId, emails })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Erreur lors de l'envoi");
+    return data;
+}
+
+// ===== ACCOUNT =====
+
+export async function changePassword(oldPassword, newPassword) {
+    const response = await fetch(`${API}/api/account/password`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify({ oldPassword, newPassword })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Erreur');
+    return data;
+}
+
+export async function deleteAccount(password) {
+    const response = await fetch(`${API}/api/account`, {
+        method: 'DELETE',
+        headers: authHeaders(),
+        body: JSON.stringify({ password })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Erreur');
+    return data;
+}

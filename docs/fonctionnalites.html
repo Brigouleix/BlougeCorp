@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>BlougeCorp - Documentation des fonctionnalités</title>
+    <style>
+        @page { margin: 2cm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .cover {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 3px solid #4f46e5;
+            margin-bottom: 40px;
+        }
+        .cover h1 {
+            font-size: 42px;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        .cover .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .cover .meta {
+            font-size: 14px;
+            color: #999;
+        }
+        h2 {
+            font-size: 24px;
+            color: #4f46e5;
+            margin: 35px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        h3 {
+            font-size: 18px;
+            color: #1e1b4b;
+            margin: 20px 0 10px;
+        }
+        p { margin-bottom: 10px; }
+        ul {
+            margin: 10px 0 15px 25px;
+        }
+        li { margin-bottom: 6px; }
+        .feature-box {
+            background: #f8f9ff;
+            border-left: 4px solid #4f46e5;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .feature-box h3 {
+            margin-top: 0;
+            color: #4f46e5;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .tech-tag {
+            background: #4f46e5;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .tech-tag.green { background: #16a34a; }
+        .tech-tag.orange { background: #ea580c; }
+        .tech-tag.blue { background: #2563eb; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+        th {
+            background: #4f46e5;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f9fafb; }
+        .page-break { page-break-before: always; }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COUVERTURE -->
+    <div class="cover">
+        <h1>BlougeCorp</h1>
+        <p class="subtitle">Application de planification de vacances en groupe</p>
+        <p class="meta">Documentation des fonctionnalités &bull; Mars 2026</p>
+    </div>
+
+    <!-- SOMMAIRE -->
+    <h2>Sommaire</h2>
+    <ol>
+        <li>Présentation générale</li>
+        <li>Stack technique</li>
+        <li>Authentification et comptes utilisateurs</li>
+        <li>Gestion des groupes</li>
+        <li>Système d'invitations</li>
+        <li>Destinations</li>
+        <li>Cartographie interactive</li>
+        <li>Commentaires et évaluations</li>
+        <li>Mon Compte</li>
+        <li>Interface utilisateur</li>
+        <li>Architecture de la base de données</li>
+        <li>Endpoints API</li>
+    </ol>
+
+    <!-- 1. PRESENTATION -->
+    <h2>1. Présentation générale</h2>
+    <p>
+        <strong>BlougeCorp</strong> est une application web fullstack permettant à des groupes d'amis ou de famille
+        de planifier ensemble leurs vacances. Chaque utilisateur peut créer des groupes, inviter des membres,
+        proposer des destinations, les noter et les commenter, le tout avec une carte interactive.
+    </p>
+
+    <!-- 2. STACK TECHNIQUE -->
+    <h2>2. Stack technique</h2>
+
+    <h3>Frontend</h3>
+    <div class="tech-stack">
+        <span class="tech-tag blue">React 18</span>
+        <span class="tech-tag blue">React Router DOM 6</span>
+        <span class="tech-tag green">Leaflet / React-Leaflet 4.2</span>
+        <span class="tech-tag">Create React App</span>
+    </div>
+
+    <h3>Backend</h3>
+    <div class="tech-stack">
+        <span class="tech-tag orange">PHP 8.2</span>
+        <span class="tech-tag orange">SQLite (PDO)</span>
+        <span class="tech-tag orange">JWT (HMAC-SHA256)</span>
+        <span class="tech-tag orange">PHPMailer</span>
+    </div>
+
+    <h3>Cartographie</h3>
+    <div class="tech-stack">
+        <span class="tech-tag green">OpenStreetMap</span>
+        <span class="tech-tag green">Nominatim (géocodage)</span>
+    </div>
+
+    <!-- 3. AUTHENTIFICATION -->
+    <div class="page-break"></div>
+    <h2>3. Authentification et comptes utilisateurs</h2>
+
+    <div class="feature-box">
+        <h3>Inscription</h3>
+        <ul>
+            <li>Création de compte avec nom d'utilisateur, email et mot de passe</li>
+            <li>Mot de passe hashé avec bcrypt</li>
+            <li>Validation de l'unicité de l'email</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Connexion</h3>
+        <ul>
+            <li>Authentification par email et mot de passe</li>
+            <li>Génération d'un token JWT (HMAC-SHA256)</li>
+            <li>Stockage du token et des infos utilisateur dans le localStorage</li>
+            <li>Routes protégées côté frontend (ProtectedRoute)</li>
+        </ul>
+    </div>
+
+    <!-- 4. GESTION DES GROUPES -->
+    <h2>4. Gestion des groupes</h2>
+
+    <div class="feature-box">
+        <h3>Création de groupe</h3>
+        <ul>
+            <li>Nom du groupe, description, image (encodée en base64)</li>
+            <li>Invitation de membres par email dès la création</li>
+            <li>Le créateur est automatiquement ajouté comme membre et administrateur</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Affichage des groupes</h3>
+        <ul>
+            <li>Page "Mes Groupes" affichant tous les groupes dont l'utilisateur est membre</li>
+            <li>Chaque carte de groupe affiche : nom, admin, liste des membres</li>
+            <li>Clic sur un groupe pour accéder à ses destinations</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Suppression de groupe</h3>
+        <ul>
+            <li>Mode suppression activable par un bouton poubelle</li>
+            <li>Seul le créateur du groupe peut supprimer</li>
+            <li>Suppression en cascade (membres, invitations, destinations)</li>
+        </ul>
+    </div>
+
+    <!-- 5. INVITATIONS -->
+    <div class="page-break"></div>
+    <h2>5. Système d'invitations</h2>
+
+    <div class="feature-box">
+        <h3>Réception d'invitations</h3>
+        <ul>
+            <li>Icône cloche avec badge indiquant le nombre d'invitations en attente</li>
+            <li>Modale affichant la liste des invitations (nom du groupe, invité par)</li>
+            <li>Boutons "Accepter" et "Refuser" pour chaque invitation</li>
+            <li>Accepter une invitation ajoute automatiquement l'utilisateur au groupe</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Envoi d'invitations</h3>
+        <ul>
+            <li>Bouton "Envoyer une invitation" sur la page des groupes</li>
+            <li>Modale avec sélecteur de groupe et champ d'emails (séparés par des virgules)</li>
+            <li>Vérification des doublons (pas d'invitation si déjà invité ou déjà membre)</li>
+            <li>Envoi d'un email automatique via PHPMailer si l'utilisateur n'existe pas encore</li>
+        </ul>
+    </div>
+
+    <!-- 6. DESTINATIONS -->
+    <h2>6. Destinations</h2>
+
+    <div class="feature-box">
+        <h3>Destinations par groupe</h3>
+        <ul>
+            <li>Chaque groupe possède ses propres destinations (liées par <code>group_id</code>)</li>
+            <li>Les destinations d'un groupe ne sont pas visibles dans un autre</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Création de destination</h3>
+        <ul>
+            <li>Nom, image, prix logement, prix transport, dates, proposé par (sélection parmi les membres)</li>
+            <li>Lieu avec autocomplétion via Nominatim (OpenStreetMap)</li>
+            <li>Géocodage automatique (latitude/longitude)</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Carte de destination</h3>
+        <ul>
+            <li>Note moyenne (étoiles) calculée à partir des commentaires en base de données</li>
+            <li>Prix par personne calculé automatiquement (logement / nb membres + transport)</li>
+            <li>Dates et nom du proposeur affichés</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Suppression de destination</h3>
+        <ul>
+            <li>Mode suppression activable (bouton poubelle)</li>
+            <li>Visible uniquement pour le créateur du groupe</li>
+        </ul>
+    </div>
+
+    <!-- 7. CARTOGRAPHIE -->
+    <div class="page-break"></div>
+    <h2>7. Cartographie interactive</h2>
+
+    <div class="feature-box">
+        <h3>Carte des destinations</h3>
+        <ul>
+            <li>Carte OpenStreetMap intégrée via React-Leaflet</li>
+            <li>Marqueurs positionnés pour chaque destination ayant des coordonnées</li>
+            <li>Popup au clic sur un marqueur affichant le nom de la destination</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Recherche d'adresse</h3>
+        <ul>
+            <li>Barre de recherche avec autocomplétion Nominatim</li>
+            <li>Debounce de 400ms pour limiter les appels API</li>
+            <li>Recentrage automatique de la carte au clic sur une suggestion</li>
+        </ul>
+    </div>
+
+    <!-- 8. COMMENTAIRES -->
+    <h2>8. Commentaires et évaluations</h2>
+
+    <div class="feature-box">
+        <h3>Système de commentaires</h3>
+        <ul>
+            <li>Ajout de commentaire avec texte et note de 1 à 5</li>
+            <li>Commentaires stockés en base de données (table <code>comments</code>)</li>
+            <li>Affichage du nom d'utilisateur, date et note pour chaque commentaire</li>
+            <li>Suppression possible uniquement par l'auteur du commentaire</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Note moyenne</h3>
+        <ul>
+            <li>Calculée automatiquement à partir de tous les commentaires</li>
+            <li>Affichée sur la carte de destination (étoile) et sur la page détail</li>
+            <li>Tri des commentaires par date ou par note</li>
+        </ul>
+    </div>
+
+    <!-- 9. MON COMPTE -->
+    <h2>9. Mon Compte</h2>
+
+    <div class="feature-box">
+        <h3>Page Mon Compte</h3>
+        <ul>
+            <li>Accessible via le bouton "&#128100; Mon Compte" dans la navbar</li>
+            <li>Affichage du nom d'utilisateur et de l'email</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Modification du mot de passe</h3>
+        <ul>
+            <li>Saisie de l'ancien mot de passe, du nouveau (minimum 12 caractères) et confirmation</li>
+            <li>Vérification de l'ancien mot de passe côté serveur</li>
+            <li>Hashage bcrypt du nouveau mot de passe</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Suppression du compte</h3>
+        <ul>
+            <li>Zone danger avec confirmation par mot de passe</li>
+            <li>Suppression en cascade : groupes créés, adhésions, invitations, compte</li>
+            <li>Déconnexion automatique après suppression</li>
+        </ul>
+    </div>
+
+    <!-- 10. UI -->
+    <div class="page-break"></div>
+    <h2>10. Interface utilisateur</h2>
+
+    <div class="feature-box">
+        <h3>Thème clair / sombre</h3>
+        <ul>
+            <li>Basculement via le bouton dans la navbar</li>
+            <li>Affecte toutes les pages et composants (cartes, modales, formulaires)</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Navigation</h3>
+        <ul>
+            <li>Navbar avec logo, boutons Home, Mode sombre, Mon Compte et Déconnexion</li>
+            <li>Boutons de retour sur chaque page (destinations &rarr; groupes, détail &rarr; destinations, mon compte &rarr; groupes)</li>
+            <li>Footer avec liens vers les mentions légales et la page de contact</li>
+        </ul>
+    </div>
+
+    <!-- 11. BASE DE DONNEES -->
+    <h2>11. Architecture de la base de données</h2>
+
+    <table>
+        <tr><th>Table</th><th>Description</th><th>Colonnes principales</th></tr>
+        <tr><td><code>users</code></td><td>Comptes utilisateurs</td><td>id, username, email, password, created_at</td></tr>
+        <tr><td><code>groups_</code></td><td>Groupes de vacances</td><td>id, name, description, image, creator_id, created_at</td></tr>
+        <tr><td><code>group_members</code></td><td>Liaison groupe ↔ utilisateur</td><td>id, group_id, user_id (UNIQUE)</td></tr>
+        <tr><td><code>destinations</code></td><td>Destinations proposées</td><td>id, group_id, name, image, price_house, price_travel, dates, proposed_by, members, location_*, created_at</td></tr>
+        <tr><td><code>comments</code></td><td>Commentaires et notes</td><td>id, destination_id, user_id, username, text, rating, created_at</td></tr>
+        <tr><td><code>invitations</code></td><td>Invitations en attente</td><td>id, group_id, email, status, created_at</td></tr>
+    </table>
+
+    <!-- 12. API -->
+    <h2>12. Endpoints API</h2>
+
+    <h3>Authentification</h3>
+    <table>
+        <tr><th>Méthode</th><th>Route</th><th>Description</th></tr>
+        <tr><td>POST</td><td>/api/register</td><td>Inscription</td></tr>
+        <tr><td>POST</td><td>/api/login</td><td>Connexion (retourne un JWT)</td></tr>
+    </table>
+
+    <h3>Groupes</h3>
+    <table>
+        <tr><th>Méthode</th><th>Route</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/groups</td><td>Liste des groupes de l'utilisateur</td></tr>
+        <tr><td>POST</td><td>/api/groups/create</td><td>Créer un groupe + inviter des membres</td></tr>
+        <tr><td>DELETE</td><td>/api/groups/{id}</td><td>Supprimer un groupe (créateur uniquement)</td></tr>
+    </table>
+
+    <h3>Invitations</h3>
+    <table>
+        <tr><th>Méthode</th><th>Route</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/invitations</td><td>Invitations en attente pour l'utilisateur</td></tr>
+        <tr><td>POST</td><td>/api/invitations/{id}/accept</td><td>Accepter une invitation</td></tr>
+        <tr><td>POST</td><td>/api/invitations/{id}/decline</td><td>Refuser une invitation</td></tr>
+        <tr><td>POST</td><td>/api/invitations/send</td><td>Envoyer des invitations à un groupe</td></tr>
+    </table>
+
+    <h3>Destinations</h3>
+    <table>
+        <tr><th>Méthode</th><th>Route</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/destinations?group_id=X</td><td>Liste des destinations d'un groupe</td></tr>
+        <tr><td>GET</td><td>/api/destinations/{id}</td><td>Détail d'une destination</td></tr>
+        <tr><td>POST</td><td>/api/destinations</td><td>Créer une destination</td></tr>
+        <tr><td>DELETE</td><td>/api/destinations/{id}</td><td>Supprimer une destination</td></tr>
+    </table>
+
+    <h3>Commentaires</h3>
+    <table>
+        <tr><th>Méthode</th><th>Route</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/destinations/{id}/comments</td><td>Commentaires d'une destination</td></tr>
+        <tr><td>POST</td><td>/api/destinations/{id}/comments</td><td>Ajouter un commentaire</td></tr>
+        <tr><td>DELETE</td><td>/api/comments/{id}</td><td>Supprimer son commentaire</td></tr>
+    </table>
+
+    <h3>Compte</h3>
+    <table>
+        <tr><th>Méthode</th><th>Route</th><th>Description</th></tr>
+        <tr><td>PUT</td><td>/api/account/password</td><td>Modifier le mot de passe</td></tr>
+        <tr><td>DELETE</td><td>/api/account</td><td>Supprimer le compte</td></tr>
+    </table>
+
+    <div class="footer">
+        <p>BlougeCorp &copy; 2026 &mdash; Document généré automatiquement</p>
+    </div>
+
+</body>
+</html>

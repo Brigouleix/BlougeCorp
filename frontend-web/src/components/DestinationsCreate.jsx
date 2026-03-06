@@ -1,26 +1,20 @@
-import { useState, useEffect, useRef } from 'react';
-import { Autocomplete } from '@react-google-maps/api';
-import myGroupsMock from '../mocks/myGroupsMock';
+import { useState, useRef } from 'react';
 import '../styles/CreateDestination.css';
 
-export default function CreateDestination({ onClose = () => {} }) {
+export default function CreateDestination({ onClose = () => {}, members = [], groupId }) {
     const [name, setName] = useState('');
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
-    const [priceHouse, setPriceHouse] = useState(null);
-    const [priceTravel, setPriceTravel] = useState(null);
-    const [dates, setDates] = useState(null);
-    const [proposedBy, setProposedBy] = useState(null);
+    const [priceHouse, setPriceHouse] = useState('');
+    const [priceTravel, setPriceTravel] = useState('');
+    const [dates, setDates] = useState('');
+    const [proposedBy, setProposedBy] = useState('');
     const [location, setLocation] = useState(null);
-    const [members, setMembers] = useState([]);
-    const autocompleteRef = useRef(null);
 
-    useEffect(() => {
-        const allMembers = myGroupsMock
-            .flatMap(group => group.members)
-            .filter((value, index, self) => self.indexOf(value) === index);
-        setMembers(allMembers);
-    }, []);
+    // Nominatim autocomplete
+    const [searchQuery, setSearchQuery] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+    const searchTimeout = useRef(null);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -34,21 +28,46 @@ export default function CreateDestination({ onClose = () => {} }) {
         }
     };
 
-    const handlePlaceChanged = () => {
-        const place = autocompleteRef.current.getPlace();
-        if (place && place.geometry) {
-            setLocation({
-                lat: place.geometry.location.lat(),
-                lng: place.geometry.location.lng(),
-                address: place.formatted_address
-            });
+    const handleSearchChange = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+
+        if (searchTimeout.current) clearTimeout(searchTimeout.current);
+
+        if (query.length < 3) {
+            setSuggestions([]);
+            return;
         }
+
+        searchTimeout.current = setTimeout(async () => {
+            try {
+                const res = await fetch(
+                    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5`,
+                    { headers: { 'Accept-Language': 'fr' } }
+                );
+                const data = await res.json();
+                setSuggestions(data);
+            } catch (err) {
+                console.error('Nominatim error:', err);
+            }
+        }, 400);
+    };
+
+    const handleSuggestionClick = (suggestion) => {
+        setLocation({
+            lat: parseFloat(suggestion.lat),
+            lng: parseFloat(suggestion.lon),
+            address: suggestion.display_name
+        });
+        setSearchQuery(suggestion.display_name);
+        setSuggestions([]);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newDestination = {
+            groupId,
             name,
             image,
             priceHouse,
@@ -109,9 +128,49 @@ export default function CreateDestination({ onClose = () => {} }) {
             </select>
 
             <label>Lieu</label>
-            <Autocomplete onLoad={(auto) => (autocompleteRef.current = auto)} onPlaceChanged={handlePlaceChanged}>
-                <input type="text" placeholder="Tapez une adresse ou ville..." required />
-            </Autocomplete>
+            <div style={{ position: 'relative' }}>
+                <input
+                    type="text"
+                    placeholder="Tapez une adresse ou ville..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    required
+                />
+                {suggestions.length > 0 && (
+                    <ul style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: 0,
+                        right: 0,
+                        background: 'white',
+                        border: '1px solid #ccc',
+                        borderRadius: '0 0 8px 8px',
+                        listStyle: 'none',
+                        margin: 0,
+                        padding: 0,
+                        zIndex: 1000,
+                        maxHeight: '200px',
+                        overflowY: 'auto',
+                    }}>
+                        {suggestions.map((s, i) => (
+                            <li
+                                key={i}
+                                onClick={() => handleSuggestionClick(s)}
+                                style={{
+                                    padding: '8px 12px',
+                                    cursor: 'pointer',
+                                    borderBottom: '1px solid #eee',
+                                    fontSize: '14px',
+                                }}
+                                onMouseEnter={(e) => e.target.style.background = '#f0f0f0'}
+                                onMouseLeave={(e) => e.target.style.background = 'white'}
+                            >
+                                {s.display_name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
 
             <button type="submit" className="create-button">Créer</button>
         </form>

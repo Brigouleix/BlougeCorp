@@ -1,20 +1,8 @@
-import { useEffect, useState } from 'react';
-import myGroupsMock from '../mocks/myGroupsMock'; // ✅ Import des groupes mockés
 import { useNavigate } from 'react-router-dom';
-import '../styles/Groups.css'; 
+import '../styles/Groups.css';
 
-export default function DestinationCards({ id, name, image, comments = [], priceHouse, priceTravel, dates, proposedBy }) {
+export default function DestinationCards({ id, name, image, comments = [], priceHouse, priceTravel, dates, proposedBy, members = [], showDelete, onDelete }) {
     const navigate = useNavigate();
-    const [members, setMembers] = useState([]);
-    
-    useEffect(() => {
-        // ✅ Extraire tous les membres uniques des groupes mockés
-        const allMembers = myGroupsMock
-            .flatMap(group => group.members)
-            .filter((value, index, self) => self.indexOf(value) === index); // Supprime les doublons
-
-        setMembers(allMembers);
-    }, []);
 
     // Calcul de la moyenne des évaluations
     const averageRating =
@@ -32,11 +20,10 @@ export default function DestinationCards({ id, name, image, comments = [], price
         pricePerPerson = 'Pas encore déterminé';
     }
 
-    // Ajout de logs pour débogage
-    console.log('priceHouse:', priceHouse);
-    console.log('priceTravel:', priceTravel);
-    console.log('members:', members);
-    console.log('pricePerPerson:', pricePerPerson);
+    const handleDelete = (e) => {
+        e.stopPropagation();
+        onDelete(id);
+    };
 
     return (
         <div className="group-card" onClick={() => navigate(`/groups/${id}`)}>
@@ -52,6 +39,12 @@ export default function DestinationCards({ id, name, image, comments = [], price
 
                 <p><strong>Dates :</strong> {dates}</p>
                 <p><strong>Proposé par :</strong> {proposedBy}</p>
+
+                {showDelete && (
+                    <button className="delete-group-button" onClick={handleDelete}>
+                        &#128465; Supprimer
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -45,8 +45,16 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </button>
             </div>
 
-            {/* Logout à droite */}
+            {/* Account + Logout à droite */}
             <div className="navbar-right">
+                {isLoggedIn && (
+                    <button
+                        onClick={() => navigate('/my-account')}
+                        className="nav-button"
+                    >
+                        &#128100; Mon Compte
+                    </button>
+                )}
                 <button
                     onClick={handleLogout}
                     className="logout-button"
