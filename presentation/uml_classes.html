@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — Diagramme de Classes UML</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4ff;color:#1e1b4b;min-height:100vh}
+  nav{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:.8rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:600;padding:.3rem .7rem;border-radius:8px}
+  nav a:hover,nav a.active{background:rgba(255,255,255,.2);color:#fff}
+  nav .nav-title{color:#fff;font-weight:800;font-size:1rem;margin-right:1rem}
+  header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:2rem;color:#fff}
+  header h1{font-size:1.8rem;font-weight:800}
+  header p{opacity:.75;margin-top:.3rem;font-size:.9rem}
+  main{padding:2rem;max-width:1400px;margin:0 auto}
+  .mermaid-wrap{background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(79,70,229,.08);overflow-x:auto}
+  .legend{display:flex;gap:1.5rem;flex-wrap:wrap;padding:1rem 1.5rem;background:rgba(255,255,255,.7);border-radius:12px;margin-bottom:1.5rem;font-size:.82rem;color:#374151}
+  .legend-item{display:flex;align-items:center;gap:.5rem}
+  .legend-line{width:30px;height:3px}
+</style>
+<script>
+mermaid.initialize({
+  startOnLoad:true,
+  theme:'base',
+  themeVariables:{
+    primaryColor:'#4f46e5',primaryTextColor:'#fff',primaryBorderColor:'#3730a3',
+    lineColor:'#6b7280',secondaryColor:'#ede9fe',tertiaryColor:'#f0f4ff',
+    classText:'#1e1b4b',fontSize:'13px'
+  },
+  classDiagram:{diagramPadding:20}
+});
+</script>
+</head>
+<body>
+<nav>
+  <span class="nav-title">✈️ BlougeCorp</span>
+  <a href="index.html">Accueil</a><a href="mcd.html">MCD</a><a href="mpd.html">MPD</a>
+  <a href="uml_classes.html" class="active">Classes</a><a href="uml_usecase.html">Use Case</a>
+  <a href="uml_sequence.html">Séquence</a><a href="uml_activity.html">Activités</a><a href="architecture.html">Architecture</a>
+</nav>
+<header>
+  <h1>📦 Diagramme de Classes UML</h1>
+  <p>UML 2.5 · Classes, attributs, méthodes, associations et dépendances</p>
+</header>
+<main>
+
+<div class="legend">
+  <span class="legend-item"><span class="legend-line" style="background:#4f46e5"></span> Association</span>
+  <span class="legend-item"><span class="legend-line" style="background:#7c3aed;border-top:2px dashed #7c3aed;height:0"></span> Dépendance</span>
+  <span class="legend-item">+ Public &nbsp; - Privé &nbsp; # Protégé</span>
+  <span class="legend-item">🔑 Clé primaire &nbsp; 🔗 Clé étrangère</span>
+</div>
+
+<div class="mermaid-wrap">
+<div class="mermaid">
+classDiagram
+    direction TB
+
+    class User {
+        +int id
+        +String username
+        +String email
+        -String password
+        +bool isAdmin
+        +DateTime createdAt
+        +login(email, password) JWT
+        +register(username, email, password) User
+        +changePassword(oldPwd, newPwd) void
+        +deleteAccount(password) void
+        +forgotPassword(email) void
+        +resetPassword(token, password) void
+    }
+
+    class Group {
+        +int id
+        +String name
+        +String description
+        +String image
+        +int creatorId
+        +DateTime createdAt
+        +create(name, desc, image, emails) Group
+        +delete(id) void
+        +getMembers() List~User~
+        +sendInvitations(emails) void
+    }
+
+    class GroupMember {
+        +int id
+        +int groupId
+        +int userId
+    }
+
+    class Invitation {
+        +int id
+        +int groupId
+        +String email
+        +String status
+        +DateTime createdAt
+        +accept() void
+        +decline() void
+        +sendEmail(groupName) void
+    }
+
+    class Destination {
+        +int id
+        +int groupId
+        +String name
+        +String image
+        +float priceHouse
+        +float priceTravel
+        +String dates
+        +String proposedBy
+        +List members
+        +Location location
+        +bool archived
+        +DateTime createdAt
+        +create(data) Destination
+        +update(id, data) Destination
+        +archive(id) void
+        +delete(id) void
+        +getComments() List~Comment~
+    }
+
+    class Location {
+        +double lat
+        +double lng
+        +String address
+    }
+
+    class Comment {
+        +int id
+        +int destinationId
+        +int userId
+        +String username
+        +String text
+        +int rating
+        +DateTime createdAt
+        +create(destId, text, rating) Comment
+        +delete(id) void
+    }
+
+    class Photo {
+        +int id
+        +int groupId
+        +int userId
+        +String username
+        +String imageBase64
+        +String caption
+        +DateTime createdAt
+        +upload(groupId, image, caption) Photo
+        +delete(id) void
+    }
+
+    class RoadTrip {
+        +int id
+        +int groupId
+        +List~int~ destinationIds
+        +int createdBy
+        +DateTime createdAt
+        +create(groupId, destIds) RoadTrip
+        +delete(id) void
+        +getDestinations() List~Destination~
+        +calculateTotalBudget() float
+        +exportPDF() Blob
+    }
+
+    class JWT {
+        -String secret
+        +encode(payload) String
+        +decode(token) Payload
+        +getUserFromRequest() User
+    }
+
+    class AuthController {
+        -PDO db
+        +register(params) void
+        +login(params) void
+        +forgotPassword(params) void
+        +resetPassword(params) void
+        -sendResetEmail(to, url) void
+    }
+
+    class AdminController {
+        -PDO db
+        -String ADMIN_EMAIL
+        +stats(params) void
+        +users(params) void
+        +deleteUser(params) void
+        +groups(params) void
+        +deleteGroup(params) void
+        +destinations(params) void
+        +testEmail(params) void
+        -checkAdmin() bool
+    }
+
+    User "1" --> "0..*" Group : crée
+    User "0..*" --o "0..*" Group : membre via
+    GroupMember ..> User : user_id
+    GroupMember ..> Group : group_id
+    Group "1" --> "0..*" Destination : contient
+    Group "1" --> "0..*" Invitation : envoie
+    Group "1" --> "0..*" Photo : possède
+    Group "1" --> "0..*" RoadTrip : planifie
+    User "1" --> "0..*" Comment : écrit
+    User "1" --> "0..*" Photo : upload
+    Destination "1" --> "0..*" Comment : reçoit
+    Destination "1" --> "1" Location : géolocalisation
+    RoadTrip "0..*" ..> "0..*" Destination : référence ids
+    AuthController ..> JWT : utilise
+    AdminController ..> JWT : utilise
+</div>
+</div>
+
+</main>
+</body>
+</html>

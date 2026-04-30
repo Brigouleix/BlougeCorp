@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — Diagramme de Cas d'Utilisation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f4ff;color:#1e1b4b;min-height:100vh}
+nav{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:.8rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:600;padding:.3rem .7rem;border-radius:8px}
+nav a:hover,nav a.active{background:rgba(255,255,255,.2);color:#fff}
+nav .nav-title{color:#fff;font-weight:800;font-size:1rem;margin-right:1rem}
+header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:2rem;color:#fff}
+header h1{font-size:1.8rem;font-weight:800}
+header p{opacity:.75;margin-top:.3rem;font-size:.9rem}
+main{padding:2rem;max-width:1300px;margin:0 auto}
+.canvas-wrap{background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(79,70,229,.08);overflow-x:auto}
+svg{display:block;margin:0 auto;font-family:'Inter',sans-serif}
+/* actors */
+.actor-head{fill:#4f46e5;stroke:#3730a3;stroke-width:2}
+.actor-body{stroke:#3730a3;stroke-width:2;fill:none}
+.actor-label{fill:#1e1b4b;font-weight:700;font-size:12px;text-anchor:middle}
+/* system boundary */
+.sys-rect{fill:rgba(79,70,229,.04);stroke:#4f46e5;stroke-width:2;stroke-dasharray:6,3}
+.sys-label{fill:#4f46e5;font-weight:700;font-size:11px}
+/* use cases */
+.uc-ellipse{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}
+.uc-label{fill:#3730a3;font-size:10.5px;text-anchor:middle;font-weight:600}
+/* associations */
+.assoc-line{stroke:#6b7280;stroke-width:1.2;fill:none}
+.include-line{stroke:#7c3aed;stroke-width:1.2;fill:none;stroke-dasharray:4,2}
+.extend-line{stroke:#0ea5e9;stroke-width:1.2;fill:none;stroke-dasharray:4,2}
+.stereotype{fill:#7c3aed;font-size:8px;text-anchor:middle;font-style:italic}
+/* section labels */
+.section-bg-auth{fill:rgba(79,70,229,.05);stroke:rgba(79,70,229,.2);stroke-width:1}
+.section-bg-groups{fill:rgba(16,185,129,.05);stroke:rgba(16,185,129,.3);stroke-width:1}
+.section-bg-dest{fill:rgba(245,158,11,.05);stroke:rgba(245,158,11,.3);stroke-width:1}
+.section-bg-rt{fill:rgba(236,72,153,.05);stroke:rgba(236,72,153,.3);stroke-width:1}
+.section-bg-admin{fill:rgba(239,68,68,.05);stroke:rgba(239,68,68,.3);stroke-width:1}
+.section-title{font-size:10px;font-weight:700}
+</style>
+</head>
+<body>
+<nav>
+  <span class="nav-title">✈️ BlougeCorp</span>
+  <a href="index.html">Accueil</a><a href="mcd.html">MCD</a><a href="mpd.html">MPD</a>
+  <a href="uml_classes.html">Classes</a><a href="uml_usecase.html" class="active">Use Case</a>
+  <a href="uml_sequence.html">Séquence</a><a href="uml_activity.html">Activités</a><a href="architecture.html">Architecture</a>
+</nav>
+<header>
+  <h1>👤 Diagramme de Cas d'Utilisation UML</h1>
+  <p>UML 2.5 · Acteurs, cas d'utilisation, relations include / extend</p>
+</header>
+<main>
+<div class="canvas-wrap">
+<svg viewBox="0 0 1150 900" width="100%" style="max-width:1150px">
+
+  <!-- ===== SYSTEM BOUNDARY ===== -->
+  <rect class="sys-rect" x="180" y="30" width="870" height="840" rx="12"/>
+  <text class="sys-label" x="614" y="22" text-anchor="middle" font-size="14" font-weight="800" fill="#4f46e5">« system » BlougeCorp</text>
+
+  <!-- ===== SECTIONS ===== -->
+  <!-- Auth -->
+  <rect class="section-bg-auth" x="195" y="45" width="255" height="160" rx="8"/>
+  <text class="section-title" fill="#4f46e5" x="205" y="62">🔐 Authentification</text>
+  <!-- Groupes -->
+  <rect class="section-bg-groups" x="465" y="45" width="240" height="160" rx="8"/>
+  <text class="section-title" fill="#059669" x="475" y="62">🗂️ Groupes</text>
+  <!-- Destinations -->
+  <rect class="section-bg-dest" x="195" y="225" width="510" height="240" rx="8"/>
+  <text class="section-title" fill="#d97706" x="205" y="242">📍 Destinations</text>
+  <!-- Road Trip -->
+  <rect class="section-bg-rt" x="195" y="485" width="510" height="175" rx="8"/>
+  <text class="section-title" fill="#be185d" x="205" y="502">🗺️ Road Trip</text>
+  <!-- Admin -->
+  <rect class="section-bg-admin" x="720" y="225" width="315" height="435" rx="8"/>
+  <text class="section-title" fill="#dc2626" x="730" y="242">🛡️ Administration</text>
+  <!-- Invitations -->
+  <rect class="section-bg-groups" x="195" y="680" width="510" height="175" rx="8"/>
+  <text class="section-title" fill="#059669" x="205" y="697">📧 Invitations</text>
+
+  <!-- ===== USE CASES : AUTH ===== -->
+  <ellipse class="uc-ellipse" cx="270" cy="95" rx="65" ry="22"/>
+  <text class="uc-label" x="270" y="99">Se connecter</text>
+
+  <ellipse class="uc-ellipse" cx="270" cy="148" rx="65" ry="22"/>
+  <text class="uc-label" x="270" y="152">S'inscrire</text>
+
+  <ellipse class="uc-ellipse" cx="420" cy="120" rx="72" ry="22"/>
+  <text class="uc-label" x="420" y="116">Mot de passe</text>
+  <text class="uc-label" x="420" y="130">oublié</text>
+
+  <!-- ===== USE CASES : GROUPES ===== -->
+  <ellipse class="uc-ellipse" cx="545" cy="90" rx="72" ry="22"/>
+  <text class="uc-label" x="545" y="94">Créer un groupe</text>
+
+  <ellipse class="uc-ellipse" cx="645" cy="140" rx="72" ry="22"/>
+  <text class="uc-label" x="645" y="136">Voir mes</text>
+  <text class="uc-label" x="645" y="150">groupes</text>
+
+  <ellipse class="uc-ellipse" cx="520" cy="170" rx="72" ry="22"/>
+  <text class="uc-label" x="520" y="166">Supprimer</text>
+  <text class="uc-label" x="520" y="178">un groupe</text>
+
+  <!-- ===== USE CASES : DESTINATIONS ===== -->
+  <ellipse class="uc-ellipse" cx="265" cy="285" rx="65" ry="22"/>
+  <text class="uc-label" x="265" y="289">Créer destination</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="285" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="289">Modifier destination</text>
+
+  <ellipse class="uc-ellipse" cx="565" cy="285" rx="65" ry="22"/>
+  <text class="uc-label" x="565" y="289">Archiver destination</text>
+
+  <ellipse class="uc-ellipse" cx="265" cy="360" rx="65" ry="22"/>
+  <text class="uc-label" x="265" y="356">Supprimer</text>
+  <text class="uc-label" x="265" y="368">destination</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="360" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="356">Commenter</text>
+  <text class="uc-label" x="415" y="368">et noter</text>
+
+  <ellipse class="uc-ellipse" cx="565" cy="360" rx="65" ry="22"/>
+  <text class="uc-label" x="565" y="356">Voir carte</text>
+  <text class="uc-label" x="565" y="368">interactive</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="435" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="431">Géolocaliser</text>
+  <text class="uc-label" x="415" y="443">adresse</text>
+
+  <!-- ===== USE CASES : ROAD TRIP ===== -->
+  <ellipse class="uc-ellipse" cx="265" cy="545" rx="65" ry="22"/>
+  <text class="uc-label" x="265" y="549">Créer road trip</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="545" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="549">Voir itinéraire</text>
+
+  <ellipse class="uc-ellipse" cx="565" cy="545" rx="65" ry="22"/>
+  <text class="uc-label" x="565" y="541">Exporter</text>
+  <text class="uc-label" x="565" y="553">PDF</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="625" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="621">Comparer</text>
+  <text class="uc-label" x="415" y="633">les offres</text>
+
+  <!-- ===== USE CASES : INVITATIONS ===== -->
+  <ellipse class="uc-ellipse" cx="265" cy="740" rx="65" ry="22"/>
+  <text class="uc-label" x="265" y="744">Inviter membres</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="740" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="744">Accepter invitation</text>
+
+  <ellipse class="uc-ellipse" cx="565" cy="740" rx="65" ry="22"/>
+  <text class="uc-label" x="565" y="744">Refuser invitation</text>
+
+  <ellipse class="uc-ellipse" cx="415" cy="820" rx="65" ry="22"/>
+  <text class="uc-label" x="415" y="816">Recevoir email</text>
+  <text class="uc-label" x="415" y="828">d'invitation</text>
+
+  <!-- ===== USE CASES : ADMIN ===== -->
+  <ellipse class="uc-ellipse" cx="840" cy="285" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="289">Voir statistiques</text>
+
+  <ellipse class="uc-ellipse" cx="840" cy="345" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="349">Gérer utilisateurs</text>
+
+  <ellipse class="uc-ellipse" cx="840" cy="405" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="409">Gérer groupes</text>
+
+  <ellipse class="uc-ellipse" cx="840" cy="465" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="461">Gérer</text>
+  <text class="uc-label" x="840" y="475">destinations</text>
+
+  <ellipse class="uc-ellipse" cx="840" cy="535" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="539">Tester email SMTP</text>
+
+  <ellipse class="uc-ellipse" cx="840" cy="595" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="591">Supprimer</text>
+  <text class="uc-label" x="840" y="603">n'importe quoi</text>
+
+  <ellipse class="uc-ellipse" cx="840" cy="655" rx="72" ry="22"/>
+  <text class="uc-label" x="840" y="651">Voir logs</text>
+  <text class="uc-label" x="840" y="663">système</text>
+
+  <!-- ===== ACTEURS ===== -->
+  <!-- Utilisateur standard -->
+  <circle class="actor-head" cx="80" cy="320" r="18"/>
+  <line class="actor-body" x1="80" y1="338" x2="80" y2="390"/>
+  <line class="actor-body" x1="55" y1="355" x2="105" y2="355"/>
+  <line class="actor-body" x1="80" y1="390" x2="55" y2="420"/>
+  <line class="actor-body" x1="80" y1="390" x2="105" y2="420"/>
+  <text class="actor-label" x="80" y="440">Utilisateur</text>
+
+  <!-- Créateur de groupe -->
+  <circle class="actor-head" cx="80" cy="560" r="18" fill="#7c3aed" stroke="#4c1d95" stroke-width="2"/>
+  <line class="actor-body" x1="80" y1="578" x2="80" y2="630" stroke="#4c1d95"/>
+  <line class="actor-body" x1="55" y1="595" x2="105" y2="595" stroke="#4c1d95"/>
+  <line class="actor-body" x1="80" y1="630" x2="55" y2="660" stroke="#4c1d95"/>
+  <line class="actor-body" x1="80" y1="630" x2="105" y2="660" stroke="#4c1d95"/>
+  <text class="actor-label" x="80" y="678" fill="#4c1d95">Créateur</text>
+  <text class="actor-label" x="80" y="690" fill="#4c1d95">de groupe</text>
+
+  <!-- Admin -->
+  <circle class="actor-head" cx="1080" cy="450" r="18" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+  <line class="actor-body" x1="1080" y1="468" x2="1080" y2="520" stroke="#991b1b"/>
+  <line class="actor-body" x1="1055" y1="485" x2="1105" y2="485" stroke="#991b1b"/>
+  <line class="actor-body" x1="1080" y1="520" x2="1055" y2="550" stroke="#991b1b"/>
+  <line class="actor-body" x1="1080" y1="520" x2="1105" y2="550" stroke="#991b1b"/>
+  <text class="actor-label" x="1080" y="568" fill="#991b1b">Admin</text>
+
+  <!-- Système externe : Nominatim -->
+  <rect x="1030" y="250" width="90" height="40" rx="6" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <text font-size="9" font-weight="700" fill="#059669" x="1075" y="266" text-anchor="middle">«système»</text>
+  <text font-size="9" font-weight="700" fill="#059669" x="1075" y="280" text-anchor="middle">Nominatim OSM</text>
+
+  <!-- ===== ASSOCIATIONS UTILISATEUR → UC ===== -->
+  <line class="assoc-line" x1="98" y1="310" x2="205" y2="95"/>
+  <line class="assoc-line" x1="98" y1="312" x2="205" y2="148"/>
+  <line class="assoc-line" x1="98" y1="315" x2="348" y2="120"/>
+  <line class="assoc-line" x1="98" y1="318" x2="473" y2="90"/>
+  <line class="assoc-line" x1="98" y1="320" x2="573" y2="140"/>
+  <line class="assoc-line" x1="98" y1="322" x2="200" y2="285"/>
+  <line class="assoc-line" x1="98" y1="324" x2="350" y2="285"/>
+  <line class="assoc-line" x1="98" y1="326" x2="350" y2="360"/>
+  <line class="assoc-line" x1="98" y1="328" x2="500" y2="360"/>
+  <line class="assoc-line" x1="98" y1="330" x2="200" y2="545"/>
+  <line class="assoc-line" x1="98" y1="332" x2="350" y2="545"/>
+  <line class="assoc-line" x1="98" y1="334" x2="350" y2="625"/>
+  <line class="assoc-line" x1="98" y1="336" x2="200" y2="740"/>
+  <line class="assoc-line" x1="98" y1="338" x2="350" y2="740"/>
+  <line class="assoc-line" x1="98" y1="340" x2="500" y2="740"/>
+
+  <!-- CRÉATEUR → UC spécifiques -->
+  <line class="assoc-line" x1="98" y1="555" x2="448" y2="170" stroke="#7c3aed"/>
+  <line class="assoc-line" x1="98" y1="558" x2="200" y2="360" stroke="#7c3aed"/>
+  <line class="assoc-line" x1="98" y1="561" x2="500" y2="285" stroke="#7c3aed"/>
+  <line class="assoc-line" x1="98" y1="564" x2="500" y2="545" stroke="#7c3aed"/>
+  <line class="assoc-line" x1="98" y1="567" x2="200" y2="740" stroke="#7c3aed"/>
+
+  <!-- ADMIN → UC admin -->
+  <line class="assoc-line" x1="1062" y1="442" x2="912" y2="285" stroke="#dc2626"/>
+  <line class="assoc-line" x1="1062" y1="445" x2="912" y2="345" stroke="#dc2626"/>
+  <line class="assoc-line" x1="1062" y1="448" x2="912" y2="405" stroke="#dc2626"/>
+  <line class="assoc-line" x1="1062" y1="451" x2="912" y2="465" stroke="#dc2626"/>
+  <line class="assoc-line" x1="1062" y1="454" x2="912" y2="535" stroke="#dc2626"/>
+  <line class="assoc-line" x1="1062" y1="457" x2="912" y2="595" stroke="#dc2626"/>
+  <line class="assoc-line" x1="1062" y1="460" x2="912" y2="655" stroke="#dc2626"/>
+
+  <!-- Nominatim → Géolocaliser -->
+  <line class="assoc-line" x1="1030" y1="270" x2="480" y2="435" stroke="#059669" stroke-dasharray="5,3"/>
+  <text font-size="8" fill="#059669" x="760" y="330" text-anchor="middle">«utilise»</text>
+
+  <!-- include : Inviter → Recevoir email -->
+  <line class="include-line" x1="265" y1="762" x2="350" y2="820"/>
+  <text class="stereotype" x="295" y="806">«include»</text>
+
+  <!-- include : Créer destination → Géolocaliser -->
+  <line class="include-line" x1="300" y1="305" x2="350" y2="435"/>
+  <text class="stereotype" x="295" y="385">«include»</text>
+
+  <!-- extend : Voir itinéraire → Exporter PDF -->
+  <line class="extend-line" x1="480" y1="545" x2="500" y2="545"/>
+  <text class="stereotype" x="493" y="535" fill="#0ea5e9">«extend»</text>
+
+</svg>
+</div>
+</main>
+</body>
+</html>

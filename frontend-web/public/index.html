@@ -11,7 +11,26 @@
     <link rel="manifest" href="/site.webmanifest">
     
 
-   
+    <!-- Suppress noisy browser errors before CRA overlay registers its own handler -->
+    <script>
+      (function() {
+        var IGNORED = ['ResizeObserver loop', '_leaflet_pos', 'leaflet', 'Script error'];
+        window.addEventListener('error', function(e) {
+          var msg = e.message || '';
+          for (var i = 0; i < IGNORED.length; i++) {
+            if (!msg || msg.indexOf(IGNORED[i]) !== -1) {
+              e.stopImmediatePropagation();
+              e.preventDefault();
+              return;
+            }
+          }
+        }, true);
+      })();
+    </script>
+
+    <!-- Leaflet servi localement (même origine → plus de "Script error." cross-origin) -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/leaflet.css" />
+    <script src="%PUBLIC_URL%/leaflet.js"></script>
 </head>
 <body>
     <div id="root"></div>  <!-- Point de montage React -->

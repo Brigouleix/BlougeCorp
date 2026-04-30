@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — Diagrammes de Séquence</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4ff;color:#1e1b4b;min-height:100vh}
+  nav{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:.8rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:600;padding:.3rem .7rem;border-radius:8px}
+  nav a:hover,nav a.active{background:rgba(255,255,255,.2);color:#fff}
+  nav .nav-title{color:#fff;font-weight:800;font-size:1rem;margin-right:1rem}
+  header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:2rem;color:#fff}
+  header h1{font-size:1.8rem;font-weight:800}
+  header p{opacity:.75;margin-top:.3rem;font-size:.9rem}
+  main{padding:2rem;max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+  .diagram-block{background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(79,70,229,.08)}
+  .diagram-block h2{font-size:1.2rem;font-weight:800;color:#4f46e5;margin-bottom:.4rem}
+  .diagram-block p{font-size:.85rem;color:#6b7280;margin-bottom:1.5rem}
+  .mermaid{overflow-x:auto}
+</style>
+<script>
+mermaid.initialize({
+  startOnLoad:true,
+  theme:'base',
+  themeVariables:{
+    primaryColor:'#4f46e5',primaryTextColor:'#fff',primaryBorderColor:'#3730a3',
+    lineColor:'#6b7280',secondaryColor:'#ede9fe',tertiaryColor:'#f0f4ff',
+    fontSize:'13px',
+    activationBkgColor:'#ede9fe',activationBorderColor:'#4f46e5',
+    noteBkgColor:'#fef9c3',noteBorderColor:'#d97706'
+  }
+});
+</script>
+</head>
+<body>
+<nav>
+  <span class="nav-title">✈️ BlougeCorp</span>
+  <a href="index.html">Accueil</a><a href="mcd.html">MCD</a><a href="mpd.html">MPD</a>
+  <a href="uml_classes.html">Classes</a><a href="uml_usecase.html">Use Case</a>
+  <a href="uml_sequence.html" class="active">Séquence</a><a href="uml_activity.html">Activités</a><a href="architecture.html">Architecture</a>
+</nav>
+<header>
+  <h1>↔️ Diagrammes de Séquence</h1>
+  <p>UML 2.5 · Flux Connexion, Création de destination, Envoi d'invitation et Road Trip</p>
+</header>
+<main>
+
+<!-- ═══ 1. CONNEXION ═══ -->
+<div class="diagram-block">
+  <h2>1 · Flux de Connexion (Login)</h2>
+  <p>L'utilisateur saisit ses identifiants → le frontend envoie une requête POST → le backend valide, génère un JWT et le renvoie → le frontend stocke le token dans localStorage.</p>
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as 👤 Utilisateur
+    participant F as ⚛️ Frontend<br/>(React)
+    participant A as 🔒 AuthController<br/>(PHP)
+    participant DB as 🗄️ Database<br/>(MySQL)
+    participant LS as 💾 localStorage
+
+    U->>F: Saisit email + mot de passe
+    F->>F: Validation basique (champs non vides)
+    F->>A: POST /api/auth/login<br/>{ email, password }
+    A->>DB: SELECT * FROM users<br/>WHERE email = ?
+    DB-->>A: Row utilisateur (hash, isAdmin…)
+
+    alt Email inexistant
+        A-->>F: 401 { error: "Identifiants invalides" }
+        F-->>U: ❌ Affiche message d'erreur
+    else Mot de passe incorrect
+        A->>A: password_verify() → false
+        A-->>F: 401 { error: "Identifiants invalides" }
+        F-->>U: ❌ Affiche message d'erreur
+    else Connexion réussie
+        A->>A: password_verify() → true
+        A->>A: JWT::encode({ id, username,<br/>email, isAdmin })
+        A-->>F: 200 { token, user }
+        F->>LS: setItem('token', token)<br/>setItem('user', JSON)
+        F-->>U: ✅ Redirige vers /my-groups
+    end
+  </div>
+</div>
+
+<!-- ═══ 2. INSCRIPTION ═══ -->
+<div class="diagram-block">
+  <h2>2 · Flux d'Inscription (Register)</h2>
+  <p>L'utilisateur crée un compte avec username, email et mot de passe. Le backend vérifie l'unicité, hash le mot de passe avec bcrypt et insère la ligne.</p>
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as 👤 Utilisateur
+    participant F as ⚛️ Frontend
+    participant A as 🔒 AuthController
+    participant DB as 🗄️ Database
+
+    U->>F: Remplit le formulaire<br/>(username, email, password)
+    F->>A: POST /api/auth/register<br/>{ username, email, password }
+    A->>DB: SELECT COUNT(*) FROM users<br/>WHERE email = ? OR username = ?
+    DB-->>A: count
+
+    alt Email ou username déjà pris
+        A-->>F: 409 { error: "Email ou pseudo déjà utilisé" }
+        F-->>U: ❌ Message d'erreur
+    else Données valides
+        A->>A: password_hash(password, BCRYPT)
+        A->>DB: INSERT INTO users<br/>(username, email, password)
+        DB-->>A: lastInsertId
+        A->>A: JWT::encode(payload)
+        A-->>F: 201 { token, user }
+        F-->>U: ✅ Redirige vers /my-groups
+    end
+  </div>
+</div>
+
+<!-- ═══ 3. CRÉATION DESTINATION ═══ -->
+<div class="diagram-block">
+  <h2>3 · Création d'une Destination</h2>
+  <p>Le membre d'un groupe soumet un formulaire de destination. Le frontend géolocalise l'adresse via Nominatim, puis envoie la destination complète au backend.</p>
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as 👤 Membre
+    participant F as ⚛️ Frontend
+    participant N as 🌍 Nominatim<br/>(OSM API)
+    participant D as 📍 DestinationController
+    participant DB as 🗄️ Database
+
+    U->>F: Remplit formulaire<br/>(nom, image, prix, dates, adresse…)
+    F->>F: Saisie adresse déclenche<br/>une requête de géocodage
+    F->>N: GET /search?q=adresse&format=json
+    N-->>F: [{ lat, lon, display_name }]
+    F->>F: Affiche suggestion sur carte Leaflet
+
+    U->>F: Confirme & soumet
+    F->>D: POST /api/destinations<br/>Authorization: Bearer <token><br/>{ groupId, name, image, prices, dates,<br/>proposedBy, members, location }
+    D->>D: JWT::getUserFromRequest()
+    D->>DB: INSERT INTO destinations (…)
+    DB-->>D: lastInsertId
+
+    alt Succès
+        D-->>F: 201 { destination }
+        F-->>U: ✅ Nouvelle carte destination ajoutée
+    else Erreur (groupId manquant, token invalide…)
+        D-->>F: 4xx { error: "…" }
+        F-->>U: ❌ Message d'erreur
+    end
+  </div>
+</div>
+
+<!-- ═══ 4. ENVOI INVITATION ═══ -->
+<div class="diagram-block">
+  <h2>4 · Envoi d'une Invitation à un Groupe</h2>
+  <p>Le créateur du groupe invite des utilisateurs par email. Le backend insère l'invitation, envoie un mail via PHPMailer/Brevo avec un lien d'accès.</p>
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor C as 👑 Créateur
+    participant F as ⚛️ Frontend
+    participant G as 👥 GroupController
+    participant DB as 🗄️ Database
+    participant M as 📧 PHPMailer<br/>(Brevo SMTP)
+    actor I as 📥 Invité
+
+    C->>F: Saisit email(s) à inviter
+    F->>G: POST /api/groups/{id}/invite<br/>Authorization: Bearer <token><br/>{ emails: ["a@b.com", …] }
+    G->>G: JWT::getUserFromRequest()
+    G->>DB: SELECT * FROM groups WHERE id = ?
+    DB-->>G: groupe + creatorId
+
+    loop Pour chaque email
+        G->>DB: INSERT INTO invitations<br/>(groupId, email, status='pending')
+        DB-->>G: OK
+        G->>M: sendInviteEmail(email, groupName,<br/>APP_URL + /register ou /login)
+        M-->>I: 📨 Email "Vous êtes invité dans <groupe>"<br/>Boutons : S'inscrire / Se connecter
+    end
+
+    G-->>F: 200 { sent: n }
+    F-->>C: ✅ "n invitation(s) envoyée(s)"
+
+    Note over I,M: L'invité clique sur le lien dans l'email
+    I->>F: Ouvre APP_URL/register (ou /login)
+    F-->>I: Formulaire d'inscription/connexion
+  </div>
+</div>
+
+<!-- ═══ 5. RÉINITIALISATION MOT DE PASSE ═══ -->
+<div class="diagram-block">
+  <h2>5 · Réinitialisation du Mot de Passe</h2>
+  <p>L'utilisateur demande un lien de réinitialisation. Le backend génère un token à durée de vie limitée, l'envoie par email, puis valide le token lors du changement.</p>
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as 👤 Utilisateur
+    participant F as ⚛️ Frontend
+    participant A as 🔒 AuthController
+    participant DB as 🗄️ Database
+    participant M as 📧 PHPMailer
+
+    U->>F: Clique "Mot de passe oublié"<br/>Saisit son email
+    F->>A: POST /api/auth/forgot-password<br/>{ email }
+    A->>DB: SELECT * FROM users WHERE email = ?
+    DB-->>A: user (ou vide)
+
+    alt Email introuvable
+        A-->>F: 200 { message: "Si cet email existe…" }
+        Note over A: Réponse identique pour éviter<br/>l'énumération d'emails
+    else Email trouvé
+        A->>A: token = bin2hex(random_bytes(32))<br/>expiry = NOW() + 1h
+        A->>DB: UPDATE users SET reset_token = token,<br/>reset_expiry = expiry WHERE id = ?
+        A->>M: sendResetEmail(email,<br/>APP_URL + /reset-password?token=…)
+        M-->>U: 📨 Email avec lien de réinitialisation
+        A-->>F: 200 { message: "Email envoyé" }
+        F-->>U: ✅ "Consultez votre boîte mail"
+    end
+
+    U->>F: Clique lien dans l'email<br/>Saisit nouveau mot de passe
+    F->>A: POST /api/auth/reset-password<br/>{ token, password }
+    A->>DB: SELECT * FROM users<br/>WHERE reset_token = ? AND reset_expiry > NOW()
+    DB-->>A: user (ou vide)
+
+    alt Token invalide ou expiré
+        A-->>F: 400 { error: "Token invalide ou expiré" }
+        F-->>U: ❌ Message d'erreur
+    else Token valide
+        A->>A: password_hash(password, BCRYPT)
+        A->>DB: UPDATE users SET password = hash,<br/>reset_token = NULL, reset_expiry = NULL
+        A-->>F: 200 { message: "Mot de passe modifié" }
+        F-->>U: ✅ Redirige vers /login
+    end
+  </div>
+</div>
+
+<!-- ═══ 6. ROAD TRIP ═══ -->
+<div class="diagram-block">
+  <h2>6 · Création d'un Road Trip</h2>
+  <p>Le membre sélectionne plusieurs destinations du groupe, les ordonne, puis sauvegarde le road trip. Le backend calcule le budget total et génère un export PDF.</p>
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as 👤 Membre
+    participant F as ⚛️ Frontend
+    participant R as 🗺️ RoadTripController
+    participant D as 📍 DestinationController
+    participant DB as 🗄️ Database
+
+    U->>F: Ouvre page Road Trip du groupe
+    F->>D: GET /api/destinations?groupId=X
+    D-->>F: [ destinations du groupe ]
+    F-->>U: Liste de destinations à sélectionner
+
+    U->>F: Sélectionne N destinations<br/>+ ordonne par drag & drop
+
+    F->>R: POST /api/roadtrips<br/>Authorization: Bearer <token><br/>{ groupId, destinationIds: [3,1,5] }
+    R->>R: JWT::getUserFromRequest()
+    R->>DB: INSERT INTO road_trips<br/>(groupId, destinationIds JSON, createdBy)
+    DB-->>R: lastInsertId
+
+    R->>DB: SELECT * FROM destinations<br/>WHERE id IN (3,1,5)
+    DB-->>R: destinations[]
+    R->>R: Calcule totalBudget<br/>= Σ(priceHouse + priceTravel)
+
+    R-->>F: 201 { roadtrip, totalBudget, destinations }
+    F-->>U: ✅ Road trip créé<br/>Affiche itinéraire + budget total
+
+    opt Export PDF
+        U->>F: Clique "Exporter PDF"
+        F->>F: Génère PDF côté client<br/>(carte + destinations + budget)
+        F-->>U: 📄 Téléchargement PDF
+    end
+  </div>
+</div>
+
+</main>
+</body>
+</html>

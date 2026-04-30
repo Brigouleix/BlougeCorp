@@ -1,7 +1,8 @@
-﻿.groups-container {
+/* ===== GROUPS PAGE ===== */
+
+.groups-container {
     padding: 2rem;
     min-height: 100vh;
-    background: #f4f4f9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,220 +10,13 @@
 
 .groups-title {
     font-size: 2rem;
-    font-weight: bold;
-    color: #333;
+    font-weight: 800;
+    color: #1e1b4b;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
 }
 
-.groups-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 1200px;
-}
-
-.group-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-    .group-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-    }
-
-.group-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.group-info {
-    padding: 1rem;
-    text-align: center;
-}
-
-.group-name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 0.5rem;
-}
-
-.group-members {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-
-/* Fond sombre pour toute la page */
-body.dark-mode {
-    background-color: #121212;
-    color: #f0f0f0;
-}
-
-/* Conteneur principal des groupes */
-body.dark-mode .groups-container {
-    background-color: #1a1a1a;
-}
-
-body.dark-mode .groups-title {
-    color:#f0f0f0;
-}
-
-/* Carte de groupe en mode sombre */
-body.dark-mode .group-card {
-    background-color: #2a2a2a;
-    color: #f0f0f0;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-}
-
-/* Titre de groupe */
-body.dark-mode .group-name {
-    color: #ffffff;
-}
-
-/* Membres */
-body.dark-mode .group-members {
-    color: #cccccc;
-}
-
-/* Navbar en mode sombre */
-body.dark-mode nav {
-    background-color: #1e1e1e;
-    border-bottom: 1px solid #333;
-}
-
-/* Boutons de la navbar */
-body.dark-mode nav button {
-    color: #f0f0f0;
-    border: 1px solid #555;
-}
-
-body.dark-mode nav button:hover {
-    background-color: #444;
-}
-
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-.modal-content {
-    background-color: white;
-    max-height: 90vh;
-    width: 100%;
-    max-width: 600px;
-    overflow-y: auto;
-    border-radius: 12px;
-    padding: 2rem;
-    position: relative;
-}
-
-body.dark .modal-content {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-}
-
-
-.dark-mode .modal-content {
-    background: #1f2937;
-    color: white;
-}
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    color: #888;
-    cursor: pointer;
-}
-
-
-
-.create-group-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    
-}
-
-.create-group-form input,
-.create-group-form textarea,
-.create-group-form button {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    
-}
-
-.create-group-form button {
-    background-color: #4f46e5;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    
-}
-
-.create-group-form button:hover {
-    background-color: #4338ca;
-}
-
-.dark-mode .create-group-form input,
-.dark-mode .create-group-form textarea {
-    background-color: #374151;
-    color: white;
-    border: 1px solid #555;
-}
-
-.dark-mode .create-group-form button {
-    background-color: #6366f1;
-}
-
-.create-group-button {
-    background-color: #4f46e5;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.create-group-button:hover {
-    background-color: #4338ca;
-}
-
-body.dark-mode .create-group-button {
-    background-color: #6366f1;
-    color: white;
-}
-
-body.dark-mode .create-group-button:hover {
-    background-color: #4f46e5;
-}
+body.dark-mode .groups-title { color: #e8e4ff; }
 
 .groups-header {
     display: flex;
@@ -233,60 +27,889 @@ body.dark-mode .create-group-button:hover {
     margin-bottom: 1.5rem;
 }
 
+.groups-header-actions,
+.groups-actions {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.groups-actions > button,
+.groups-header-actions > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* ===== GROUP CARD ===== */
+.group-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.1), 0 1px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.group-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(79, 70, 229, 0.2), 0 4px 10px rgba(0,0,0,0.08);
+}
+
+body.dark-mode .group-card {
+    background: rgba(30, 27, 75, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.group-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Placeholder quand pas de photo */
+.group-image-placeholder {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.group-image-placeholder-initial {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    line-height: 1;
+}
+
+.group-image-placeholder-icon {
+    font-size: 1.4rem;
+    opacity: 0.7;
+}
+
+/* Boutons d'action sur la card (modifier / supprimer) */
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.card-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+
+.card-action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.card-action-edit {
+    background: rgba(79, 70, 229, 0.1);
+    color: #4f46e5;
+}
+
+body.dark-mode .card-action-edit {
+    background: rgba(165, 180, 252, 0.15);
+    color: #a5b4fc;
+}
+
+.card-action-archive {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+body.dark-mode .card-action-archive {
+    background: rgba(253, 230, 138, 0.1);
+    color: #fbbf24;
+}
+
+.card-action-delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+body.dark-mode .card-action-delete {
+    background: rgba(252, 165, 165, 0.1);
+    color: #fca5a5;
+}
+
+.group-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.group-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin-bottom: 0.4rem;
+}
+
+body.dark-mode .group-name { color: #e8e4ff; }
+
+.group-members {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+body.dark-mode .group-members { color: #a5b4fc; }
+
 .group-rating {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #f59e0b;
     margin: 0.3rem 0;
 }
 
-.group-member-names {
-    margin-top: 0.5rem;
-    list-style: none;
-    padding: 0;
+/* ===== BUTTONS ===== */
+.create-group-button {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    letter-spacing: 0.01em;
 }
 
+.create-group-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+    filter: brightness(1.05);
+}
+
+.create-group-button:active { transform: translateY(0); }
+
+.delete-group-button {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    padding: 0.45rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.delete-group-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.45);
+}
+
+.delete-mode-button {
+    background: rgba(107, 114, 128, 0.15);
+    border: 1px solid rgba(107, 114, 128, 0.3);
+    padding: 0.45rem 0.8rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.delete-mode-button:hover { background: rgba(107, 114, 128, 0.25); }
+
+/* ===== MODAL LIQUID GLASS — from global.css but scoped overrides ===== */
+.create-group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-group-form input,
+.create-group-form textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    border: 1.5px solid rgba(79, 70, 229, 0.2);
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    color: #1e1b4b;
+}
+
+.create-group-form input:focus,
+.create-group-form textarea:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.create-group-form button {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    border-radius: 14px;
+    padding: 0.75rem;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    font-size: 0.95rem;
+}
+
+.create-group-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(79, 70, 229, 0.45);
+    filter: brightness(1.05);
+}
+
+/* Dark mode form */
+body.dark-mode .create-group-form input,
+body.dark-mode .create-group-form textarea {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(165, 180, 252, 0.3);
+    color: #e8e4ff;
+}
+
+body.dark-mode .create-group-form input:focus,
+body.dark-mode .create-group-form textarea:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+}
+
+/* ===== INVITATIONS BANNER ===== */
+.invitations-banner {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.1);
+}
+
+.invitations-banner h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4f46e5;
+    margin: 0 0 1rem 0;
+}
+
+.invitation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.invitation-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.invitation-item span {
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.invitation-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.btn-accept {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-accept:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.45);
+}
+
+.btn-decline {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 0.4rem 0.9rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-decline:hover {
+    background: rgba(239, 68, 68, 0.18);
+}
+
+body.dark-mode .invitations-banner {
+    background: rgba(30, 27, 75, 0.55);
+    border-color: rgba(165, 180, 252, 0.2);
+}
+
+body.dark-mode .invitations-banner h3 {
+    color: #a5b4fc;
+}
+
+body.dark-mode .invitation-item span {
+    color: #d1d5db;
+}
+
+/* ===== DESTINATIONS MAP ===== */
+.destinations-map-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.destinations-map {
+    width: 100%;
+    height: 350px;
+}
+
+/* Misc */
+.group-member-names,
 .member-list {
     margin-top: 0.5rem;
     padding-left: 1rem;
     font-size: 0.9rem;
-    color: #444;
+    color: #6b7280;
     list-style-type: disc;
 }
 
-
-
-
-.groups-header-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.delete-group-button {
-    margin-top: 10px;
-    background-color: #ff4d4f;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
+/* ===== ICON BUTTONS ===== */
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(79, 70, 229, 0.2);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #4f46e5;
     cursor: pointer;
-}
-
-.delete-group-button:hover {
-    background-color: #ff1a1a;
-}
-
-.groups-actions {
     display: flex;
-    gap: 10px;
     align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    position: relative;
 }
 
-.delete-mode-button {
-    background-color: #ccc;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 18px;
-    cursor: pointer;
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
 }
+
+.icon-btn:hover {
+    background: rgba(79, 70, 229, 0.1);
+    border-color: rgba(79, 70, 229, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.icon-btn-active {
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+    border-color: transparent !important;
+    color: white !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.icon-btn-danger {
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.icon-btn-danger:hover {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Tooltip */
+.icon-btn[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 12, 41, 0.85);
+    color: white;
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+body.dark-mode .icon-btn {
+    background: rgba(30, 27, 75, 0.6);
+    border-color: rgba(165, 180, 252, 0.2);
+    color: #a5b4fc;
+}
+
+body.dark-mode .icon-btn:hover {
+    background: rgba(165, 180, 252, 0.12);
+}
+
+/* ===== ROAD TRIP ALBUM CARD ===== */
+.road-trip-album-card {
+    position: relative;
+    border-radius: 20px;
+    cursor: pointer;
+    min-height: 260px;
+    z-index: 2;
+    container-type: inline-size;
+    /* Quand le fan est ouvert, passe au-dessus de toutes les cards */
+}
+
+.road-trip-album-card.rt-hovered {
+    z-index: 1000;
+}
+
+.rt-stack-layer {
+    position: absolute;
+    border-radius: 20px;
+    inset: 0;
+}
+
+.rt-layer-1 {
+    background: rgba(79, 70, 229, 0.12);
+    transform: rotate(2.5deg) translateY(6px);
+    z-index: -1;
+}
+
+.rt-layer-2 {
+    background: rgba(124, 58, 237, 0.08);
+    transform: rotate(-1.5deg) translateY(10px) translateX(4px);
+    z-index: -2;
+}
+
+.rt-face {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.road-trip-album-card:hover .rt-face {
+    box-shadow: 0 16px 48px rgba(79, 70, 229, 0.25);
+    transform: translateY(-3px);
+}
+
+body.dark-mode .rt-face {
+    background: rgba(20, 16, 60, 0.75);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.rt-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    align-self: flex-start;
+    letter-spacing: 0.03em;
+}
+
+.rt-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+body.dark-mode .rt-title { color: #e8e4ff; }
+
+.rt-route {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.82rem;
+}
+
+.rt-stop {
+    background: rgba(79, 70, 229, 0.1);
+    color: #4f46e5;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+body.dark-mode .rt-stop { background: rgba(165,180,252,0.15); color: #a5b4fc; }
+
+.rt-arrow { color: #9ca3af; font-size: 0.9rem; }
+
+.rt-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+    font-weight: 600;
+}
+
+body.dark-mode .rt-meta { color: #a5b4fc; }
+
+.rt-hint {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin: 0;
+    margin-top: auto;
+    font-style: italic;
+}
+
+/* Destination cards appear "behind" when a road trip exists */
+.has-road-trip .group-card {
+    opacity: 0.88;
+    transform: scale(0.97);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 0;
+}
+
+.has-road-trip .group-card:hover {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+.road-trip-album-card {
+    z-index: 3;
+}
+
+/* Fan of destination sub-cards — below the card */
+.rt-fan {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    z-index: 200;
+}
+
+.rt-fan-card {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(79,70,229,0.12);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateX(-12px) scale(0.95);
+    animation: fanIn 0.25s ease forwards;
+    animation-delay: var(--delay, 0s);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.rt-fan-card:hover, .rt-fan-active {
+    box-shadow: 0 8px 28px rgba(79,70,229,0.25);
+    transform: translateX(0) scale(1.02) !important;
+}
+
+@keyframes fanIn {
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.rt-fan-img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+}
+
+.rt-fan-info {
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.rt-fan-step {
+    font-size: 0.68rem;
+    color: #6366f1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.rt-fan-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e1b4b;
+}
+
+.rt-fan-rating { font-size: 0.78rem; color: #f59e0b; }
+
+.rt-fan-price {
+    font-size: 0.78rem;
+    color: #059669;
+    font-weight: 700;
+}
+
+.rt-fan-address {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.dark-mode .rt-fan-card {
+    background: rgba(20,16,60,0.88);
+    border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .rt-fan-name { color: #e8e4ff; }
+
+/* ===== ROAD TRIP ===== */
+
+.road-trip-floating-bar {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 12, 41, 0.92);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(165, 180, 252, 0.25);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    min-width: 320px;
+}
+
+.road-trip-count {
+    color: #e8e4ff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.road-trip-floating-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-left: auto;
+}
+
+.card-selected {
+    outline: 3px solid #4f46e5;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2), 0 4px 20px rgba(79, 70, 229, 0.15) !important;
+}
+
+.road-trip-toggle {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.road-trip-toggle-active {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4) !important;
+}
+
+.road-trip-toggle-active:hover {
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55) !important;
+}
+
+.road-trip-checkbox {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    z-index: 10;
+    background: rgba(255,255,255,0.9);
+    border-radius: 6px;
+    padding: 2px 4px;
+    pointer-events: none;
+}
+
+.road-trip-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4f46e5;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+/* Road Trip Summary */
+.road-trip-summary {
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.road-trip-summary-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin: 0;
+}
+
+body.dark-mode .road-trip-summary-title { color: #e8e4ff; }
+
+.road-trip-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.road-trip-pill {
+    background: rgba(79, 70, 229, 0.1);
+    border: 1px solid rgba(79, 70, 229, 0.25);
+    color: #4f46e5;
+    border-radius: 20px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+body.dark-mode .road-trip-pill {
+    background: rgba(165, 180, 252, 0.12);
+    border-color: rgba(165, 180, 252, 0.3);
+    color: #a5b4fc;
+}
+
+.road-trip-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.road-trip-stat {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 14px;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 130px;
+}
+
+body.dark-mode .road-trip-stat {
+    background: rgba(30,27,75,0.5);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.road-trip-stat-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.road-trip-stat-value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1e1b4b;
+}
+
+body.dark-mode .road-trip-stat-value { color: #e8e4ff; }
+
+.road-trip-export-btn {
+    align-self: flex-start;
+}
+
+
+/* ===== ARCHIVED SECTION ===== */
+.archived-section {
+    width: 100%;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 2px dashed rgba(79, 70, 229, 0.2);
+}
+
+.archived-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #d97706;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.archived-title::before {
+    content: '📦';
+}
+
+.archived-empty {
+    color: #9ca3af;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+body.dark-mode .archived-title { color: #fbbf24; }
+body.dark-mode .archived-empty { color: #6b7280; }
+body.dark-mode .archived-section { border-top-color: rgba(165, 180, 252, 0.15); }

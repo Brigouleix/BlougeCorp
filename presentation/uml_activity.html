@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — Diagrammes d'Activités</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4ff;color:#1e1b4b;min-height:100vh}
+  nav{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:.8rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:600;padding:.3rem .7rem;border-radius:8px}
+  nav a:hover,nav a.active{background:rgba(255,255,255,.2);color:#fff}
+  nav .nav-title{color:#fff;font-weight:800;font-size:1rem;margin-right:1rem}
+  header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:2rem;color:#fff}
+  header h1{font-size:1.8rem;font-weight:800}
+  header p{opacity:.75;margin-top:.3rem;font-size:.9rem}
+  main{padding:2rem;max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+  .diagram-block{background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(79,70,229,.08)}
+  .diagram-block h2{font-size:1.2rem;font-weight:800;color:#4f46e5;margin-bottom:.4rem}
+  .diagram-block p{font-size:.85rem;color:#6b7280;margin-bottom:1.5rem}
+  .diagrams-row{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:900px){.diagrams-row{grid-template-columns:1fr}}
+  .mermaid{overflow-x:auto}
+</style>
+<script>
+mermaid.initialize({
+  startOnLoad:true,
+  theme:'base',
+  themeVariables:{
+    primaryColor:'#4f46e5',primaryTextColor:'#fff',primaryBorderColor:'#3730a3',
+    lineColor:'#6b7280',secondaryColor:'#ede9fe',tertiaryColor:'#f0f4ff',
+    fontSize:'13px',
+    edgeLabelBackground:'#f0f4ff'
+  },
+  flowchart:{curve:'basis',diagramPadding:20}
+});
+</script>
+</head>
+<body>
+<nav>
+  <span class="nav-title">✈️ BlougeCorp</span>
+  <a href="index.html">Accueil</a><a href="mcd.html">MCD</a><a href="mpd.html">MPD</a>
+  <a href="uml_classes.html">Classes</a><a href="uml_usecase.html">Use Case</a>
+  <a href="uml_sequence.html">Séquence</a><a href="uml_activity.html" class="active">Activités</a><a href="architecture.html">Architecture</a>
+</nav>
+<header>
+  <h1>🔄 Diagrammes d'Activités</h1>
+  <p>UML 2.5 · Flux métier : destination, road trip, invitation, authentification</p>
+</header>
+<main>
+
+<!-- ═══ 1. CRÉATION DESTINATION ═══ -->
+<div class="diagram-block">
+  <h2>1 · Création d'une Destination</h2>
+  <p>Flux complet depuis l'ouverture du formulaire jusqu'à l'affichage de la carte destination, avec géolocalisation Nominatim.</p>
+  <div class="mermaid">
+flowchart TD
+    START(( )) --> A[Ouvrir page Destinations du groupe]
+    A --> B[Cliquer ＋ Ajouter une destination]
+    B --> C[/Remplir formulaire\nnombre destinations\nnom, image, prix hébergement,\nprix transport, dates, adresse/]
+    C --> D{Saisie adresse ?}
+    D -- Oui --> E[Appel Nominatim OSM\nGET /search?q=adresse]
+    E --> F{Résultats ?}
+    F -- Oui --> G[Afficher suggestions sur carte Leaflet]
+    G --> H[Sélectionner localisation]
+    H --> I[lat / lng enregistrés]
+    F -- Non --> J[Afficher message\nadressee introuvable]
+    J --> C
+    D -- Non / adresse déjà saisie --> I
+    I --> K{Formulaire valide ?}
+    K -- Non --> L[Afficher erreurs de validation]
+    L --> C
+    K -- Oui --> M[POST /api/destinations\nAvec token JWT]
+    M --> N{Réponse serveur}
+    N -- 201 Créé --> O[Ajouter carte dans la liste locale]
+    O --> P[Afficher toast succès]
+    P --> END(( ))
+    N -- 4xx Erreur --> Q[Afficher message erreur]
+    Q --> C
+  </div>
+</div>
+
+<!-- ═══ 2. ARCHIVAGE & SUPPRESSION ═══ -->
+<div class="diagram-block">
+  <h2>2 · Archivage et Suppression d'une Destination</h2>
+  <p>Deux niveaux de suppression : archivage (réversible, via mode archive) et suppression définitive (pour le proposeur ou le créateur du groupe).</p>
+  <div class="mermaid">
+flowchart TD
+    START(( )) --> A[Affichage liste destinations]
+    A --> B{Mode archive activé ?}
+    B -- Non --> C[Bouton archive visible\npour créateur du groupe]
+    C --> D[Cliquer icône archive]
+    D --> E[PATCH /api/destinations/:id/archive]
+    E --> F{Succès ?}
+    F -- Oui --> G[Retirer carte de la liste active]
+    G --> H[Toast : destination archivée]
+    F -- Non --> I[Afficher erreur]
+
+    B -- Oui --> J[Bouton supprimer définitivement\nvisible si proposeur OU créateur groupe]
+    J --> K[Cliquer icône supprimer]
+    K --> L[DELETE /api/destinations/:id]
+    L --> M{Succès ?}
+    M -- Oui --> N[Retirer carte de la liste archivée]
+    N --> O[Toast : supprimé]
+    M -- Non --> P[Afficher erreur]
+
+    A --> Q[Cliquer Voir archives]
+    Q --> R[GET /api/destinations?archived=1&groupId=X]
+    R --> S[Afficher section Destinations archivées]
+    S --> J
+
+    H --> END(( ))
+    O --> END
+    I --> END(( ))
+    P --> END
+  </div>
+</div>
+
+<!-- ═══ 3. PLANIFICATION ROAD TRIP ═══ -->
+<div class="diagram-block">
+  <h2>3 · Planification d'un Road Trip</h2>
+  <p>Sélection et ordonnancement des destinations du groupe pour construire un itinéraire avec calcul automatique du budget total.</p>
+  <div class="mermaid">
+flowchart TD
+    START(( )) --> A[Ouvrir page Road Trip du groupe]
+    A --> B[GET /api/destinations?groupId=X\nRécupérer destinations disponibles]
+    B --> C{Destinations trouvées ?}
+    C -- Non --> D[Afficher message\nAucune destination dans ce groupe]
+    D --> END1(( ))
+    C -- Oui --> E[Afficher liste destinations\nà cocher]
+    E --> F[Sélectionner une ou plusieurs\ndestinations]
+    F --> G{Au moins 1 sélectionnée ?}
+    G -- Non --> H[Bouton Créer désactivé]
+    H --> F
+    G -- Oui --> I[Afficher ordre actuel\nde l'itinéraire]
+    I --> J{Réordonner ?}
+    J -- Oui --> K[Drag & drop ou\nflèches haut/bas]
+    K --> I
+    J -- Non --> L[Calculer budget prévisionnel\nΣ prix hébergement + transport]
+    L --> M[POST /api/roadtrips\n{ groupId, destinationIds }]
+    M --> N{Réponse serveur}
+    N -- 201 --> O[Afficher itinéraire créé\navec budget total]
+    O --> P{Exporter PDF ?}
+    P -- Oui --> Q[Générer PDF côté client\ncarte + étapes + budget]
+    Q --> R[Télécharger fichier PDF]
+    P -- Non --> END2(( ))
+    R --> END2
+    N -- Erreur --> S[Afficher message erreur]
+    S --> F
+  </div>
+</div>
+
+<!-- ═══ 4. INVITATION ═══ -->
+<div class="diagram-block">
+  <h2>4 · Flux d'Invitation à un Groupe</h2>
+  <p>Processus côté créateur (envoi) et côté invité (réception email → inscription/connexion → accès au groupe).</p>
+  <div class="mermaid">
+flowchart TD
+    START(( )) --> A[Créateur ouvre\nla gestion du groupe]
+    A --> B[/Saisir adresse(s) email\nà inviter/]
+    B --> C{Emails valides ?}
+    C -- Non --> D[Afficher erreur format]
+    D --> B
+    C -- Oui --> E[POST /api/groups/:id/invite\n{ emails }]
+    E --> F[Pour chaque email :\nINSERT INTO invitations]
+    F --> G[Envoi email PHPMailer\nvia SMTP Brevo]
+    G --> H{Email envoyé ?}
+    H -- Oui --> I[Toast : N invitation(s) envoyée(s)]
+    H -- Non --> J[Log erreur serveur\nToast : erreur envoi]
+    I --> END1(( ))
+    J --> END1
+
+    subgraph Côté Invité
+    K[Réception email\nVous êtes invité dans Groupe X] --> L{Déjà inscrit ?}
+    L -- Non --> M[Cliquer S'inscrire\nRedirigé vers /register]
+    M --> N[Créer un compte]
+    L -- Oui --> O[Cliquer Se connecter\nRedirigé vers /login]
+    O --> P[Se connecter]
+    N --> Q[Accès aux groupes partagés]
+    P --> Q
+    Q --> END2(( ))
+    end
+  </div>
+</div>
+
+<!-- ═══ 5. RÉINITIALISATION MOT DE PASSE ═══ -->
+<div class="diagram-block">
+  <h2>5 · Réinitialisation du Mot de Passe</h2>
+  <p>Flux complet de récupération de compte via email avec token à usage unique et expiration 1 heure.</p>
+  <div class="mermaid">
+flowchart TD
+    START(( )) --> A[Cliquer Mot de passe oublié\nsur la page Login]
+    A --> B[/Saisir son adresse email/]
+    B --> C[POST /api/auth/forgot-password\n{ email }]
+    C --> D{Email existe\ndans la BDD ?}
+    D -- Non --> E[Réponse générique\npour éviter l'énumération]
+    D -- Oui --> F[Générer token\nbin2hex 32 octets]
+    F --> G[Stocker token + expiry\nNOW + 1 heure]
+    G --> H[Envoyer email\navec lien APP_URL/reset-password?token=...]
+    E --> I[Afficher message\nSi cet email existe...]
+    H --> I
+    I --> END1(( ))
+
+    J[Utilisateur clique le lien\ndans l'email] --> K{Token valide\net non expiré ?}
+    K -- Non --> L[Afficher erreur\nToken invalide ou expiré]
+    L --> M[Proposer de recommencer]
+    M --> A
+    K -- Oui --> N[/Saisir nouveau\nmot de passe/]
+    N --> O{Mot de passe\ncorrespond aux critères ?}
+    O -- Non --> P[Afficher critères manquants]
+    P --> N
+    O -- Oui --> Q[POST /api/auth/reset-password\n{ token, password }]
+    Q --> R[password_hash BCRYPT]
+    R --> S[UPDATE users\nreset_token = NULL]
+    S --> T[Afficher succès\nRedirige vers /login]
+    T --> END2(( ))
+  </div>
+</div>
+
+<!-- ═══ 6. ADMINISTRATION ═══ -->
+<div class="diagram-block">
+  <h2>6 · Administration du Site</h2>
+  <p>Accès et actions réservées à l'administrateur (antoine.brigouleix@gmail.com) via le dashboard /admin.</p>
+  <div class="mermaid">
+flowchart TD
+    START(( )) --> A[Utilisateur navigue vers /admin]
+    A --> B{JWT présent\ndans localStorage ?}
+    B -- Non --> C[Rediriger vers /login]
+    C --> END1(( ))
+    B -- Oui --> D{email === administrateur ?}
+    D -- Non --> E[Rediriger vers /my-groups]
+    E --> END2(( ))
+    D -- Oui --> F[Afficher Dashboard Admin]
+    F --> G{Choisir onglet}
+
+    G --> H[Statistiques\nGET /api/admin/stats]
+    H --> I[Afficher total users,\ngroupes, destinations,\ncommentaires, photos]
+
+    G --> J[Gestion Utilisateurs\nGET /api/admin/users]
+    J --> K[Liste avec email, date création,\nstatut admin]
+    K --> L{Action ?}
+    L --> M[Supprimer utilisateur\nDELETE /api/admin/users/:id]
+    M --> N[Retirer de la liste locale]
+
+    G --> O[Gestion Groupes\nGET /api/admin/groups]
+    O --> P[Liste avec créateur,\nnbr membres]
+    P --> Q{Action ?}
+    Q --> R[Supprimer groupe\nDELETE /api/admin/groups/:id]
+    R --> S[Retirer de la liste locale]
+
+    G --> T[Test Email\nPOST /api/admin/test-email]
+    T --> U{Email envoyé ?}
+    U -- Oui --> V[Toast : SMTP opérationnel]
+    U -- Non --> W[Toast : Erreur SMTP]
+
+    N --> END3(( ))
+    S --> END3
+    V --> END3
+    W --> END3
+    I --> END3
+  </div>
+</div>
+
+</main>
+</body>
+</html>

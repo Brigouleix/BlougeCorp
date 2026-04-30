@@ -6,11 +6,11 @@ const GroupCard = ({ id, name, members, creator, currentUser, showDelete, onDele
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/destinations', { state: { name, members } });
+        navigate('/destinations', { state: { groupId: id, name, members, creator } });
     };
 
     const handleDelete = (e) => {
-        e.stopPropagation(); // pour ne pas déclencher le navigate
+        e.stopPropagation();
         onDelete(id);
     };
 

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from '../assets/blouge.svg';
+import { useTranslation } from '../i18n/LanguageContext';
 import '../styles/Login.css';
 
 export default function Register() {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -99,33 +101,35 @@ export default function Register() {
         <div className="login-container">
             <div className="login-card">
                 <img src={logo} alt="Logo Blouge" className="login-logo" />
-                <h1 className="login-title">Inscription</h1>
+                <h1 className="login-title">{t('auth.register')}</h1>
 
                 <form onSubmit={handleRegister}>
                     <div>
-                        <label className="login-label">Nom d'utilisateur</label>
+                        <label className="login-label">{t('auth.username')}</label>
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             className="login-input"
+                            autoComplete="username"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="login-label">Email</label>
+                        <label className="login-label">{t('auth.email')}</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="login-input"
+                            autoComplete="email"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="login-label">Mot de passe</label>
+                        <label className="login-label">{t('auth.password')}</label>
                         <br />
                         <small className="password-hint">
                             ⚠️ Le mot de passe doit contenir au moins 12 caractères avec 4 types différents : minuscules, majuscules, chiffres et caractères spéciaux. ⚠️
@@ -140,7 +144,7 @@ export default function Register() {
                     </div>
 
                     <div>
-                        <label className="login-label">Confirmer le mot de passe</label>
+                        <label className="login-label">{t('auth.confirmPassword')}</label>
                         <input
                             type="password"
                             value={confirmPassword}
@@ -150,21 +154,16 @@ export default function Register() {
                         />
                     </div>
 
-                    
                     {success && <p className="login-success">{success}</p>}
                     {error && <p className="login-error">{error}</p>}
 
-
-
-                    
-
                     <button type="submit" className="login-button" disabled={loading}>
-                        {loading ? 'Création en cours...' : "S'inscrire"}
+                        {loading ? t('auth.creating') : t('auth.registerBtn')}
                     </button>
 
                     <div className="register-link">
-                        <span>Déjà un compte ? </span>
-                        <Link to="/" className="login-link">Se connecter</Link>
+                        <span>{t('auth.alreadyAccount')} </span>
+                        <Link to="/" className="login-link">{t('auth.loginBtn')}</Link>
                     </div>
                 </form>
             </div>

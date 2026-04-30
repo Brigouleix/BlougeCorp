@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — MPD Merise</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4ff;color:#1e1b4b;min-height:100vh}
+  nav{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:.8rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:600;padding:.3rem .7rem;border-radius:8px;transition:background .2s}
+  nav a:hover,nav a.active{background:rgba(255,255,255,.2);color:#fff}
+  nav .nav-title{color:#fff;font-weight:800;font-size:1rem;margin-right:1rem}
+  header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:2rem;color:#fff}
+  header h1{font-size:1.8rem;font-weight:800}
+  header p{opacity:.75;margin-top:.3rem;font-size:.9rem}
+  main{padding:2rem;max-width:1400px;margin:0 auto}
+  h2{font-size:1.1rem;font-weight:700;color:#4f46e5;margin:2rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid rgba(79,70,229,.15)}
+  .tables-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:2rem}
+  .table-card{background:#fff;border:2px solid #4f46e5;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(79,70,229,.1)}
+  .table-card-header{background:#4f46e5;color:#fff;padding:.6rem 1rem;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem}
+  .table-card table{width:100%;border-collapse:collapse;font-size:.82rem}
+  .table-card th{background:#eef2ff;color:#4f46e5;padding:.5rem .8rem;text-align:left;font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e5e7eb}
+  .table-card td{padding:.45rem .8rem;border-bottom:1px solid #f3f4f6;color:#374151;vertical-align:top}
+  .table-card tr:last-child td{border-bottom:none}
+  .table-card tr:hover td{background:#f9fafb}
+  .pk{color:#4f46e5;font-weight:700}
+  .fk{color:#7c3aed}
+  .type{color:#6b7280;font-size:.78rem;font-family:monospace}
+  .constraint{display:inline-block;font-size:.68rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;margin-left:.3rem}
+  .pk-badge{background:#dbeafe;color:#1d4ed8}
+  .fk-badge{background:#ede9fe;color:#6d28d9}
+  .uk-badge{background:#d1fae5;color:#065f46}
+  .nn-badge{background:#fef3c7;color:#92400e}
+  .mermaid-wrap{background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(79,70,229,.08);margin-bottom:2rem;overflow-x:auto}
+  .legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:1rem;background:rgba(255,255,255,.7);border-radius:10px;font-size:.82rem}
+  .legend span{display:flex;align-items:center;gap:.3rem}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+</style>
+<script>mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#4f46e5',primaryTextColor:'#fff',primaryBorderColor:'#3730a3',lineColor:'#6b7280',secondaryColor:'#ede9fe',tertiaryColor:'#f0f4ff'},er:{diagramPadding:30}});</script>
+</head>
+<body>
+<nav>
+  <span class="nav-title">✈️ BlougeCorp</span>
+  <a href="index.html">Accueil</a><a href="mcd.html">MCD</a><a href="mpd.html" class="active">MPD</a>
+  <a href="uml_classes.html">Classes</a><a href="uml_usecase.html">Use Case</a>
+  <a href="uml_sequence.html">Séquence</a><a href="uml_activity.html">Activités</a><a href="architecture.html">Architecture</a>
+</nav>
+<header>
+  <h1>🗄️ MPD — Modèle Physique de Données</h1>
+  <p>Merise · Implémentation SQL MySQL · Tables, types, clés primaires &amp; étrangères</p>
+</header>
+<main>
+
+<div class="legend">
+  <span><span class="dot" style="background:#4f46e5"></span> <strong>PK</strong> Clé primaire</span>
+  <span><span class="dot" style="background:#7c3aed"></span> <strong>FK</strong> Clé étrangère</span>
+  <span><span class="dot" style="background:#059669"></span> <strong>UK</strong> Unique</span>
+  <span><span class="dot" style="background:#d97706"></span> <strong>NN</strong> Not Null</span>
+</div>
+
+<!-- Schéma ER physique -->
+<div class="mermaid-wrap">
+<div class="mermaid">
+erDiagram
+    users {
+        INT id PK
+        VARCHAR_100 username
+        VARCHAR_255 email UK
+        VARCHAR_255 password
+        TINYINT is_admin
+        DATETIME created_at
+    }
+    groups_ {
+        INT id PK
+        VARCHAR_255 name
+        TEXT description
+        LONGTEXT image
+        INT creator_id FK
+        DATETIME created_at
+    }
+    group_members {
+        INT id PK
+        INT group_id FK
+        INT user_id FK
+    }
+    invitations {
+        INT id PK
+        INT group_id FK
+        VARCHAR_255 email
+        ENUM status
+        DATETIME created_at
+    }
+    destinations {
+        INT id PK
+        INT group_id FK
+        VARCHAR_255 name
+        LONGTEXT image
+        DECIMAL price_house
+        DECIMAL price_travel
+        VARCHAR_255 dates
+        VARCHAR_100 proposed_by
+        TEXT members
+        DOUBLE location_lat
+        DOUBLE location_lng
+        VARCHAR_500 location_address
+        TINYINT archived
+        DATETIME created_at
+    }
+    comments {
+        INT id PK
+        INT destination_id FK
+        INT user_id FK
+        VARCHAR_100 username
+        TEXT text
+        INT rating
+        DATETIME created_at
+    }
+    photos {
+        INT id PK
+        INT group_id FK
+        INT user_id FK
+        VARCHAR_100 username
+        LONGTEXT image
+        VARCHAR_255 caption
+        DATETIME created_at
+    }
+    road_trips {
+        INT id PK
+        INT group_id FK
+        TEXT destination_ids
+        INT created_by FK
+        DATETIME created_at
+    }
+    password_resets {
+        INT id PK
+        VARCHAR_255 email
+        VARCHAR_64 token
+        DATETIME expires_at
+        TINYINT used
+        DATETIME created_at
+    }
+
+    users ||--o{ groups_ : "creator_id"
+    users ||--o{ group_members : "user_id"
+    groups_ ||--o{ group_members : "group_id"
+    groups_ ||--o{ invitations : "group_id"
+    groups_ ||--o{ destinations : "group_id"
+    destinations ||--o{ comments : "destination_id"
+    users ||--o{ comments : "user_id"
+    groups_ ||--o{ photos : "group_id"
+    users ||--o{ photos : "user_id"
+    groups_ ||--o{ road_trips : "group_id"
+    users ||--o{ road_trips : "created_by"
+</div>
+</div>
+
+<h2>📋 Détail des tables</h2>
+<div class="tables-grid">
+
+  <div class="table-card">
+    <div class="table-card-header">👤 users</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span><span class="constraint nn-badge">AI</span></td></tr>
+        <tr><td>username</td><td class="type">VARCHAR(100)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>email</td><td class="type">VARCHAR(255)</td><td><span class="constraint uk-badge">UK</span><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>password</td><td class="type">VARCHAR(255)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>is_admin</td><td class="type">TINYINT(1)</td><td>DEFAULT 0</td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">🗂️ groups_</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span><span class="constraint nn-badge">AI</span></td></tr>
+        <tr><td>name</td><td class="type">VARCHAR(255)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>description</td><td class="type">TEXT</td><td>—</td></tr>
+        <tr><td>image</td><td class="type">LONGTEXT</td><td>Base64</td></tr>
+        <tr><td class="fk">creator_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → users.id</span></td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">🔗 group_members</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span><span class="constraint nn-badge">AI</span></td></tr>
+        <tr><td class="fk">group_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → groups_.id</span></td></tr>
+        <tr><td class="fk">user_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → users.id</span></td></tr>
+        <tr><td colspan="3" style="color:#6b7280;font-style:italic">UNIQUE KEY (group_id, user_id)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">📧 invitations</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span><span class="constraint nn-badge">AI</span></td></tr>
+        <tr><td class="fk">group_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → groups_.id</span></td></tr>
+        <tr><td>email</td><td class="type">VARCHAR(255)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>status</td><td class="type">ENUM</td><td>pending/accepted/declined</td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">📍 destinations</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span></td></tr>
+        <tr><td class="fk">group_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → groups_.id</span></td></tr>
+        <tr><td>name</td><td class="type">VARCHAR(255)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>image</td><td class="type">LONGTEXT</td><td>Base64</td></tr>
+        <tr><td>price_house</td><td class="type">DECIMAL(10,2)</td><td>DEFAULT 0</td></tr>
+        <tr><td>price_travel</td><td class="type">DECIMAL(10,2)</td><td>DEFAULT 0</td></tr>
+        <tr><td>dates</td><td class="type">VARCHAR(255)</td><td>—</td></tr>
+        <tr><td>proposed_by</td><td class="type">VARCHAR(100)</td><td>—</td></tr>
+        <tr><td>members</td><td class="type">TEXT</td><td>JSON array</td></tr>
+        <tr><td>location_lat/lng</td><td class="type">DOUBLE</td><td>—</td></tr>
+        <tr><td>location_address</td><td class="type">VARCHAR(500)</td><td>—</td></tr>
+        <tr><td>archived</td><td class="type">TINYINT(1)</td><td>DEFAULT 0</td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">💬 comments</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span></td></tr>
+        <tr><td class="fk">destination_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → destinations.id</span></td></tr>
+        <tr><td class="fk">user_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → users.id</span></td></tr>
+        <tr><td>username</td><td class="type">VARCHAR(100)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>text</td><td class="type">TEXT</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>rating</td><td class="type">INT</td><td>DEFAULT 5</td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">📸 photos</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span></td></tr>
+        <tr><td class="fk">group_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → groups_.id</span></td></tr>
+        <tr><td class="fk">user_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → users.id</span></td></tr>
+        <tr><td>username</td><td class="type">VARCHAR(100)</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>image</td><td class="type">LONGTEXT</td><td><span class="constraint nn-badge">NN</span> Base64</td></tr>
+        <tr><td>caption</td><td class="type">VARCHAR(255)</td><td>—</td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">🗺️ road_trips</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span></td></tr>
+        <tr><td class="fk">group_id</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → groups_.id</span></td></tr>
+        <tr><td>destination_ids</td><td class="type">TEXT</td><td><span class="constraint nn-badge">NN</span> JSON array</td></tr>
+        <tr><td class="fk">created_by</td><td class="type">INT</td><td><span class="constraint fk-badge">FK → users.id</span></td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">🔐 password_resets</div>
+    <table>
+      <thead><tr><th>Colonne</th><th>Type</th><th>Contraintes</th></tr></thead>
+      <tbody>
+        <tr><td class="pk">id</td><td class="type">INT</td><td><span class="constraint pk-badge">PK</span></td></tr>
+        <tr><td>email</td><td class="type">VARCHAR(255)</td><td>INDEX</td></tr>
+        <tr><td>token</td><td class="type">VARCHAR(64)</td><td>INDEX</td></tr>
+        <tr><td>expires_at</td><td class="type">DATETIME</td><td><span class="constraint nn-badge">NN</span></td></tr>
+        <tr><td>used</td><td class="type">TINYINT(1)</td><td>DEFAULT 0</td></tr>
+        <tr><td>created_at</td><td class="type">DATETIME</td><td>DEFAULT NOW()</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</main>
+</body>
+</html>

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/blouge.svg';
+import { useTranslation } from '../i18n/LanguageContext';
 import '../styles/Login.css';
 
 export default function Login() {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -60,7 +62,7 @@ export default function Login() {
     };
 
     const handleForgotPassword = () => {
-        alert("Fonctionnalité à venir : récupération du mot de passe !");
+        navigate('/forgot-password');
     };
 
     const handleSignUpRedirect = () => {
@@ -76,7 +78,7 @@ export default function Login() {
 
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label className="login-label">Email</label>
+                        <label className="login-label">{t('auth.email')}</label>
                         <input
                             type="email"
                             value={email}
@@ -88,7 +90,7 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <label className="login-label">Mot de passe</label>
+                        <label className="login-label">{t('auth.password')}</label>
                         <input
                             type="password"
                             value={password}
@@ -102,23 +104,15 @@ export default function Login() {
                     {error && <p className="login-error">{error}</p>}
 
                     <button type="submit" className="login-button" disabled={loading}>
-                        {loading ? 'Connexion en cours...' : 'Se connecter'}
+                        {loading ? t('common.loading') : t('auth.loginBtn')}
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={handleForgotPassword}
-                        className="login-link"
-                    >
-                        Mot de passe oublié ?
+                    <button type="button" onClick={handleForgotPassword} className="login-link">
+                        {t('auth.forgotPassword')}
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={handleSignUpRedirect}
-                        className="login-link"
-                    >
-                        Pas encore de compte ? Rejoins-nous !!
+                    <button type="button" onClick={handleSignUpRedirect} className="login-link">
+                        {t('auth.noAccount')} {t('auth.registerBtn')} !
                     </button>
                 </form>
             </div>

@@ -1,0 +1,215 @@
+/* === Album Photo === */
+.photo-album h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+/* Upload */
+.photo-upload {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.photo-caption-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+.upload-button {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    background-color: #4f46e5;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+
+.upload-button:hover {
+    background-color: #4338ca;
+}
+
+/* Grille */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.photo-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.photo-card:hover {
+    transform: translateY(-3px);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    cursor: pointer;
+    display: block;
+}
+
+.photo-info {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.photo-author {
+    font-weight: 600;
+    display: block;
+    color: #333;
+}
+
+.photo-caption {
+    color: #666;
+    display: block;
+    margin-top: 0.15rem;
+}
+
+.photo-delete-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(225, 29, 72, 0.9);
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-card:hover .photo-delete-btn {
+    opacity: 1;
+}
+
+.no-photos {
+    text-align: center;
+    color: #888;
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+/* Lightbox */
+.photo-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    cursor: default;
+    text-align: center;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.lightbox-info {
+    color: white;
+    margin-top: 1rem;
+}
+
+.lightbox-author {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.lightbox-caption {
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.lightbox-date {
+    font-size: 0.85rem;
+    color: #999;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* Modal large pour l'album */
+.modal-large {
+    max-width: 900px !important;
+    width: 90vw;
+}
+
+/* === Dark mode === */
+body.dark-mode .photo-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .photo-author {
+    color: #ddd;
+}
+
+body.dark-mode .photo-caption {
+    color: #999;
+}
+
+body.dark-mode .photo-caption-input {
+    background-color: #2c2c2c;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+body.dark-mode .upload-button {
+    background-color: #6366f1;
+}
+
+body.dark-mode .upload-button:hover {
+    background-color: #4f46e5;
+}

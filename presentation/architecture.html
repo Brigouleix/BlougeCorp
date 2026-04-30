@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — Architecture Technique</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4ff;color:#1e1b4b;min-height:100vh}
+  nav{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:.8rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:600;padding:.3rem .7rem;border-radius:8px}
+  nav a:hover,nav a.active{background:rgba(255,255,255,.2);color:#fff}
+  nav .nav-title{color:#fff;font-weight:800;font-size:1rem;margin-right:1rem}
+  header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:2rem;color:#fff}
+  header h1{font-size:1.8rem;font-weight:800}
+  header p{opacity:.75;margin-top:.3rem;font-size:.9rem}
+  main{padding:2rem;max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:2rem}
+
+  /* Architecture diagram */
+  .arch-wrap{background:#fff;border-radius:20px;padding:2.5rem;box-shadow:0 4px 24px rgba(79,70,229,.1);overflow-x:auto}
+  .arch-wrap h2{font-size:1.2rem;font-weight:800;color:#4f46e5;margin-bottom:1.5rem}
+
+  .arch-diagram{display:flex;flex-direction:column;gap:12px;min-width:700px}
+
+  /* Layers */
+  .layer{border-radius:16px;padding:1.2rem 1.5rem}
+  .layer-title{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;opacity:.7}
+  .layer-content{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+
+  .layer-client{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #93c5fd}
+  .layer-client .layer-title{color:#1d4ed8}
+  .layer-backend{background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:2px solid #a78bfa}
+  .layer-backend .layer-title{color:#6d28d9}
+  .layer-data{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac}
+  .layer-data .layer-title{color:#15803d}
+  .layer-external{background:linear-gradient(135deg,#fff7ed,#fed7aa);border:2px solid #fdba74}
+  .layer-external .layer-title{color:#c2410c}
+
+  /* Boxes inside layers */
+  .box{border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;gap:.35rem;min-width:140px;flex:1}
+  .box-icon{font-size:1.4rem}
+  .box-title{font-size:.85rem;font-weight:700}
+  .box-sub{font-size:.72rem;color:#6b7280;line-height:1.4}
+  .box-tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem}
+  .tag{font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:rgba(79,70,229,.1);color:#4338ca}
+  .tag-green{background:rgba(16,185,129,.1);color:#065f46}
+  .tag-orange{background:rgba(245,158,11,.1);color:#92400e}
+  .tag-blue{background:rgba(59,130,246,.1);color:#1e40af}
+  .tag-red{background:rgba(239,68,68,.1);color:#991b1b}
+
+  .box-react{background:#fff;border:1.5px solid #93c5fd}
+  .box-php{background:#fff;border:1.5px solid #a78bfa}
+  .box-db{background:#fff;border:1.5px solid #86efac}
+  .box-ext{background:#fff;border:1.5px solid #fdba74}
+
+  /* Arrow rows */
+  .arrow-row{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.8rem;color:#6b7280;font-weight:600;padding:.2rem 0}
+  .arrow-line{flex:1;height:2px;background:linear-gradient(to right,transparent,#94a3b8,transparent)}
+  .arrow-label{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:20px;padding:.2rem .8rem;font-size:.72rem;white-space:nowrap}
+
+  /* Flow table */
+  .flow-table{width:100%;border-collapse:collapse;font-size:.83rem}
+  .flow-table th{background:#4f46e5;color:#fff;padding:.6rem 1rem;text-align:left;font-weight:700;font-size:.78rem}
+  .flow-table td{padding:.55rem 1rem;border-bottom:1px solid #e5e7eb;vertical-align:top}
+  .flow-table tr:hover td{background:#f5f3ff}
+  .method-badge{display:inline-block;font-size:.65rem;font-weight:800;padding:.1rem .5rem;border-radius:6px;margin-right:.4rem}
+  .m-get{background:#dbeafe;color:#1d4ed8}
+  .m-post{background:#dcfce7;color:#15803d}
+  .m-patch{background:#fef3c7;color:#92400e}
+  .m-delete{background:#fee2e2;color:#991b1b}
+
+  /* Security section */
+  .security-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+  .sec-card{background:#fff;border-radius:12px;padding:1.1rem 1.3rem;box-shadow:0 2px 10px rgba(79,70,229,.07);border-left:4px solid #4f46e5}
+  .sec-card h4{font-size:.88rem;font-weight:700;margin-bottom:.4rem}
+  .sec-card p{font-size:.78rem;color:#6b7280;line-height:1.5}
+
+  .section-h2{font-size:1.2rem;font-weight:800;color:#4f46e5;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+  .section-h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,rgba(79,70,229,.3),transparent)}
+  .card-wrap{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(79,70,229,.08)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="nav-title">✈️ BlougeCorp</span>
+  <a href="index.html">Accueil</a><a href="mcd.html">MCD</a><a href="mpd.html">MPD</a>
+  <a href="uml_classes.html">Classes</a><a href="uml_usecase.html">Use Case</a>
+  <a href="uml_sequence.html">Séquence</a><a href="uml_activity.html">Activités</a>
+  <a href="architecture.html" class="active">Architecture</a>
+</nav>
+<header>
+  <h1>🏗️ Architecture Technique</h1>
+  <p>Vue d'ensemble des couches applicatives, flux de données et endpoints API</p>
+</header>
+<main>
+
+<!-- ══════════ DIAGRAMME COUCHES ══════════ -->
+<div class="arch-wrap">
+  <h2>Vue en couches — Architecture 3-tiers</h2>
+  <div class="arch-diagram">
+
+    <!-- CLIENT -->
+    <div class="layer layer-client">
+      <div class="layer-title">🖥️ Couche Présentation — Client (Navigateur)</div>
+      <div class="layer-content">
+        <div class="box box-react">
+          <span class="box-icon">⚛️</span>
+          <span class="box-title">React 18</span>
+          <span class="box-sub">SPA — Create React App<br/>React Router DOM v6<br/>useState / useEffect</span>
+          <div class="box-tags"><span class="tag tag-blue">JSX</span><span class="tag tag-blue">Hooks</span></div>
+        </div>
+        <div class="box box-react">
+          <span class="box-icon">🗺️</span>
+          <span class="box-title">Leaflet.js</span>
+          <span class="box-sub">Cartes interactives<br/>Marqueurs géolocalisés<br/>Intégration Nominatim</span>
+          <div class="box-tags"><span class="tag tag-blue">OSM</span></div>
+        </div>
+        <div class="box box-react">
+          <span class="box-icon">💾</span>
+          <span class="box-title">localStorage</span>
+          <span class="box-sub">Stockage JWT token<br/>Données utilisateur<br/>Préférences langue</span>
+          <div class="box-tags"><span class="tag tag-orange">Persistance</span></div>
+        </div>
+        <div class="box box-react">
+          <span class="box-icon">🌐</span>
+          <span class="box-title">i18n (7 langues)</span>
+          <span class="box-sub">FR, EN, ES, DE, IT, PT, JA<br/>Fichier translations.js<br/>Contexte React global</span>
+          <div class="box-tags"><span class="tag tag-green">L10n</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <span class="arrow-label">HTTP / HTTPS · REST JSON · Authorization: Bearer &lt;JWT&gt; · CORS</span>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- BACKEND -->
+    <div class="layer layer-backend">
+      <div class="layer-title">⚙️ Couche Métier — Serveur (PHP 8.2 / Apache)</div>
+      <div class="layer-content">
+        <div class="box box-php">
+          <span class="box-icon">🔀</span>
+          <span class="box-title">Router</span>
+          <span class="box-sub">Routage maison<br/>GET / POST / PATCH / DELETE<br/>Middleware CORS</span>
+          <div class="box-tags"><span class="tag">index.php</span></div>
+        </div>
+        <div class="box box-php">
+          <span class="box-icon">🔒</span>
+          <span class="box-title">AuthController</span>
+          <span class="box-sub">register / login<br/>forgot / reset password<br/>JWT encode / decode</span>
+          <div class="box-tags"><span class="tag tag-red">BCrypt</span><span class="tag">HS256</span></div>
+        </div>
+        <div class="box box-php">
+          <span class="box-icon">👥</span>
+          <span class="box-title">GroupController</span>
+          <span class="box-sub">CRUD groupes<br/>Membres + invitations<br/>Upload photo base64</span>
+          <div class="box-tags"><span class="tag tag-green">PHPMailer</span></div>
+        </div>
+        <div class="box box-php">
+          <span class="box-icon">📍</span>
+          <span class="box-title">DestinationController</span>
+          <span class="box-sub">CRUD destinations<br/>Archive / restore<br/>Commentaires + filtres</span>
+          <div class="box-tags"><span class="tag tag-orange">Archive</span></div>
+        </div>
+        <div class="box box-php">
+          <span class="box-icon">🗺️</span>
+          <span class="box-title">RoadTripController</span>
+          <span class="box-sub">Création itinéraires<br/>Calcul budget total<br/>Ordonnancement</span>
+          <div class="box-tags"><span class="tag">JSON</span></div>
+        </div>
+        <div class="box box-php">
+          <span class="box-icon">🛡️</span>
+          <span class="box-title">AdminController</span>
+          <span class="box-sub">Stats globales<br/>Gestion users/groupes<br/>Vérification email admin</span>
+          <div class="box-tags"><span class="tag tag-red">Admin only</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <span class="arrow-label">PDO · Prepared statements · Transactions SQL</span>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- DATA -->
+    <div class="layer layer-data">
+      <div class="layer-title">🗄️ Couche Données — Base de données</div>
+      <div class="layer-content">
+        <div class="box box-db">
+          <span class="box-icon">🗄️</span>
+          <span class="box-title">MySQL / MariaDB</span>
+          <span class="box-sub">9 tables relationnelles<br/>Clés étrangères + index<br/>Charset utf8mb4</span>
+          <div class="box-tags"><span class="tag tag-green">InnoDB</span><span class="tag tag-green">PDO</span></div>
+        </div>
+        <div class="box box-db">
+          <span class="box-icon">📋</span>
+          <span class="box-title">Tables principales</span>
+          <span class="box-sub">users · groups · group_members<br/>destinations · comments<br/>photos · road_trips</span>
+          <div class="box-tags"><span class="tag">FK</span><span class="tag">ON DELETE</span></div>
+        </div>
+        <div class="box box-db">
+          <span class="box-icon">🔄</span>
+          <span class="box-title">Tables support</span>
+          <span class="box-sub">invitations (status)<br/>reset tokens (expiry)<br/>archived flag</span>
+          <div class="box-tags"><span class="tag tag-orange">Soft delete</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <span class="arrow-label">SMTP TLS 587 · REST JSON · Geocoding API</span>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- EXTERNAL -->
+    <div class="layer layer-external">
+      <div class="layer-title">🌍 Services Externes</div>
+      <div class="layer-content">
+        <div class="box box-ext">
+          <span class="box-icon">📧</span>
+          <span class="box-title">Brevo SMTP</span>
+          <span class="box-sub">smtp-relay.brevo.com:587<br/>Invitations + reset mdp<br/>PHPMailer TLS</span>
+          <div class="box-tags"><span class="tag tag-orange">Free tier</span></div>
+        </div>
+        <div class="box box-ext">
+          <span class="box-icon">🌍</span>
+          <span class="box-title">Nominatim OSM</span>
+          <span class="box-sub">Géocodage adresses<br/>Suggestions autocomplete<br/>Lat / Lng gratuit</span>
+          <div class="box-tags"><span class="tag tag-orange">OpenStreetMap</span></div>
+        </div>
+        <div class="box box-ext">
+          <span class="box-icon">🗺️</span>
+          <span class="box-title">Leaflet Tiles</span>
+          <span class="box-sub">Tuiles cartographiques OSM<br/>Rendu côté client<br/>Zoom + marqueurs</span>
+          <div class="box-tags"><span class="tag tag-orange">CDN</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ ENDPOINTS ══════════ -->
+<div class="card-wrap">
+  <div class="section-h2">📡 Endpoints API REST</div>
+  <table class="flow-table">
+    <thead>
+      <tr><th>Méthode</th><th>Route</th><th>Contrôleur</th><th>Description</th><th>Auth</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/auth/register</td><td>AuthController</td><td>Créer un compte</td><td>—</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/auth/login</td><td>AuthController</td><td>Connexion → JWT</td><td>—</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/auth/forgot-password</td><td>AuthController</td><td>Demander reset email</td><td>—</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/auth/reset-password</td><td>AuthController</td><td>Réinitialiser mot de passe</td><td>Token URL</td></tr>
+      <tr><td><span class="method-badge m-get">GET</span></td><td>/api/groups</td><td>GroupController</td><td>Groupes de l'utilisateur</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/groups</td><td>GroupController</td><td>Créer un groupe</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-delete">DELETE</span></td><td>/api/groups/:id</td><td>GroupController</td><td>Supprimer un groupe</td><td>JWT + créateur</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/groups/:id/invite</td><td>GroupController</td><td>Inviter par email</td><td>JWT + créateur</td></tr>
+      <tr><td><span class="method-badge m-get">GET</span></td><td>/api/destinations</td><td>DestinationController</td><td>Destinations du groupe (?archived=1)</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/destinations</td><td>DestinationController</td><td>Créer une destination</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-patch">PATCH</span></td><td>/api/destinations/:id</td><td>DestinationController</td><td>Modifier une destination</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-patch">PATCH</span></td><td>/api/destinations/:id/archive</td><td>DestinationController</td><td>Archiver une destination</td><td>JWT + créateur</td></tr>
+      <tr><td><span class="method-badge m-delete">DELETE</span></td><td>/api/destinations/:id</td><td>DestinationController</td><td>Supprimer définitivement</td><td>JWT + proposeur/créateur</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/comments</td><td>DestinationController</td><td>Ajouter un commentaire</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-get">GET</span></td><td>/api/roadtrips</td><td>RoadTripController</td><td>Road trips du groupe</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/roadtrips</td><td>RoadTripController</td><td>Créer un road trip</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-delete">DELETE</span></td><td>/api/roadtrips/:id</td><td>RoadTripController</td><td>Supprimer un road trip</td><td>JWT</td></tr>
+      <tr><td><span class="method-badge m-get">GET</span></td><td>/api/admin/stats</td><td>AdminController</td><td>Statistiques globales</td><td>JWT admin</td></tr>
+      <tr><td><span class="method-badge m-get">GET</span></td><td>/api/admin/users</td><td>AdminController</td><td>Liste des utilisateurs</td><td>JWT admin</td></tr>
+      <tr><td><span class="method-badge m-delete">DELETE</span></td><td>/api/admin/users/:id</td><td>AdminController</td><td>Supprimer un utilisateur</td><td>JWT admin</td></tr>
+      <tr><td><span class="method-badge m-get">GET</span></td><td>/api/admin/groups</td><td>AdminController</td><td>Liste de tous les groupes</td><td>JWT admin</td></tr>
+      <tr><td><span class="method-badge m-delete">DELETE</span></td><td>/api/admin/groups/:id</td><td>AdminController</td><td>Supprimer un groupe</td><td>JWT admin</td></tr>
+      <tr><td><span class="method-badge m-post">POST</span></td><td>/api/admin/test-email</td><td>AdminController</td><td>Tester la configuration SMTP</td><td>JWT admin</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════ SÉCURITÉ ══════════ -->
+<div class="card-wrap">
+  <div class="section-h2">🔐 Sécurité</div>
+  <div class="security-grid">
+    <div class="sec-card">
+      <h4>JWT HS256</h4>
+      <p>Tokens signés côté serveur avec clé secrète. Payload : id, username, email, isAdmin. Expiration configurable.</p>
+    </div>
+    <div class="sec-card">
+      <h4>BCrypt Password Hashing</h4>
+      <p>password_hash() avec PASSWORD_BCRYPT. Vérification via password_verify(). Aucun mot de passe en clair.</p>
+    </div>
+    <div class="sec-card">
+      <h4>Prepared Statements PDO</h4>
+      <p>Toutes les requêtes SQL utilisent des paramètres bindés. Protection totale contre les injections SQL.</p>
+    </div>
+    <div class="sec-card">
+      <h4>CORS configuré</h4>
+      <p>Origines autorisées listées explicitement. Headers Authorization, Content-Type acceptés. Préflight OPTIONS géré.</p>
+    </div>
+    <div class="sec-card">
+      <h4>Vérification des droits</h4>
+      <p>Chaque action sensible vérifie l'appartenance au groupe ET le rôle (créateur, proposeur, admin) côté serveur.</p>
+    </div>
+    <div class="sec-card">
+      <h4>Reset Token à usage unique</h4>
+      <p>Token cryptographiquement sûr (32 octets), expirant après 1h, invalidé après utilisation.</p>
+    </div>
+    <div class="sec-card">
+      <h4>Admin server-side</h4>
+      <p>Le rôle admin est vérifié en comparant l'email du JWT à l'email admin défini côté serveur uniquement.</p>
+    </div>
+    <div class="sec-card">
+      <h4>Images en Base64</h4>
+      <p>Les images sont stockées en base64 en BDD (TEXT). Pas de stockage de fichiers physiques, pas de path traversal.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ STACK ══════════ -->
+<div class="card-wrap">
+  <div class="section-h2">⚙️ Stack Technique Complète</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem">
+    <div style="background:#eff6ff;border-radius:10px;padding:1rem">
+      <div style="font-weight:800;font-size:.85rem;color:#1d4ed8;margin-bottom:.5rem">Frontend</div>
+      <div style="font-size:.8rem;color:#374151;line-height:1.7">React 18<br/>React Router DOM 6<br/>Create React App<br/>Leaflet.js 1.9<br/>CSS Modules</div>
+    </div>
+    <div style="background:#f5f3ff;border-radius:10px;padding:1rem">
+      <div style="font-weight:800;font-size:.85rem;color:#6d28d9;margin-bottom:.5rem">Backend</div>
+      <div style="font-size:.8rem;color:#374151;line-height:1.7">PHP 8.2<br/>Apache (XAMPP)<br/>Router maison<br/>PDO MySQL<br/>Composer</div>
+    </div>
+    <div style="background:#f0fdf4;border-radius:10px;padding:1rem">
+      <div style="font-weight:800;font-size:.85rem;color:#15803d;margin-bottom:.5rem">Base de données</div>
+      <div style="font-size:.8rem;color:#374151;line-height:1.7">MySQL 8 / MariaDB<br/>InnoDB (FK)<br/>utf8mb4<br/>9 tables<br/>Migrations auto</div>
+    </div>
+    <div style="background:#fff7ed;border-radius:10px;padding:1rem">
+      <div style="font-weight:800;font-size:.85rem;color:#c2410c;margin-bottom:.5rem">Auth & Sécurité</div>
+      <div style="font-size:.8rem;color:#374151;line-height:1.7">JWT HS256<br/>BCrypt<br/>Prepared statements<br/>CORS<br/>Token reset</div>
+    </div>
+    <div style="background:#fdf4ff;border-radius:10px;padding:1rem">
+      <div style="font-weight:800;font-size:.85rem;color:#86198f;margin-bottom:.5rem">Email</div>
+      <div style="font-size:.8rem;color:#374151;line-height:1.7">PHPMailer 6.9<br/>Brevo SMTP TLS<br/>Gmail App Password<br/>HTML + AltBody<br/>APP_URL configurable</div>
+    </div>
+    <div style="background:#f0f9ff;border-radius:10px;padding:1rem">
+      <div style="font-weight:800;font-size:.85rem;color:#0369a1;margin-bottom:.5rem">Cartographie</div>
+      <div style="font-size:.8rem;color:#374151;line-height:1.7">Leaflet.js<br/>OpenStreetMap tiles<br/>Nominatim geocoding<br/>Marqueurs + popups<br/>Zoom interactif</div>
+    </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

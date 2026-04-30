@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlougeCorp — Dossier de Présentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#eef2ff 0%,#ede9fe 40%,#faf5ff 100%);min-height:100vh;color:#1e1b4b}
+  header{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:3.5rem 2rem;text-align:center;color:#fff;position:relative;overflow:hidden}
+  header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  header h1{font-size:3rem;font-weight:900;letter-spacing:-0.03em;position:relative}
+  header p{font-size:1.15rem;opacity:.85;margin-top:.6rem;font-weight:300;position:relative}
+  .badge-row{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem;position:relative}
+  .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:.3rem .9rem;font-size:.8rem;font-weight:600}
+  main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
+  .section-title{font-size:1.5rem;font-weight:800;color:#4f46e5;margin:2.5rem 0 1.2rem;display:flex;align-items:center;gap:.6rem}
+  .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(to right,rgba(79,70,229,.3),transparent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+  .card{background:rgba(255,255,255,.72);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.6);border-radius:20px;padding:1.6rem;box-shadow:0 4px 20px rgba(79,70,229,.1);transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.5rem}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(79,70,229,.2)}
+  .card-icon{font-size:2rem;margin-bottom:.2rem}
+  .card-title{font-size:1.05rem;font-weight:700;color:#1e1b4b}
+  .card-desc{font-size:.85rem;color:#6b7280;line-height:1.5}
+  .card-tag{align-self:flex-start;font-size:.72rem;font-weight:700;padding:.2rem .65rem;border-radius:20px;margin-top:.3rem}
+  .tag-merise{background:rgba(245,158,11,.12);color:#d97706}
+  .tag-uml{background:rgba(79,70,229,.12);color:#4f46e5}
+  .tag-arch{background:rgba(16,185,129,.12);color:#059669}
+  .tag-slides{background:rgba(236,72,153,.12);color:#be185d}
+  .stack{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.5rem}
+  .pill{background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.2);border-radius:10px;padding:.3rem .8rem;font-size:.8rem;font-weight:600;color:#4f46e5}
+  footer{text-align:center;padding:2rem;color:#9ca3af;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>✈️ BlougeCorp</h1>
+  <p>Dossier de Présentation Technique — Organisateur de Voyages en Groupe</p>
+  <div class="badge-row">
+    <span class="badge">React 18</span>
+    <span class="badge">PHP 8.2</span>
+    <span class="badge">MySQL</span>
+    <span class="badge">JWT Auth</span>
+    <span class="badge">PHPMailer</span>
+    <span class="badge">Leaflet.js</span>
+  </div>
+</header>
+
+<main>
+  <div class="section-title">📐 Modélisation Merise</div>
+  <div class="grid">
+    <a class="card" href="mcd.html">
+      <span class="card-icon">🗺️</span>
+      <span class="card-title">MCD — Modèle Conceptuel de Données</span>
+      <span class="card-desc">Entités, associations et cardinalités. Vision métier des données sans contraintes techniques.</span>
+      <span class="card-tag tag-merise">Merise</span>
+    </a>
+    <a class="card" href="mpd.html">
+      <span class="card-icon">🗄️</span>
+      <span class="card-title">MPD — Modèle Physique de Données</span>
+      <span class="card-desc">Tables SQL avec types, clés primaires, clés étrangères et index. Implémentation réelle MySQL.</span>
+      <span class="card-tag tag-merise">Merise</span>
+    </a>
+  </div>
+
+  <div class="section-title">🔷 Diagrammes UML</div>
+  <div class="grid">
+    <a class="card" href="uml_classes.html">
+      <span class="card-icon">📦</span>
+      <span class="card-title">Diagramme de Classes</span>
+      <span class="card-desc">Classes, attributs, méthodes et relations (héritage, association, dépendance).</span>
+      <span class="card-tag tag-uml">UML</span>
+    </a>
+    <a class="card" href="uml_usecase.html">
+      <span class="card-icon">👤</span>
+      <span class="card-title">Diagramme de Cas d'Utilisation</span>
+      <span class="card-desc">Acteurs (Utilisateur, Créateur, Admin) et toutes les fonctionnalités du système.</span>
+      <span class="card-tag tag-uml">UML</span>
+    </a>
+    <a class="card" href="uml_sequence.html">
+      <span class="card-icon">↔️</span>
+      <span class="card-title">Diagrammes de Séquence</span>
+      <span class="card-desc">Flux Connexion, Création de destination et Envoi d'invitation avec interactions détaillées.</span>
+      <span class="card-tag tag-uml">UML</span>
+    </a>
+    <a class="card" href="uml_activity.html">
+      <span class="card-icon">🔄</span>
+      <span class="card-title">Diagrammes d'Activités</span>
+      <span class="card-desc">Flux de création destination, planification road trip et réinitialisation mot de passe.</span>
+      <span class="card-tag tag-uml">UML</span>
+    </a>
+  </div>
+
+  <div class="section-title">🏗️ Architecture</div>
+  <div class="grid">
+    <a class="card" href="architecture.html">
+      <span class="card-icon">🏗️</span>
+      <span class="card-title">Architecture Technique</span>
+      <span class="card-desc">Vue d'ensemble frontend/backend/BDD, flux des données, couches applicatives.</span>
+      <span class="card-tag tag-arch">Architecture</span>
+    </a>
+  </div>
+
+  <div class="section-title">📊 Présentation</div>
+  <div class="grid">
+    <a class="card" href="slides.html">
+      <span class="card-icon">🖥️</span>
+      <span class="card-title">Slides de Présentation</span>
+      <span class="card-desc">Diaporama interactif 12 slides : contexte, fonctionnalités, architecture, données, sécurité, admin. Navigation ←/→.</span>
+      <span class="card-tag tag-slides">Présentation</span>
+    </a>
+  </div>
+
+  <div class="section-title">⚙️ Stack Technique</div>
+  <div class="stack">
+    <span class="pill">React 18</span><span class="pill">React Router 6</span><span class="pill">PHP 8.2</span>
+    <span class="pill">MySQL / PDO</span><span class="pill">JWT (HS256)</span><span class="pill">PHPMailer</span>
+    <span class="pill">Leaflet.js</span><span class="pill">Nominatim OSM</span><span class="pill">Mermaid.js</span>
+    <span class="pill">XAMPP / Apache</span><span class="pill">Create React App</span>
+  </div>
+</main>
+<footer>BlougeCorp · Dossier généré automatiquement · 2026</footer>
+</body>
+</html>
