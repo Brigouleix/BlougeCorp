@@ -60,7 +60,7 @@ function App() {
     
 
     return (
-        <LoadScript googleMapsApiKey="AIzaSyCYi43JdVAzPYWGqsNP724LNeA2MQK7z8w" libraries={['places']}>
+        <LoadScript  libraries={['places']}>
         <Router>
             <div className={`app-container ${darkMode ? 'dark' : ''}`}>
                 <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
