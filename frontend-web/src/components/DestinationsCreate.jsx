@@ -1,5 +1,4 @@
-import { useState, useRef } from 'react';
-import { Autocomplete } from '@react-google-maps/api';
+import { useState } from 'react';
 import '../styles/CreateDestination.css';
 
 export default function CreateDestination({
@@ -15,8 +14,7 @@ export default function CreateDestination({
   const [dates, setDates] = useState('');
   // const [proposedBy, setProposedBy] = useState('');  <-- supprimé
   const [members] = useState(defaultMembers);
-  const [location, setLocation] = useState(null);
-  const autocompleteRef = useRef(null);
+  const [locationText, setLocationText] = useState('');
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -27,16 +25,6 @@ export default function CreateDestination({
       setPreview(reader.result);
     };
     reader.readAsDataURL(file);
-  };
-
-  const handlePlaceChanged = () => {
-    const place = autocompleteRef.current.getPlace();
-    if (!place?.geometry) return;
-    setLocation({
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng(),
-      address: place.formatted_address,
-    });
   };
 
   const handleSubmit = async (e) => {
@@ -53,7 +41,7 @@ export default function CreateDestination({
       dates,
       // proposedBy,  <-- supprimé
       emails: members.map(m => m.email ? m.email : m),
-      location,
+      location: locationText ? { address: locationText } : null,
     };
 
     try {
@@ -128,12 +116,11 @@ export default function CreateDestination({
       {/* Champ "Proposé par" supprimé */}
 
       <label>Lieu</label>
-      <Autocomplete
-        onLoad={(auto) => (autocompleteRef.current = auto)}
-        onPlaceChanged={handlePlaceChanged}
-      >
-        <input placeholder="Adresse ou ville" />
-      </Autocomplete>
+      <input
+        placeholder="Adresse ou ville"
+        value={locationText}
+        onChange={(e) => setLocationText(e.target.value)}
+      />
 
       <button className="create-button" type="submit">
         Créer

@@ -2,7 +2,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { LoadScript, Autocomplete } from '@react-google-maps/api';
 import DestinationCreate from '../src/components/DestinationsCreate';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -29,38 +28,10 @@ function App() {
         }
     }, [darkMode]);
 
-    useEffect(() => {
-        const scriptId = 'google-api-script';
-      
-        if (!document.getElementById(scriptId)) {
-          const script = document.createElement('script');
-          script.src = 'https://accounts.google.com/gsi/client';
-          script.id = scriptId;
-          script.async = true;
-          script.defer = true;
-          document.body.appendChild(script);
-        }
-      }, []);
-      useEffect(() => {
-        if (window.google && window.google.accounts) {
-          window.google.accounts.id.initialize({
-            client_id: "AIzaSyCYi43JdVAzPYWGqsNP724LNeA2MQK7z8w",
-            callback: handleCallbackResponse,
-          });
-      
-          window.google.accounts.id.renderButton(
-            document.getElementById("google-signin-button"),
-            { theme: "outline", size: "large" }
-          );
-        }
-      }, []);
-      
-      
-    
-    
+
+
 
     return (
-        <LoadScript  libraries={['places']}>
         <Router>
             <div className={`app-container ${darkMode ? 'dark' : ''}`}>
                 <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -108,7 +79,6 @@ function App() {
 
             </div>
         </Router>
-        </LoadScript>
     );
 }
 

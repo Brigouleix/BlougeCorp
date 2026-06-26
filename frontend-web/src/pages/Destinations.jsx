@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import { fetchDestinations } from '../services/api';
 import DestinationCard   from '../components/DestinationCards';
 import CreateDestination from '../components/DestinationsCreate';
-import { GoogleMap, Marker } from '@react-google-maps/api';
 import '../styles/Groups.css';
 
 export default function Destinations() {
@@ -47,18 +46,6 @@ export default function Destinations() {
           Créer une destination
         </button>
       </div>
-
-      <GoogleMap
-        mapContainerStyle={{ width: '100%', height: 400, borderRadius: 8 }}
-        zoom={2}
-        center={{ lat: 43.6, lng: 1.433 }}
-      >
-        {destinations.map(d =>
-          d.location?.lat && d.location?.lng && (
-            <Marker key={d.id} position={d.location} title={d.name} />
-          )
-        )}
-      </GoogleMap>
 
       <div className="groups-grid">
         {destinations.map(d => <DestinationCard key={d.id} {...d} />)}

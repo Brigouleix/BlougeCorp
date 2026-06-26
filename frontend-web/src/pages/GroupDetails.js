@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { GoogleMap, Autocomplete, Marker } from '@react-google-maps/api';
 
 import '../styles/GroupDetails.css';
 
@@ -13,9 +12,7 @@ export default function GroupDetails() {
     const [rating, setRating] = useState(5);
     const [sortType, setSortType] = useState('date');
 
-    const [mapCenter, setMapCenter] = useState({ lat: 48.8566, lng: 2.3522 }); // Paris par défaut
-    const [markerPosition, setMarkerPosition] = useState(null);
-    const autocompleteRef = useRef(null);
+    const [locationText, setLocationText] = useState('');
 
     // useEffect : fetch des données du groupe depuis API
     useEffect(() => {
@@ -32,13 +29,8 @@ export default function GroupDetails() {
                 const savedComments = JSON.parse(localStorage.getItem(`comments-${groupId}`)) || [];
                 setComments(savedComments);
 
-                // Si données de localisation valides, centrer la carte
-                if (data?.location?.lat && data?.location?.lng) {
-                    const loc = { lat: data.location.lat, lng: data.location.lng };
-                    setMapCenter(loc);
-                    setMarkerPosition(loc);
-                } else {
-                    setMarkerPosition(null);
+                if (data?.location?.address) {
+                    setLocationText(data.location.address);
                 }
             } catch (error) {
                 console.error('Erreur lors du fetch du groupe :', error);
@@ -89,57 +81,27 @@ export default function GroupDetails() {
         return (total / comments.length).toFixed(1);
     };
 
-    // Gestion changement adresse autocomplete Google Maps
-    const handlePlaceChanged = () => {
-        const place = autocompleteRef.current?.getPlace();
-        if (place && place.geometry) {
-            const location = place.geometry.location;
-            const latLng = {
-                lat: location.lat(),
-                lng: location.lng(),
-            };
-            setMapCenter(latLng);
-            setMarkerPosition(latLng);
-        }
-    };
-
     if (!group) return <p className="loading-text">Chargement...</p>;
-
-    const mapContainerStyle = {
-        width: '100%',
-        height: '400px'
-    };
 
     return (
         <div className="group-details-container">
             <h1 className="group-title">{group.name}</h1>
 
             <div className="group-banner">
-                <Autocomplete
-                    onLoad={autocomplete => (autocompleteRef.current = autocomplete)}
-                    onPlaceChanged={handlePlaceChanged}
-                >
-                    <input
-                        type="text"
-                        placeholder="Rechercher une adresse..."
-                        style={{
-                            width: '100%',
-                            padding: '10px',
-                            fontSize: '16px',
-                            borderRadius: '8px',
-                            marginBottom: '10px',
-                            border: '1px solid #ccc',
-                        }}
-                    />
-                </Autocomplete>
-
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    center={mapCenter}
-                    zoom={12}
-                >
-                    {markerPosition && <Marker position={markerPosition} />}
-                </GoogleMap>
+                <input
+                    type="text"
+                    placeholder="Adresse ou ville..."
+                    value={locationText}
+                    onChange={e => setLocationText(e.target.value)}
+                    style={{
+                        width: '100%',
+                        padding: '10px',
+                        fontSize: '16px',
+                        borderRadius: '8px',
+                        marginBottom: '10px',
+                        border: '1px solid #ccc',
+                    }}
+                />
             </div>
 
             <section className="comments-section">
