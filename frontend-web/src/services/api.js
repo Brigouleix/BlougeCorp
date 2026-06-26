@@ -132,8 +132,13 @@ export async function deleteGroup(id) {
 // ———————————————————————————————————————————————
 
 export const getCurrentUser = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user) : null;
+  try {
+    const user = localStorage.getItem('user');
+    if (!user || user === 'undefined' || user === 'null') return null;
+    return JSON.parse(user);
+  } catch {
+    return null;
+  }
 };
 export async function fetchUsersByEmails(emails) {
   const response = await fetch('http://localhost/blougecorp/api/users-by-emails', {
