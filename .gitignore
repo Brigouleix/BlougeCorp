@@ -5,6 +5,7 @@ node_modules/
 frontend-web/build/
 
 # PHP (backend Laravel / custom MVC)
+vendor/
 BlougeCorp-backend/vendor/
 *.log
 *.lock
