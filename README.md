@@ -22,23 +22,27 @@ Application web de planification de voyages en groupe. Crée des groupes, propos
 - Mode sombre
 
 ## Structure du projet
+
 BlougeCorp/
-├── frontend-web/ # App React
-│ ├── src/
-│ │ ├── pages/ # Login, Register, MyGroups, Destinations, GroupDetails…
-│ │ ├── components/ # Navbar, Footer, GroupCard, DestinationCard…
-│ │ ├── services/ # api.js (appels HTTP)
-│ │ └── styles/ # CSS par page/composant
-│ └── package.json
-├── BlougeCorp-backend/ # API PHP
-│ ├── public/ # index.php (point d'entrée)
-│ ├── app/
-│ │ ├── Controllers/ # AuthController, GroupController, DestinationController…
-│ │ ├── Models/ # User, Group, Destination…
-│ │ └── Core/ # Router, Auth (JWT)
-│ ├── routes/ # Définition des routes API
-│ └── composer.json
-└── .env # Variables d'environnement (non versionné)
+│
+├── frontend-web/
+│   ├── src/
+│   │   ├── pages/          # Login, Register, MyGroups, Destinations, GroupDetails
+│   │   ├── components/     # Navbar, Footer, GroupCard, DestinationCard
+│   │   ├── services/       # api.js (appels HTTP)
+│   │   └── styles/         # CSS par page/composant
+│   └── package.json
+│
+├── BlougeCorp-backend/
+│   ├── public/             # index.php (point d'entrée)
+│   ├── app/
+│   │   ├── Controllers/    # AuthController, GroupController, DestinationController
+│   │   ├── Models/         # User, Group, Destination
+│   │   └── Core/           # Router, Auth JWT
+│   ├── routes/
+│   └── composer.json
+│
+└── .env                    # Variables d'environnement (non versionné)
 
 
 ## Installation locale
